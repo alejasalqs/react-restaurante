@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 
 const checkValidFields = async (req, res, next) => {
   // manejo de errores
-  const errors = validationResult();
+  const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(400).json({
