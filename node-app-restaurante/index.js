@@ -19,6 +19,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Rutas
+app.use("/api/database", require("./src/routes/DataBase.route"));
 
 // escuchar peticiones
 app.listen(process.env.PORT, () => {
