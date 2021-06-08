@@ -6,7 +6,7 @@ export const LoginScreen = () => {
       <div className="login-box">
         <div className="card card-outline card-primary">
           <div className="card-header text-center">
-            <a href="../../index2.html" className="h1">
+            <a className="h1">
               <b>Admin</b>LTE
             </a>
           </div>
