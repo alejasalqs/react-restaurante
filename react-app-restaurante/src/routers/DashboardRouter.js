@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import { HomeScreen } from "../components/dashboard/HomeScreen";
+import { Footer } from "../components/ui/Footer";
 import { Navbar } from "../components/ui/Navbar";
 import { Sidebar } from "../components/ui/Sidebar";
 
@@ -13,6 +14,7 @@ export const DashboardRouter = () => {
         <Switch>
           <Route path="/" component={HomeScreen} />
         </Switch>
+        <Footer />
       </div>
     </div>
   );
