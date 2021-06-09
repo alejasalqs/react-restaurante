@@ -1,0 +1,40 @@
+* {
+  margin: 0px;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+main {
+  width: 100%;
+}
+
+.app {
+  width: 100%;
+}
+
+.menu {
+  background-color: #0081a7;
+  padding-left: 10px;
+}
+
+.menu-list a {
+  color: white;
+}
+
+.menu-list a:hover {
+  background-color: #fdfcdc;
+  color: #00afb9;
+  font-weight: bold;
+}
+
+.menu-label {
+  color: #fdfcdc;
+}
+
+.navbar {
+  background-color: #0081a7;
+}

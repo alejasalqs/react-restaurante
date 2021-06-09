@@ -6,8 +6,10 @@ import { RegisterScreen } from "../components/auth/RegisterScreen";
 export const AuthRouter = () => {
   return (
     <Switch>
-      <Route path="/auth/login" component={LoginScreen} />
-      <Route path="/auth/register" component={RegisterScreen} />
+      <div className="columns is-centered is-vcentered">
+        <Route path="/auth/login" component={LoginScreen} />
+        <Route path="/auth/register" component={RegisterScreen} />
+      </div>
     </Switch>
   );
 };
