@@ -1,22 +1,5 @@
 import React from "react";
 
 export const HomeScreen = () => {
-  return (
-    <div class="content-wrapper">
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Starter Page</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row"></div>
-        </div>
-      </div>
-    </div>
-  );
+  return <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>;
 };
