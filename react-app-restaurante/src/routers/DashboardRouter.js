@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, Switch } from "react-router";
+import { Redirect, Route, Switch } from "react-router";
 import { EmpleadosScreen } from "../components/dashboard/administracion/EmpleadosScreen";
 import { EspecialesScreen } from "../components/dashboard/administracion/EspecialesScreen";
 import { MesasScreen } from "../components/dashboard/administracion/MesasScreen";
 import { PuestosScreen } from "../components/dashboard/administracion/PuestosScreen";
 import { HomeScreen } from "../components/dashboard/HomeScreen";
-import { Footer } from "../components/ui/Footer";
+//import { Footer } from "../components/ui/Footer";
 import { Navbar } from "../components/ui/Navbar";
 import { Sidebar } from "../components/ui/Sidebar";
 
@@ -35,6 +35,8 @@ export const DashboardRouter = () => {
                 component={PuestosScreen}
               />
               <Route path="/dashboard" component={HomeScreen} />
+
+              <Redirect to="/dashboard" />
             </Switch>
           </div>
         </div>
