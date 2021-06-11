@@ -4,7 +4,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
+        <a className="navbar-item" href="#">
           <img
             src="https://bulma.io/images/bulma-logo.png"
             alt="Bulma: Free, open source, and modern CSS framework based on Flexbox"
@@ -14,6 +14,7 @@ export const Navbar = () => {
         </a>
 
         <a
+          href="#"
           role="button"
           className="navbar-burger"
           aria-label="menu"
@@ -30,10 +31,10 @@ export const Navbar = () => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <a className="button is-danger is-outlined">
+            <button className="button is-danger is-outlined">
               <i class="fas fa-sign-out-alt"></i>
               <span>Cerrar Sesión</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -10,9 +10,14 @@ export const PublicRoutes = ({
   return (
     <Route
       {...rest}
-      component={(props) =>
-        !isLoggedIn ? <Component {...props} /> : <Redirect to="/dashboard" />
-      }
+      component={(props) => {
+        //!isLoggedIn ? <Component {...props} /> : <Redirect to="/dashboard" />
+        if (!isLoggedIn) {
+          return <Component {...props} />;
+        } else {
+          return <Redirect to="/auth/login" />;
+        }
+      }}
     />
   );
 };

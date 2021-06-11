@@ -1,6 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../../actions/ui.actions";
+import { EmpleadosModal } from "../../ui/modals/EmpleadosModal";
 
 export const EmpleadosScreen = () => {
+  const dispatch = useDispatch();
+
+  const handleOnclik = () => {
+    console.log("holaaa");
+    dispatch(openModal());
+  };
+
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -25,7 +35,7 @@ export const EmpleadosScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr onClick={handleOnclik}>
                     <td>1</td>
                     <td>117270430</td>
                     <td>Alejandro Salguero Quirós</td>
@@ -39,6 +49,7 @@ export const EmpleadosScreen = () => {
           </div>
         </div>
       </div>
+      <EmpleadosModal />
     </div>
   );
 };

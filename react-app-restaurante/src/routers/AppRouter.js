@@ -10,7 +10,7 @@ import { PublicRoutes } from "./PublicRoutes";
 export const AppRouter = () => {
   //const dispatch = useDispatch();
 
-  const { checking, email } = useSelector((state) => state.auth);
+  const { checking } = useSelector((state) => state.auth);
 
   if (checking) {
     //return <Loading />;
