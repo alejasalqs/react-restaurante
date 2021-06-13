@@ -28,71 +28,73 @@ export const Sidebar = () => {
             </NavLink>
           </li>
         </ul>
-        <p className="menu-label">Transactions</p>
+        <p className="menu-label">Clientes</p>
         <ul className="menu-list">
           <li>
-            <a>Payments</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="far fa-copyright"></i> Marcas
+            </NavLink>
           </li>
           <li>
-            <a>Transfers</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fab fa-product-hunt"></i> Productos
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-truck"></i> Proveedores
+            </NavLink>
+          </li>
+        </ul>
+        <p className="menu-label">Reportes</p>
+        <ul className="menu-list">
+          <li>
+            <NavLink to="/dashboard/especiales">
+              <i className="far fa-clipboard"></i> Bitácora
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-chart-pie"></i> Reporte Clientes
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-chart-bar"></i> Reporte Facturación
+            </NavLink>
+          </li>
+        </ul>
+        <p className="menu-label">Seguridad</p>
+        <ul className="menu-list">
+          <li>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-users"></i> Usuarios
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-list-ol"></i> Consecutivos
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-flag"></i> Países
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
-          </li>
-
-          <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-boxes"></i> Cajas
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-calendar-week"></i> Roles o eventos
+            </NavLink>
           </li>
           <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
-          </li>
-          <li>
-            <a>Balance</a>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-balance-scale"></i> Unidades de Medidad
+            </NavLink>
           </li>
         </ul>
       </aside>

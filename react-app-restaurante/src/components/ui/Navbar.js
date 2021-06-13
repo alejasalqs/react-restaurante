@@ -32,7 +32,7 @@ export const Navbar = () => {
         <div className="navbar-item">
           <div className="buttons">
             <button className="button is-danger is-outlined">
-              <i class="fas fa-sign-out-alt"></i>
+              <i className="fas fa-sign-out-alt"></i>
               <span>Cerrar Sesión</span>
             </button>
           </div>

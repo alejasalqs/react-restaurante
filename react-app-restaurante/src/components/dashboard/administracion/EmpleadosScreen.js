@@ -31,7 +31,7 @@ export const EmpleadosScreen = () => {
                 type="button"
                 onClick={handleAdd}
               >
-                <i class="fas fa-user-plus mr-2"></i>
+                <i className="fas fa-user-plus mr-2"></i>
                 Agregar
               </button>
               <table className="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">

@@ -87,11 +87,11 @@ export const EmpleadosModal = () => {
       )}
       <hr />
       <form>
-        <div class="field">
-          <label class="label">Código</label>
-          <div class="control">
+        <div className="field">
+          <label className="label">Código</label>
+          <div className="control">
             <input
-              class="input"
+              className="input"
               type="text"
               name="codigo"
               onChange={handleInputChange}
@@ -101,11 +101,11 @@ export const EmpleadosModal = () => {
             />
           </div>
         </div>
-        <div class="field">
-          <label class="label">Cédula</label>
-          <div class="control">
+        <div className="field">
+          <label className="label">Cédula</label>
+          <div className="control">
             <input
-              class="input"
+              className="input"
               type="text"
               autoComplete="off"
               name="cedula"
@@ -117,11 +117,11 @@ export const EmpleadosModal = () => {
         </div>
         <div className="columns">
           <div className="column">
-            <div class="field">
-              <label class="label">Nombre</label>
-              <div class="control">
+            <div className="field">
+              <label className="label">Nombre</label>
+              <div className="control">
                 <input
-                  class="input"
+                  className="input"
                   type="text"
                   autoComplete="off"
                   name="nombre"
@@ -133,11 +133,11 @@ export const EmpleadosModal = () => {
             </div>
           </div>
           <div className="column">
-            <div class="field">
-              <label class="label">Primer Apellido</label>
-              <div class="control">
+            <div className="field">
+              <label className="label">Primer Apellido</label>
+              <div className="control">
                 <input
-                  class="input"
+                  className="input"
                   type="text"
                   autoComplete="off"
                   name="apellido1"
@@ -149,11 +149,11 @@ export const EmpleadosModal = () => {
             </div>
           </div>
           <div className="column">
-            <div class="field">
-              <label class="label">Segundo Apellido</label>
-              <div class="control">
+            <div className="field">
+              <label className="label">Segundo Apellido</label>
+              <div className="control">
                 <input
-                  class="input"
+                  className="input"
                   type="text"
                   autoComplete="off"
                   name="apellido2"
@@ -167,11 +167,11 @@ export const EmpleadosModal = () => {
         </div>
         <div className="columns">
           <div className="column">
-            <div class="field">
-              <label class="label">Teléfono #1</label>
-              <div class="control">
+            <div className="field">
+              <label className="label">Teléfono #1</label>
+              <div className="control">
                 <input
-                  class="input"
+                  className="input"
                   type="text"
                   autoComplete="off"
                   name="telefono"
@@ -183,11 +183,11 @@ export const EmpleadosModal = () => {
             </div>
           </div>
           <div className="column">
-            <div class="field">
-              <label class="label">Teléfono #2</label>
-              <div class="control">
+            <div className="field">
+              <label className="label">Teléfono #2</label>
+              <div className="control">
                 <input
-                  class="input"
+                  className="input"
                   type="text"
                   autoComplete="off"
                   name=""
@@ -200,86 +200,86 @@ export const EmpleadosModal = () => {
         </div>
         <div className="columns">
           <div className="column">
-            <div class="field">
-              <p class="control has-icons-left">
-                <span class="select">
+            <div className="field">
+              <p className="control has-icons-left">
+                <span className="select">
                   <select onChange={handleInputChange}>
                     <option selected>Puesto</option>
                     <option>Select dropdown</option>
                     <option>With options</option>
                   </select>
                 </span>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-globe"></i>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-globe"></i>
                 </span>
               </p>
             </div>
           </div>
           <div className="column">
-            <div class="field">
-              <p class="control has-icons-left">
-                <span class="select">
+            <div className="field">
+              <p className="control has-icons-left">
+                <span className="select">
                   <select>
                     <option selected>Restaurante</option>
                     <option>Select dropdown</option>
                     <option>With options</option>
                   </select>
                 </span>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-globe"></i>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-globe"></i>
                 </span>
               </p>
             </div>
           </div>
         </div>
         {activeEmployee ? (
-          <div class="field is-grouped">
-            <div class="control mr-2">
+          <div className="field is-grouped">
+            <div className="control mr-2">
               <button
-                class="button is-link"
+                className="button is-link"
                 type="submit"
                 onClick={editInformation}
               >
-                <i class="fas fa-save mr-2"></i> Editar
+                <i className="fas fa-save mr-2"></i> Editar
               </button>
             </div>
-            <div class="control mr-2">
+            <div className="control mr-2">
               <button
-                class="button is-link is-light"
+                className="button is-link is-light"
                 type="submit"
                 onClick={handleDelete}
               >
-                <i class="fas fa-window-close mr-2"></i>Eliminar
+                <i className="fas fa-window-close mr-2"></i>Eliminar
               </button>
             </div>
-            <div class="control">
+            <div className="control">
               <button
-                class="button is-link is-light"
+                className="button is-link is-light"
                 type="button"
                 onClick={handleCancel}
               >
-                <i class="fas fa-window-close mr-2"></i>Cancelar
+                <i className="fas fa-window-close mr-2"></i>Cancelar
               </button>
             </div>
           </div>
         ) : (
-          <div class="field is-grouped">
-            <div class="control mr-3">
+          <div className="field is-grouped">
+            <div className="control mr-3">
               <button
-                class="button is-link"
+                className="button is-link"
                 type="submit"
                 onClick={saveInformation}
               >
-                <i class="fas fa-save mr-2"></i> Guardar
+                <i className="fas fa-save mr-2"></i> Guardar
               </button>
             </div>
-            <div class="control">
+            <div className="control">
               <button
-                class="button is-link is-light"
+                className="button is-link is-light"
                 type="button"
                 onClick={handleCancel}
               >
-                <i class="fas fa-window-close mr-2"></i>Cancelar
+                <i className="fas fa-window-close mr-2"></i>Cancelar
               </button>
             </div>
           </div>
