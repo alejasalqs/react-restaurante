@@ -1,13 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../../actions/ui.actions";
 import { EmpleadosModal } from "../../ui/modals/EmpleadosModal";
 
 export const EmpleadosScreen = () => {
   const dispatch = useDispatch();
 
-  const handleOnclik = () => {
-    console.log("holaaa");
+  const { employees } = useSelector((state) => state.employees);
+
+  const handleOnclik = (e) => {
+    //console.log(e);
+    dispatch(openModal());
+  };
+
+  const handleAdd = () => {
     dispatch(openModal());
   };
 
@@ -20,7 +26,12 @@ export const EmpleadosScreen = () => {
         <div className="card">
           <div className="card-content">
             <div className="content">
-              <button className="button is-success is-rounded mb-3">
+              <button
+                className="button is-success is-rounded mb-3"
+                type="button"
+                onClick={handleAdd}
+              >
+                <i class="fas fa-user-plus mr-2"></i>
                 Agregar
               </button>
               <table className="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
@@ -35,14 +46,23 @@ export const EmpleadosScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr onClick={handleOnclik}>
-                    <td>1</td>
-                    <td>117270430</td>
-                    <td>Alejandro Salguero Quirós</td>
-                    <td>84469756</td>
-                    <td>Chef</td>
-                    <td>Patito</td>
-                  </tr>
+                  {employees.map((employee) => (
+                    <tr
+                      onClick={handleOnclik}
+                      id={employee.codigo}
+                      key={employee.codigo}
+                    >
+                      <td>{employee.codigo}</td>
+                      <td>{employee.cedula}</td>
+                      <td>
+                        {employee.nombre} {employee.apellido1}{" "}
+                        {employee.apellido2}
+                      </td>
+                      <td>{employee.telefono}</td>
+                      <td>{employee.puesto}</td>
+                      <td>{employee.restaurant}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
