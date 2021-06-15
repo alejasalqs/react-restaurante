@@ -55,11 +55,11 @@ export const EmpleadosScreen = () => {
   const handleOnclik = (employee) => {
     console.log(employee);
     dispatch(setActiveEmployee(employee));
-    dispatch(openModal());
+    dispatch(openModal("employees"));
   };
 
   const handleAdd = () => {
-    dispatch(openModal());
+    dispatch(openModal("employees"));
   };
 
   return (

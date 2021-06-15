@@ -1,6 +1,42 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveJob } from "../../../actions/jobs.actions";
+import { openModal } from "../../../actions/ui.actions";
+import { Table } from "../../../helpers/Table.helper";
+import { PuestosModal } from "../../ui/modals/PuestosModal";
 
 export const PuestosScreen = () => {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Código",
+        accessor: "codigo",
+      },
+      {
+        Header: "Nombre",
+        accessor: "nombre",
+      },
+      {
+        Header: "Rol",
+        accessor: "rol",
+      },
+    ],
+    []
+  );
+
+  const dispatch = useDispatch();
+
+  const { jobs } = useSelector((state) => state.jobs);
+
+  const handleOnclik = (job) => {
+    //console.log(job);
+    dispatch(setActiveJob(job));
+    dispatch(openModal("jobs"));
+  };
+
+  const handleAdd = () => {
+    dispatch(openModal("jobs"));
+  };
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -10,33 +46,19 @@ export const PuestosScreen = () => {
         <div className="card">
           <div className="card-content">
             <div className="content">
-              <button className="button is-success is-rounded mb-3">
+              <button
+                className="button is-success is-rounded mb-3"
+                type="button"
+                onClick={handleAdd}
+              >
                 Agregar
               </button>
-              <table className="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Codigo</th>
-                    <th>Nombre</th>
-                    <th>Rol</th>
-                    <th>Interno al Restaurante</th>
-                    <th>Externo al Restaurante</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Chef</td>
-                    <td>Cocina</td>
-                    <td>Si</td>
-                    <td>No</td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table columns={columns} data={jobs} onClick={handleOnclik} />
             </div>
           </div>
         </div>
       </div>
+      <PuestosModal />
     </div>
   );
 };

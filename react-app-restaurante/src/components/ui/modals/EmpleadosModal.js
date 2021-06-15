@@ -7,18 +7,8 @@ import {
   removeActiveEmployee,
 } from "../../../actions/employees.actions";
 import { closeModal } from "../../../actions/ui.actions";
-import { useForm } from "../../../hooks/useForm";
+import { customStyles } from "../../../helpers/modal.customStyles";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
 // Agregar el modal al documento
 Modal.setAppElement("#root");
 
@@ -77,7 +67,7 @@ export const EmpleadosModal = () => {
   const handleCloseModal = () => {
     reset();
     dispatch(removeActiveEmployee());
-    dispatch(closeModal());
+    dispatch(closeModal("employees"));
   };
 
   const handleCancel = () => {
