@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewEmployee } from "../../../actions/employees.actions";
+import {
+  addNewEmployee,
+  deleteEmployee,
+  removeActiveEmployee,
+} from "../../../actions/employees.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { useForm } from "../../../hooks/useForm";
 
@@ -18,21 +22,35 @@ const customStyles = {
 // Agregar el modal al documento
 Modal.setAppElement("#root");
 
+const initialValues = {
+  codigo: 4,
+  cedula: "",
+  nombre: "",
+  apellido1: "",
+  apellido2: "",
+  telefono: "",
+  puesto: "Lava Platos",
+  restaurant: "Patitos SA",
+};
+
 export const EmpleadosModal = () => {
   const dispatch = useDispatch();
   const { empleadosModalOpen } = useSelector((state) => state.ui);
   const { activeEmployee } = useSelector((state) => state.employees);
 
-  const [formValues, handleInputChange, reset] = useForm({
-    codigo: 4,
-    cedula: "",
-    nombre: "",
-    apellido1: "",
-    apellido2: "",
-    telefono: "",
-    puesto: "Lava Platos",
-    restaurant: "Patitos SA",
-  });
+  const [formValues, setFormValues] = useState(initialValues);
+
+  useEffect(() => {
+    if (activeEmployee) {
+      setFormValues(activeEmployee);
+    } else {
+      setFormValues(initialValues);
+    }
+  }, [activeEmployee, setFormValues]);
+
+  /*const [formValues, handleInputChange, reset] = useForm(
+    activeEmployee || initialValues
+  );*/
 
   const {
     codigo,
@@ -45,14 +63,26 @@ export const EmpleadosModal = () => {
     restaurant,
   } = formValues;
 
+  const handleInputChange = ({ target }) => {
+    setFormValues({
+      ...formValues,
+      [target.name]: target.value,
+    });
+  };
+
+  const reset = () => {
+    setFormValues(initialValues);
+  };
+
   const handleCloseModal = () => {
     reset();
+    dispatch(removeActiveEmployee());
     dispatch(closeModal());
   };
 
   const handleCancel = () => {
     reset();
-    dispatch(closeModal());
+    handleCloseModal();
   };
 
   const saveInformation = (e) => {
@@ -66,8 +96,9 @@ export const EmpleadosModal = () => {
     e.preventDefault();
   };
 
-  const handleDelete = (e) => {
-    e.preventDefault();
+  const handleDelete = () => {
+    dispatch(deleteEmployee());
+    handleCloseModal();
   };
 
   return (

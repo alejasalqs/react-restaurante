@@ -10,9 +10,8 @@ export const editEmployee = (employee) => ({
   payload: employee,
 });
 
-export const deleteEmployee = (employee) => ({
+export const deleteEmployee = () => ({
   type: types.deleteEmployee,
-  payload: employee,
 });
 
 export const setActiveEmployee = (employee) => ({

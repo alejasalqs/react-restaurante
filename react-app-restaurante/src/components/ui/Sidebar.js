@@ -64,6 +64,19 @@ export const Sidebar = () => {
             </NavLink>
           </li>
         </ul>
+        <p className="menu-label">Contabilidad</p>
+        <ul className="menu-list">
+          <li>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-box-open"></i> Apertura de caja
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-box"></i> Ciere de caja
+            </NavLink>
+          </li>
+        </ul>
         <p className="menu-label">Seguridad</p>
         <ul className="menu-list">
           <li>
@@ -93,7 +106,12 @@ export const Sidebar = () => {
           </li>
           <li>
             <NavLink to="/dashboard/especiales">
-              <i className="fas fa-balance-scale"></i> Unidades de Medidad
+              <i className="fas fa-balance-scale"></i> Unidades de Medida
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/especiales">
+              <i className="fas fa-power-off"></i> Cerrar Sesión
             </NavLink>
           </li>
         </ul>

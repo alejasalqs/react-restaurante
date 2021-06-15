@@ -57,6 +57,15 @@ export const employeesReducer = (state = initialState, action) => {
         employees: [...state.employees, action.payload],
       };
 
+    case types.deleteEmployee:
+      return {
+        ...state,
+        employees: state.employees.filter(
+          (e) => e.codigo !== state.activeEmployee.codigo
+        ),
+        activeEmployee: null,
+      };
+
     default:
       return state;
   }

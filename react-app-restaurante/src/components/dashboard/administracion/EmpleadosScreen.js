@@ -1,15 +1,60 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setActiveEmployee } from "../../../actions/employees.actions";
 import { openModal } from "../../../actions/ui.actions";
+import { Table } from "../../../helpers/Table.helper";
 import { EmpleadosModal } from "../../ui/modals/EmpleadosModal";
 
 export const EmpleadosScreen = () => {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Código",
+        accessor: "codigo",
+      },
+      {
+        Header: "Cédula",
+        accessor: "cedula",
+      },
+      {
+        Header: "",
+        accessor: "nombre",
+        columns: [
+          {
+            Header: "Nombre completo",
+            accessor: "nombre",
+          },
+          {
+            accessor: "apellido1",
+          },
+          {
+            accessor: "apellido2",
+          },
+        ],
+      },
+      {
+        Header: "Teléfono",
+        accessor: "telefono",
+      },
+      {
+        Header: "Puesto",
+        accessor: "puesto",
+      },
+      {
+        Header: "Restaurant",
+        accessor: "restaurant",
+      },
+    ],
+    []
+  );
+
   const dispatch = useDispatch();
 
   const { employees } = useSelector((state) => state.employees);
 
-  const handleOnclik = (e) => {
-    //console.log(e);
+  const handleOnclik = (employee) => {
+    console.log(employee);
+    dispatch(setActiveEmployee(employee));
     dispatch(openModal());
   };
 
@@ -34,37 +79,11 @@ export const EmpleadosScreen = () => {
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
               </button>
-              <table className="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Codigo</th>
-                    <th>Cédula</th>
-                    <th>Nombre Completo</th>
-                    <th>Telefono</th>
-                    <th>Puesto</th>
-                    <th>Restaurante</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.map((employee) => (
-                    <tr
-                      onClick={handleOnclik}
-                      id={employee.codigo}
-                      key={employee.codigo}
-                    >
-                      <td>{employee.codigo}</td>
-                      <td>{employee.cedula}</td>
-                      <td>
-                        {employee.nombre} {employee.apellido1}{" "}
-                        {employee.apellido2}
-                      </td>
-                      <td>{employee.telefono}</td>
-                      <td>{employee.puesto}</td>
-                      <td>{employee.restaurant}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <Table
+                columns={columns}
+                data={employees}
+                onClick={handleOnclik}
+              />
             </div>
           </div>
         </div>
