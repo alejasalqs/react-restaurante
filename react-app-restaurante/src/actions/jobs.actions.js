@@ -8,3 +8,17 @@ export const setActiveJob = (job) => ({
 export const removeActiveJob = () => ({
   type: types.removeActiveJob,
 });
+
+export const addJob = (job) => ({
+  type: types.addJob,
+  payload: job,
+});
+
+export const updateJob = (job) => ({
+  type: types.editJob,
+  payload: job,
+});
+
+export const deleteJob = () => ({
+  type: types.deleteJob,
+});

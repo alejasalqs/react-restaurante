@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { removeActiveJob } from "../../../actions/jobs.actions";
+import {
+  addJob,
+  deleteJob,
+  removeActiveJob,
+  updateJob,
+} from "../../../actions/jobs.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
@@ -38,18 +43,37 @@ export const PuestosModal = () => {
     });
   };
 
+  const reset = () => {
+    setFormValues(initValues);
+  };
+
   const handleCloseModal = () => {
+    reset();
     dispatch(closeModal("jobs"));
     dispatch(removeActiveJob());
   };
 
-  const editInformation = () => {};
+  const editInformation = (e) => {
+    e.preventDefault();
+    dispatch(updateJob(formValues));
+    handleCloseModal();
+  };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    dispatch(deleteJob());
+    handleCloseModal();
+  };
 
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    handleCloseModal();
+  };
 
-  const saveInformation = () => {};
+  const saveInformation = (e) => {
+    e.preventDefault();
+    console.log(formValues);
+    dispatch(addJob(formValues));
+    handleCloseModal();
+  };
 
   return (
     <Modal
@@ -78,51 +102,62 @@ export const PuestosModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly="true"
+              readOnly={true}
             />
           </div>
         </div>
-        <div className="columns">
-          <div className="column">
-            <div className="field">
-              <label className="label">Nombre</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  autoComplete="off"
-                  name="nombre"
-                  onChange={handleInputChange}
-                  value={nombre}
-                  placeholder="Nombre"
-                />
-              </div>
-            </div>
+        <div className="field">
+          <label className="label">Nombre</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="nombre"
+              onChange={handleInputChange}
+              value={nombre}
+              placeholder="Nombre"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Rol</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="rol"
+              id="rol"
+              onChange={handleInputChange}
+              value={rol}
+              placeholder="Rol Externo o Interno"
+            />
           </div>
         </div>
         {activeJob ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button
-                className="button is-link"
+                className="button is-warning"
                 type="submit"
                 onClick={editInformation}
               >
-                <i className="fas fa-save mr-2"></i> Editar
+                <i className="fas fa-edit" mr-2></i> Editar
               </button>
             </div>
             <div className="control mr-2">
               <button
-                className="button is-link is-light"
+                className="button is-danger"
                 type="submit"
                 onClick={handleDelete}
               >
-                <i className="fas fa-window-close mr-2"></i>Eliminar
+                <i class="fas fa-trash mr-2"></i>Eliminar
               </button>
             </div>
             <div className="control">
               <button
-                className="button is-link is-light"
+                className="button is-danger is-light"
                 type="button"
                 onClick={handleCancel}
               >
@@ -134,7 +169,7 @@ export const PuestosModal = () => {
           <div className="field is-grouped">
             <div className="control mr-3">
               <button
-                className="button is-link"
+                className="button is-success"
                 type="submit"
                 onClick={saveInformation}
               >
@@ -143,7 +178,7 @@ export const PuestosModal = () => {
             </div>
             <div className="control">
               <button
-                className="button is-link is-light"
+                className="button is-danger is-light"
                 type="button"
                 onClick={handleCancel}
               >

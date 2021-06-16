@@ -51,6 +51,7 @@ export const PuestosScreen = () => {
                 type="button"
                 onClick={handleAdd}
               >
+                <i className="fas fa-plus-circle mr-2"></i>
                 Agregar
               </button>
               <Table columns={columns} data={jobs} onClick={handleOnclik} />

@@ -77,7 +77,7 @@ export const EmpleadosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    //console.log(formValues);
     dispatch(addNewEmployee(formValues));
     handleCloseModal();
   };
@@ -118,7 +118,7 @@ export const EmpleadosModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly="true"
+              readOnly={true}
             />
           </div>
         </div>

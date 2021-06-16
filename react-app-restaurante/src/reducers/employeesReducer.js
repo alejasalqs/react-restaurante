@@ -57,6 +57,17 @@ export const employeesReducer = (state = initialState, action) => {
         employees: [...state.employees, action.payload],
       };
 
+    case types.editEmployee:
+      return {
+        ...state,
+        employees: [
+          ...state.employees,
+          state.employees.map((e) =>
+            e.codigo === action.payload.codigo ? action.payload : e
+          ),
+        ],
+      };
+
     case types.deleteEmployee:
       return {
         ...state,
