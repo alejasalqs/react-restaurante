@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { authReducer } from "./authReducer";
 import { employeesReducer } from "./employeesReducer";
 import { jobsReducer } from "./jobsReducer";
+import { tableReducer } from "./tablesReducer";
 import { uiReducer } from "./uiReducer";
 
 export const rootReducer = combineReducers({
@@ -9,4 +10,5 @@ export const rootReducer = combineReducers({
   ui: uiReducer,
   employees: employeesReducer,
   jobs: jobsReducer,
+  tables: tableReducer,
 });

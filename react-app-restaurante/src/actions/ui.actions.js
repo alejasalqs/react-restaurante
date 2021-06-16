@@ -8,6 +8,9 @@ export const openModal = (modalType) => {
     case "jobs":
       return { type: types.uiOpenPuestosModal };
 
+    case "tables":
+      return { type: types.uiOpenTableModal };
+
     default:
       return {};
   }
@@ -20,6 +23,9 @@ export const closeModal = (modalType) => {
 
     case "jobs":
       return { type: types.uiClosePuestosModal };
+
+    case "tables":
+      return { type: types.uiCloseTableModal };
 
     default:
       return {};

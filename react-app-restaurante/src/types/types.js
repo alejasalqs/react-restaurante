@@ -6,6 +6,8 @@ export const types = {
   uiCloseEmpleadosModal: "[UI] Close employes Modal",
   uiOpenPuestosModal: "[UI] Open puestos Modal",
   uiClosePuestosModal: "[UI] Close puestos Modal",
+  uiOpenTableModal: "[UI] Open Table Modal",
+  uiCloseTableModal: "[UI] Close Table Modal",
   //////////////////
   setActiveEmployee: "[Employees] Set Active Employee",
   removeActiveEmployee: "[Employees] Remove Active Employee",
@@ -18,5 +20,11 @@ export const types = {
   addJob: "[Jobs] Add new Job",
   editJob: "[Jobs] Edit Job",
   deleteJob: "[Jobs] Delete Job",
+  /////////////////
+  setActiveTable: "[Tables] Set Active Table",
+  removeActiveTable: "[Tables] Remove Active Table",
+  addTable: "[Tables] Add new Table",
+  editTable: "[Tables] Edit Table",
+  deleteTable: "[Jobs] Delete Job",
   /////////////////
 };

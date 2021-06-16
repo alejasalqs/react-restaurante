@@ -3,6 +3,7 @@ import { types } from "../types/types";
 const initialState = {
   empleadosModalOpen: false,
   puestosModalOpen: false,
+  tableModalOpen: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -29,6 +30,18 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         puestosModalOpen: false,
+      };
+
+    case types.uiOpenTableModal:
+      return {
+        ...state,
+        tableModalOpen: true,
+      };
+
+    case types.uiCloseTableModal:
+      return {
+        ...state,
+        tableModalOpen: false,
       };
 
     default:
