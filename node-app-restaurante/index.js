@@ -20,6 +20,7 @@ app.use(express.json());
 
 // Rutas
 app.use("/api/database", require("./src/routes/DataBase.route"));
+app.use("/api/restaurant", require("./src/routes/Restaurant.route"));
 
 // escuchar peticiones
 app.listen(process.env.PORT, () => {
