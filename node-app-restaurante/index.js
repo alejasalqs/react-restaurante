@@ -24,6 +24,8 @@ app.use("/api/database", require("./src/routes/DataBase.route"));
 app.use("/api/restaurant", require("./src/routes/Restaurant.route"));
 app.use("/api/users", require("./src/routes/Users.route"));
 app.use("/api/employees", require("./src/routes/employees.route"));
+app.use("/api/tables", require("./src/routes/table.route"));
+app.use("/api/positions", require("./src/routes/position.route"));
 
 // escuchar peticiones
 app.listen(process.env.PORT, () => {

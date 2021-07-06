@@ -12,23 +12,27 @@ const getAllEmployeesFromRestaurant = async (req, res, next) => {
 };
 
 const createEmployee = async (req, res, next) => {
-  const { restaurant } = req.user;
+  try {
+    const { restaurant } = req.user;
 
-  const restaurantDB = await RestaurantModel.findById(restaurant);
+    const restaurantDB = await RestaurantModel.findById(restaurant);
 
-  const employee = new EmployeesModel(req.body);
+    const employee = new EmployeesModel(req.body);
 
-  await employee.save();
+    await employee.save();
 
-  restaurantDB.empleados.push(employee);
+    restaurantDB.empleados.push(employee);
 
-  await restaurantDB.save();
+    await restaurantDB.save();
 
-  return res.json({
-    ok: true,
-    employee,
-    restaurantDB,
-  });
+    return res.json({
+      ok: true,
+      employee,
+      restaurantDB,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updateEmployee = async (req, res, next) => {
