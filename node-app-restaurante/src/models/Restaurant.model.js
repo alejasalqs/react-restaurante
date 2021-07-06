@@ -4,9 +4,9 @@ const RestaurantSchema = Schema({
   nombre: {
     require: true,
     type: String,
+    unique: true,
   },
   consecutivo: {
-    require: true,
     type: String,
   },
   direccion: {
@@ -36,12 +36,6 @@ const RestaurantSchema = Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Drink",
-    },
-  ],
-  usuarios: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
     },
   ],
   clientes: [

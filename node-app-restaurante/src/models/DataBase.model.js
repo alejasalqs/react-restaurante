@@ -12,6 +12,12 @@ const DataBaseSchema = Schema({
       ref: "Restaurant",
     },
   ],
+  usuarios: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
