@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
-const encrypt = require("mongoose-encryption");
 
-const UsersSchema = Schema({
+const ProductSchema = Schema({
   consecutivo: {
     type: String,
     unique: true,
@@ -21,22 +20,21 @@ const UsersSchema = Schema({
     required: true,
     type: String,
   },
-  telefono: {
-    type: String,
-  },
-  celular: {
-    type: String,
-  },
-  login: {
-    required: true,
-    type: String,
-    unique: true,
-  },
-  password: {
+  cedula: {
     required: true,
     type: String,
   },
-  tipo_usuario: {
+  telefono1: {
+    type: String,
+  },
+  telefono2: {
+    type: String,
+  },
+  puesto: {
+    required: true,
+    type: Number,
+  },
+  nacionalidad: {
     required: true,
     type: Number,
   },
@@ -45,12 +43,12 @@ const UsersSchema = Schema({
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
 const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 
-UsersSchema.plugin(encrypt, {
+/*DataBaseSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre", "apellido1", "apellido2", "telefono", "celular"],
-});
+  encryptedFields: ["db_name"],
+});*/
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods
 
-module.exports = model("User", UsersSchema);
+module.exports = model("Product", ProductSchema);

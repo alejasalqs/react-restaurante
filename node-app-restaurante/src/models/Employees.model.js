@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const encrypt = require("mongoose-encryption");
 
 const EmployeeSchema = Schema({
   consecutivo: {
@@ -43,11 +44,18 @@ const EmployeeSchema = Schema({
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
 const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 
-/*DataBaseSchema.plugin(encrypt, {
+EmployeeSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["db_name"],
-});*/
+  encryptedFields: [
+    "nombre",
+    "apellido1",
+    "apellido2",
+    "telefono1",
+    "telefono2",
+    "cedula",
+  ],
+});
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods
 

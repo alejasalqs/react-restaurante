@@ -25,7 +25,7 @@ const createUser = async (req, res, next) => {
       user: savedDB,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -52,7 +52,7 @@ const updateUser = async (req, res, next) => {
       user: updatedUser,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -76,7 +76,7 @@ const deleteUser = async (req, res, next) => {
       user: deletedUser,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

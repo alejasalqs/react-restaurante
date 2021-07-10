@@ -1,35 +1,33 @@
+const bcrypt = require("bcrypt");
 const RestaurantModel = require("../models/Restaurant.model");
-const TableModel = require("../models/Table.model");
+const SupplierModel = require("../models/Supplier.model");
 
-const getAllTablesFromRestaurant = async (req, res, next) => {
-  const { restaurant } = req.user;
-  const tables = await TableModel.find({ restaurante: restaurant });
+const getAllSuppliersFromRestaurant = async (req, res, next) => {
+  const suppliers = await SupplierModel.find();
 
   return res.json({
     ok: true,
-    tables,
+    suppliers,
   });
 };
 
-const createTable = async (req, res, next) => {
+const createSupplier = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    console.log(restaurantDB);
+    const supplier = new SupplierModel(req.body);
 
-    const table = new TableModel({ ...req.body, restaurante: restaurant });
+    await supplier.save();
 
-    await table.save();
-
-    restaurantDB.mesas.push(table);
+    restaurantDB.proveedores.push(supplier);
 
     await restaurantDB.save();
 
     return res.json({
       ok: true,
-      table,
+      supplier,
       restaurantDB,
     });
   } catch (error) {
@@ -37,12 +35,12 @@ const createTable = async (req, res, next) => {
   }
 };
 
-const updateTable = async (req, res, next) => {
+const updateSupplier = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const table = await TableModel.findOneAndUpdate(
+    const supplier = await SupplierModel.findOneAndUpdate(
       {
         restaurante: restaurant,
         _id: id,
@@ -55,35 +53,34 @@ const updateTable = async (req, res, next) => {
 
     return res.json({
       ok: true,
-      table,
+      supplier,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const deleteTable = async (req, res, next) => {
+const deleteSupplier = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const table = await TableModel.findOneAndRemove({
+    const supplier = await SupplierModel.findOneAndRemove({
       restaurante: restaurant,
       _id: id,
     });
 
     return res.json({
       ok: true,
-      table,
+      supplier,
     });
   } catch (error) {
     next(error);
   }
 };
-
 module.exports = {
-  getAllTablesFromRestaurant,
-  createTable,
-  updateTable,
-  deleteTable,
+  getAllSuppliersFromRestaurant,
+  createSupplier,
+  updateSupplier,
+  deleteSupplier,
 };

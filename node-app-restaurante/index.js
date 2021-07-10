@@ -26,6 +26,13 @@ app.use("/api/users", require("./src/routes/Users.route"));
 app.use("/api/employees", require("./src/routes/employees.route"));
 app.use("/api/tables", require("./src/routes/table.route"));
 app.use("/api/positions", require("./src/routes/position.route"));
+app.use("/api/brands", require("./src/routes/brand.route"));
+
+// Manejo de Errores
+app.use((err, req, res, next) => {
+  //errorLogger.log(err);
+  return res.status(501).json({ success: false, message: err.message });
+});
 
 // escuchar peticiones
 app.listen(process.env.PORT, () => {
