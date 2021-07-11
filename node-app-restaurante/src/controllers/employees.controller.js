@@ -15,7 +15,7 @@ const createEmployee = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
 
-    const restaurantDB = await RestaurantModel.findById(restaurant);
+    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
     const employee = new EmployeesModel(req.body);
 
@@ -31,7 +31,7 @@ const createEmployee = async (req, res, next) => {
       restaurantDB,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -56,7 +56,7 @@ const updateEmployee = async (req, res, next) => {
       employee,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -75,7 +75,7 @@ const deleteEmployee = async (req, res, next) => {
       employee,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 module.exports = {

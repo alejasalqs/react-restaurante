@@ -27,6 +27,7 @@ app.use("/api/employees", require("./src/routes/employees.route"));
 app.use("/api/tables", require("./src/routes/table.route"));
 app.use("/api/positions", require("./src/routes/position.route"));
 app.use("/api/brands", require("./src/routes/brand.route"));
+app.use("/api/suppliers", require("./src/routes/supplier.route"));
 
 // Manejo de Errores
 app.use((err, req, res, next) => {

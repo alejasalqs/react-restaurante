@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const RestaurantModel = require("../models/Restaurant.model");
 const SupplierModel = require("../models/Supplier.model");
 
@@ -13,9 +12,9 @@ const getAllSuppliersFromRestaurant = async (req, res, next) => {
 
 const createSupplier = async (req, res, next) => {
   try {
-    const { restaurant } = req.user;
+    //const { restaurant } = req.user;
 
-    const restaurantDB = await RestaurantModel.findById(restaurant);
+    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
     const supplier = new SupplierModel(req.body);
 

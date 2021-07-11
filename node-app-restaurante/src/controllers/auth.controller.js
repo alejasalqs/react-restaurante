@@ -39,6 +39,24 @@ const login = async (req, res, next) => {
   });
 };
 
+const renewToken = async (req, res) => {
+  // Comom ya paso por el middleware de verificar el token aqui ya tenemos la info del usuario
+
+  // Generar web token
+  const token = await generateJWT(
+    req.user.uid,
+    req.user.name,
+    req.user.restaurante
+  );
+  res.json({
+    ok: true,
+    token,
+    uid: req.user.uid,
+    name: req.user.name,
+  });
+};
+
 module.exports = {
   login,
+  renewToken,
 };

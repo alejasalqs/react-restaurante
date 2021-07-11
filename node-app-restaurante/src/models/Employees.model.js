@@ -32,12 +32,12 @@ const EmployeeSchema = Schema({
     type: String,
   },
   puesto: {
-    required: true,
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: "Position",
   },
   nacionalidad: {
-    required: true,
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: "Country",
   },
 });
 

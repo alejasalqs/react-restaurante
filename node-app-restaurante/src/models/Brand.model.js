@@ -12,7 +12,7 @@ const BrandSchema = Schema({
   },
   descripcion: {
     required: true,
-    type: Number,
+    type: String,
   },
   restaurante: {
     required: true,

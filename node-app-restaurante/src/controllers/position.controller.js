@@ -1,4 +1,5 @@
 const PositionModel = require("../models/Position.model");
+const RestaurantModel = require("../models/Restaurant.model");
 
 const getAllPositions = async (req, res, next) => {
   const { restaurant } = req.user;
@@ -12,15 +13,15 @@ const getAllPositions = async (req, res, next) => {
 
 const createPosition = async (req, res, next) => {
   try {
-    const { restaurant } = req.user;
+    //const { restaurant } = req.user;
 
-    const restaurantDB = await PositionModel.findById(restaurant);
+    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
     const position = new PositionModel(req.body);
 
-    await table.save();
+    await position.save();
 
-    restaurantDB.mesas.push(employee);
+    restaurantDB.puestos.push(position);
 
     await restaurantDB.save();
 
@@ -30,7 +31,7 @@ const createPosition = async (req, res, next) => {
       restaurantDB,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -55,7 +56,7 @@ const updatePosition = async (req, res, next) => {
       position,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -74,7 +75,7 @@ const deletePosition = async (req, res, next) => {
       position,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

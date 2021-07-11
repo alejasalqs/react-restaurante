@@ -31,7 +31,7 @@ const createBrand = async (req, res, next) => {
       restaurantDB,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -56,7 +56,7 @@ const updateBrand = async (req, res, next) => {
       brand,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -75,7 +75,7 @@ const deleteBrand = async (req, res, next) => {
       brand,
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

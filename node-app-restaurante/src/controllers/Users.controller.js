@@ -2,7 +2,9 @@ const bcrypt = require("bcrypt");
 const UsersModel = require("../models/Users.model");
 
 const getAllUsersFromRestaurant = async (req, res, next) => {
-  const users = await UsersModel.find();
+  const { restaurant } = req.user;
+
+  const users = await UsersModel.find({ restaurante: restaurant });
 
   return res.json({
     ok: true,

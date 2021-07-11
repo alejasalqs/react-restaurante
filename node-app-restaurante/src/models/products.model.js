@@ -43,7 +43,7 @@ const ProductSchema = Schema({
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
 const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 
-/*DataBaseSchema.plugin(encrypt, {
+/*ProductSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
   encryptedFields: ["db_name"],

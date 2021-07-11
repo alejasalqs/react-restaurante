@@ -63,6 +63,30 @@ const RestaurantSchema = Schema({
       ref: "Table",
     },
   ],
+  puestos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Position",
+    },
+  ],
+  consecutivos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Consecutivo",
+    },
+  ],
+  roles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Rol",
+    },
+  ],
+  cajas: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Caja",
+    },
+  ],
 });
 
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
