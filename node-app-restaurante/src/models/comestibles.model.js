@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const encrypt = require("mongoose-encryption");
 
-const TableSchema = Schema({
+const ComestibleSchema = Schema({
   codigo: {
     type: String,
     unique: true,
@@ -10,29 +10,25 @@ const TableSchema = Schema({
     required: true,
     type: String,
   },
-  numero: {
+  cantidad: {
     required: true,
-    type: Number,
+    type: String,
   },
   restaurante: {
     required: true,
     type: String,
-  },
-  cantidad_sillas: {
-    required: true,
-    type: Number,
   },
 });
 
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
 const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 
-TableSchema.plugin(encrypt, {
+ComestibleSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre"],
+  encryptedFields: ["nombre", "cantidad"],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods
 
-module.exports = model("Table", TableSchema);
+module.exports = model("Comestible", ComestibleSchema);

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const encrypt = require("mongoose-encryption");
 
 const EmployeeSchema = Schema({
-  consecutivo: {
+  codigo: {
     type: String,
     unique: true,
   },

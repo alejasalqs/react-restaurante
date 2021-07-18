@@ -9,8 +9,8 @@ const {
   deleteBrand,
   createBrand,
 } = require("../controllers/brand.controller");
-
 const { checkJWT } = require("../middlewares/jwt-validator");
+
 const router = express.Router();
 
 router.use(checkJWT);

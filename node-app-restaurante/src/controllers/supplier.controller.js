@@ -1,8 +1,16 @@
 const RestaurantModel = require("../models/Restaurant.model");
 const SupplierModel = require("../models/Supplier.model");
+const { generateNewConsecutivo } = require("./consecutivos.controller");
+const { createNewBitacoraEntry } = require("./bitacora.controller");
 
 const getAllSuppliersFromRestaurant = async (req, res, next) => {
   const suppliers = await SupplierModel.find();
+
+  const bitacora = await createNewBitacoraEntry(
+    req.user,
+    "PROVEEDOR GET",
+    req.body
+  );
 
   return res.json({
     ok: true,
@@ -16,6 +24,10 @@ const createSupplier = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
+    const consecutivo = await generateNewConsecutivo("PROVEEDOR");
+
+    req.body.codigo = consecutivo;
+
     const supplier = new SupplierModel(req.body);
 
     await supplier.save();
@@ -23,6 +35,12 @@ const createSupplier = async (req, res, next) => {
     restaurantDB.proveedores.push(supplier);
 
     await restaurantDB.save();
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "PROVEEDOR INSERT",
+      req.body
+    );
 
     return res.json({
       ok: true,
@@ -50,6 +68,12 @@ const updateSupplier = async (req, res, next) => {
       }
     );
 
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "PROVEEDOR UPDATE",
+      req.body
+    );
+
     return res.json({
       ok: true,
       supplier,
@@ -68,6 +92,12 @@ const deleteSupplier = async (req, res, next) => {
       restaurante: restaurant,
       _id: id,
     });
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "PROVEEDOR DELETE",
+      req.body
+    );
 
     return res.json({
       ok: true,

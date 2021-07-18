@@ -1,53 +1,54 @@
-const PositionModel = require("../models/Position.model");
 const RestaurantModel = require("../models/Restaurant.model");
+const RolModel = require("../models/Rol.model");
 const { createNewBitacoraEntry } = require("./bitacora.controller");
 const { generateNewConsecutivo } = require("./consecutivos.controller");
 
-const getAllPositions = async (req, res, next) => {
+const getAllRolsFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
-  const position = await PositionModel.find({ restaurante: restaurant });
+  const rols = await RolModel.find({ restaurante: restaurant });
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
-    "PUESTOS GET",
+    "ROL INSERT",
     req.body
   );
 
   return res.json({
     ok: true,
-    position,
+    rols,
   });
 };
 
-const createPosition = async (req, res, next) => {
+const createRol = async (req, res, next) => {
   try {
-    //const { restaurant } = req.user;
+    const { restaurant } = req.user;
 
-    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
+    const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("PUESTO");
+    const consecutivo = await generateNewConsecutivo("ROL");
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
-    const position = new PositionModel(req.body);
+    const rol = new RolModel(req.body);
 
-    await position.save();
+    await rol.save();
 
-    restaurantDB.puestos.push(position);
+    restaurantDB.roles.push(rol);
 
     await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS INSERT",
+      "ROL INSERT",
       req.body
     );
 
-    //console.log(bitacora);
+    console.log(bitacora);
 
     return res.json({
       ok: true,
-      position,
+      rol,
       restaurantDB,
     });
   } catch (error) {
@@ -55,12 +56,12 @@ const createPosition = async (req, res, next) => {
   }
 };
 
-const updatePosition = async (req, res, next) => {
+const updateRol = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const position = await PositionModel.findOneAndUpdate(
+    const rol = await RolModel.findOneAndUpdate(
       {
         restaurante: restaurant,
         _id: id,
@@ -73,47 +74,46 @@ const updatePosition = async (req, res, next) => {
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS UPDATE",
+      "ROL UPDATE",
       req.body
     );
 
     return res.json({
       ok: true,
-      position,
+      rol,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const deletePosition = async (req, res, next) => {
+const deleteRol = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const position = await PositionModel.findOneAndRemove({
+    const rol = await RolModel.findOneAndRemove({
       restaurante: restaurant,
       _id: id,
     });
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS ELIMINAR",
+      "ROL DELETE",
       req.body
     );
 
     return res.json({
       ok: true,
-      position,
+      rol,
     });
   } catch (error) {
     next(error);
   }
 };
-
 module.exports = {
-  getAllPositions,
-  createPosition,
-  updatePosition,
-  deletePosition,
+  getAllRolsFromRestaurant,
+  createRol,
+  updateRol,
+  deleteRol,
 };

@@ -28,11 +28,23 @@ app.use("/api/tables", require("./src/routes/table.route"));
 app.use("/api/positions", require("./src/routes/position.route"));
 app.use("/api/brands", require("./src/routes/brand.route"));
 app.use("/api/suppliers", require("./src/routes/supplier.route"));
+app.use("/api/consecutivos", require("./src/routes/consecutivos.route"));
+app.use("/api/clients", require("./src/routes/clients.route"));
+app.use("/api/rols", require("./src/routes/rol.route"));
+app.use("/api/products/comestibles", require("./src/routes/comestibles.route"));
+app.use("/api/products/desechables", require("./src/routes/comestibles.route"));
+app.use("/api/products/limpieza", require("./src/routes/comestibles.route"));
+app.use("/api/products/tecnologia", require("./src/routes/comestibles.route"));
 
 // Manejo de Errores
 app.use((err, req, res, next) => {
-  //errorLogger.log(err);
-  return res.status(501).json({ success: false, message: err.message });
+  let log = {
+    Mensaje: err.message ? err.message.substr(0, 500) : "Error desconocido",
+    Descripcion: err.stack ? err.stack.substr(0, 500) : "",
+    Codigo_Error: err.code || -1,
+    Fecha: new Date(),
+  };
+  return res.status(500).json({ ok: false, mensaje: err.message, log });
 });
 
 // escuchar peticiones

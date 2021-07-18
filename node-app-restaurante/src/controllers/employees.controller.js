@@ -1,9 +1,17 @@
 const EmployeesModel = require("../models/Employees.model");
 const RestaurantModel = require("../models/Restaurant.model");
+const { createNewBitacoraEntry } = require("./bitacora.controller");
+const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllEmployeesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const employees = await EmployeesModel.find({ restaurante: restaurant });
+
+  const bitacora = await createNewBitacoraEntry(
+    req.user,
+    "EMPLEADOS GET",
+    req.body
+  );
 
   return res.json({
     ok: true,
@@ -17,6 +25,10 @@ const createEmployee = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
+    const consecutivo = await generateNewConsecutivo("EMPLEADO");
+
+    req.body.codigo = consecutivo;
+
     const employee = new EmployeesModel(req.body);
 
     await employee.save();
@@ -24,6 +36,12 @@ const createEmployee = async (req, res, next) => {
     restaurantDB.empleados.push(employee);
 
     await restaurantDB.save();
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "EMPLEADOS INSERT",
+      req.body
+    );
 
     return res.json({
       ok: true,
@@ -51,6 +69,12 @@ const updateEmployee = async (req, res, next) => {
       }
     );
 
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "EMPLEADOS UPDATE",
+      req.body
+    );
+
     return res.json({
       ok: true,
       employee,
@@ -69,6 +93,12 @@ const deleteEmployee = async (req, res, next) => {
       restaurante: restaurant,
       _id: id,
     });
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "EMPLEADOS DELETE",
+      req.body
+    );
 
     return res.json({
       ok: true,

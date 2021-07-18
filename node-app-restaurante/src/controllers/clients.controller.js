@@ -1,53 +1,51 @@
-const PositionModel = require("../models/Position.model");
+const ClientModel = require("../models/Client.model");
 const RestaurantModel = require("../models/Restaurant.model");
-const { createNewBitacoraEntry } = require("./bitacora.controller");
 const { generateNewConsecutivo } = require("./consecutivos.controller");
 
-const getAllPositions = async (req, res, next) => {
+const getAllClientsFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
-  const position = await PositionModel.find({ restaurante: restaurant });
+  const clients = await ClientModel.find({ restaurante: restaurant });
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
-    "PUESTOS GET",
+    "CLIENTES GET",
     req.body
   );
 
   return res.json({
     ok: true,
-    position,
+    clients,
   });
 };
 
-const createPosition = async (req, res, next) => {
+const createClient = async (req, res, next) => {
   try {
-    //const { restaurant } = req.user;
-
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
-    const consecutivo = await generateNewConsecutivo("PUESTO");
+    const consecutivo = await generateNewConsecutivo("CLIENTE");
 
-    req.body.codigo = consecutivo;
+    req.body.consecutivo = consecutivo;
+    req.body.fecha = new Date();
 
-    const position = new PositionModel(req.body);
+    const client = new ClientModel(req.body);
 
-    await position.save();
+    await client.save();
 
-    restaurantDB.puestos.push(position);
+    restaurantDB.clientes.push(client);
 
     await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS INSERT",
+      "CLIENTES INSERT",
       req.body
     );
 
-    //console.log(bitacora);
+    console.log(bitacora);
 
     return res.json({
       ok: true,
-      position,
+      client,
       restaurantDB,
     });
   } catch (error) {
@@ -55,12 +53,12 @@ const createPosition = async (req, res, next) => {
   }
 };
 
-const updatePosition = async (req, res, next) => {
+const updateClient = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const position = await PositionModel.findOneAndUpdate(
+    const client = await ClientModel.findOneAndUpdate(
       {
         restaurante: restaurant,
         _id: id,
@@ -73,47 +71,46 @@ const updatePosition = async (req, res, next) => {
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS UPDATE",
+      "CLIENTES UPDATE",
       req.body
     );
 
     return res.json({
       ok: true,
-      position,
+      client,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const deletePosition = async (req, res, next) => {
+const deleteClient = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const position = await PositionModel.findOneAndRemove({
+    const client = await ClientModel.findOneAndRemove({
       restaurante: restaurant,
       _id: id,
     });
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS ELIMINAR",
+      "CLIENTES DELETE",
       req.body
     );
 
     return res.json({
       ok: true,
-      position,
+      client,
     });
   } catch (error) {
     next(error);
   }
 };
-
 module.exports = {
-  getAllPositions,
-  createPosition,
-  updatePosition,
-  deletePosition,
+  getAllClientsFromRestaurant,
+  createClient,
+  updateClient,
+  deleteClient,
 };

@@ -1,9 +1,19 @@
-const bcrypt = require("bcrypt");
 const BrandModel = require("../models/Brand.model");
 const RestaurantModel = require("../models/Restaurant.model");
+const {
+  createNewBitacoraEntry,
+} = require("../controllers/bitacora.controller");
 
 const getAllBrandsFromRestaurant = async (req, res, next) => {
   const brands = await BrandModel.find();
+
+  const bitacora = await createNewBitacoraEntry(
+    req.user,
+    "MARCAS GET",
+    req.body
+  );
+
+  console.log(bitacora);
 
   return res.json({
     ok: true,
@@ -17,13 +27,25 @@ const createBrand = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
+    const consecutivo = await generateNewConsecutivo("MARCAS");
+
+    req.body.codigo = consecutivo;
+
     const brand = new BrandModel(req.body);
 
     await brand.save();
 
-    restaurantDB.marcas.push(employee);
+    restaurantDB.marcas.push(brand);
 
     await restaurantDB.save();
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "MARCAS INSERT",
+      req.body
+    );
+
+    console.log(bitacora);
 
     return res.json({
       ok: true,
@@ -51,6 +73,14 @@ const updateBrand = async (req, res, next) => {
       }
     );
 
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "MARCAS UPDATE",
+      req.body
+    );
+
+    console.log(bitacora);
+
     return res.json({
       ok: true,
       brand,
@@ -69,6 +99,14 @@ const deleteBrand = async (req, res, next) => {
       restaurante: restaurant,
       _id: id,
     });
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "MARCAS DELETE",
+      req.body
+    );
+
+    console.log(bitacora);
 
     return res.json({
       ok: true,

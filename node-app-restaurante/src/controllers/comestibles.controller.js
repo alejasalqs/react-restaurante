@@ -1,53 +1,48 @@
-const PositionModel = require("../models/Position.model");
+const comestiblesModel = require("../models/comestibles.model");
 const RestaurantModel = require("../models/Restaurant.model");
 const { createNewBitacoraEntry } = require("./bitacora.controller");
 const { generateNewConsecutivo } = require("./consecutivos.controller");
 
-const getAllPositions = async (req, res, next) => {
+const getAllComestiblesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
-  const position = await PositionModel.find({ restaurante: restaurant });
-
-  const bitacora = await createNewBitacoraEntry(
-    req.user,
-    "PUESTOS GET",
-    req.body
-  );
+  const comestibles = await comestiblesModel.find({ restaurante: restaurant });
 
   return res.json({
     ok: true,
-    position,
+    comestibles,
   });
 };
 
-const createPosition = async (req, res, next) => {
+const createComestible = async (req, res, next) => {
   try {
-    //const { restaurant } = req.user;
+    const { restaurant } = req.user;
 
-    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
+    const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("PUESTO");
+    const consecutivo = await generateNewConsecutivo("COMESTIBLE");
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
-    const position = new PositionModel(req.body);
+    const comestible = new comestiblesModel(req.body);
 
-    await position.save();
+    await comestible.save();
 
-    restaurantDB.puestos.push(position);
+    restaurantDB.comestibles.push(comestible);
 
     await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS INSERT",
+      "COMESTIBLE INSERT",
       req.body
     );
 
-    //console.log(bitacora);
+    console.log(bitacora);
 
     return res.json({
       ok: true,
-      position,
+      comestible,
       restaurantDB,
     });
   } catch (error) {
@@ -55,12 +50,12 @@ const createPosition = async (req, res, next) => {
   }
 };
 
-const updatePosition = async (req, res, next) => {
+const updateComestible = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const position = await PositionModel.findOneAndUpdate(
+    const comestible = await comestiblesModel.findOneAndUpdate(
       {
         restaurante: restaurant,
         _id: id,
@@ -73,47 +68,46 @@ const updatePosition = async (req, res, next) => {
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS UPDATE",
+      "COMESTIBLE UPDATE",
       req.body
     );
 
     return res.json({
       ok: true,
-      position,
+      comestible,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const deletePosition = async (req, res, next) => {
+const deleteComestible = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const position = await PositionModel.findOneAndRemove({
+    const comestible = await comestiblesModel.findOneAndRemove({
       restaurante: restaurant,
       _id: id,
     });
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "PUESTOS ELIMINAR",
+      "COMESTIBLE DELETE",
       req.body
     );
 
     return res.json({
       ok: true,
-      position,
+      comestible,
     });
   } catch (error) {
     next(error);
   }
 };
-
 module.exports = {
-  getAllPositions,
-  createPosition,
-  updatePosition,
-  deletePosition,
+  getAllComestiblesFromRestaurant,
+  createComestible,
+  updateComestible,
+  deleteComestible,
 };

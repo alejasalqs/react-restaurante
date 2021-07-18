@@ -1,9 +1,17 @@
 const RestaurantModel = require("../models/Restaurant.model");
 const TableModel = require("../models/Table.model");
+const { createNewBitacoraEntry } = require("./bitacora.controller");
+const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllTablesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const tables = await TableModel.find({ restaurante: restaurant });
+
+  const bitacora = await createNewBitacoraEntry(
+    req.user,
+    "MESAS GET",
+    req.body
+  );
 
   return res.json({
     ok: true,
@@ -17,7 +25,8 @@ const createTable = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    console.log(restaurantDB);
+    const consecutivo = await generateNewConsecutivo("MESAS");
+    req.body.codigo = consecutivo;
 
     const table = new TableModel({ ...req.body, restaurante: restaurant });
 
@@ -26,6 +35,12 @@ const createTable = async (req, res, next) => {
     restaurantDB.mesas.push(table);
 
     await restaurantDB.save();
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "MESAS GET",
+      req.body
+    );
 
     return res.json({
       ok: true,
@@ -53,6 +68,12 @@ const updateTable = async (req, res, next) => {
       }
     );
 
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "MESAS UPDATE",
+      req.body
+    );
+
     return res.json({
       ok: true,
       table,
@@ -71,6 +92,12 @@ const deleteTable = async (req, res, next) => {
       restaurante: restaurant,
       _id: id,
     });
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "MESAS DELETE",
+      req.body
+    );
 
     return res.json({
       ok: true,

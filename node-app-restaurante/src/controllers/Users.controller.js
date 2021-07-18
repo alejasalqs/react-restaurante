@@ -1,10 +1,18 @@
 const bcrypt = require("bcrypt");
 const UsersModel = require("../models/Users.model");
+const { generateNewConsecutivo } = require("./consecutivos.controller");
+const { createNewBitacoraEntry } = require("./bitacora.controller");
 
 const getAllUsersFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
 
   const users = await UsersModel.find({ restaurante: restaurant });
+
+  const bitacora = await createNewBitacoraEntry(
+    req.user,
+    "USUARIOS GET",
+    req.body
+  );
 
   return res.json({
     ok: true,
@@ -14,6 +22,9 @@ const getAllUsersFromRestaurant = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   try {
+    const consecutivo = await generateNewConsecutivo("USUARIOS");
+    req.body.codigo = consecutivo;
+
     const user = new UsersModel(req.body);
 
     // Encriptar password
@@ -21,6 +32,12 @@ const createUser = async (req, res, next) => {
     user.password = bcrypt.hashSync(req.body.password, salt);
 
     const savedDB = await user.save();
+
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "USUARIOS INSERT",
+      req.body
+    );
 
     return res.status(201).json({
       ok: true,
@@ -49,6 +66,12 @@ const updateUser = async (req, res, next) => {
       new: true,
     });
 
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "USUARIOS UPDATE",
+      req.body
+    );
+
     return res.json({
       ok: true,
       user: updatedUser,
@@ -73,7 +96,13 @@ const deleteUser = async (req, res, next) => {
 
     const deletedUser = await UsersModel.findByIdAndDelete(id, {});
 
-    res.status(200).json({
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "USUARIOS DELETE",
+      req.body
+    );
+
+    return res.status(200).json({
       ok: true,
       user: deletedUser,
     });
