@@ -32,9 +32,10 @@ app.use("/api/consecutivos", require("./src/routes/consecutivos.route"));
 app.use("/api/clients", require("./src/routes/clients.route"));
 app.use("/api/rols", require("./src/routes/rol.route"));
 app.use("/api/products/comestibles", require("./src/routes/comestibles.route"));
-app.use("/api/products/desechables", require("./src/routes/comestibles.route"));
-app.use("/api/products/limpieza", require("./src/routes/comestibles.route"));
-app.use("/api/products/tecnologia", require("./src/routes/comestibles.route"));
+app.use("/api/products/desechables", require("./src/routes/desechables.route"));
+app.use("/api/products/limpieza", require("./src/routes/limpieza.route"));
+app.use("/api/products/tecnologia", require("./src/routes/tecnologia.route"));
+app.use("/api/products/equipos", require("./src/routes/equipos.route"));
 
 // Manejo de Errores
 app.use((err, req, res, next) => {

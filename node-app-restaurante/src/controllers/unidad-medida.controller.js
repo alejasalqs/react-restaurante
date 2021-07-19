@@ -1,48 +1,48 @@
-const EquiposModel = require("../models/Equipos.model");
 const RestaurantModel = require("../models/Restaurant.model");
+const UnidadMedidaModel = require("../models/UnidadMedida.model");
 const { createNewBitacoraEntry } = require("./bitacora.controller");
 const { generateNewConsecutivo } = require("./consecutivos.controller");
 
-const getAllEquiposUtensiliosFromRestaurant = async (req, res, next) => {
+const getAllUnidadMedida = async (req, res, next) => {
   const { restaurant } = req.user;
-  const equipos_utencilios = await EquiposModel.find({
+  const unidad_medida = await UnidadMedidaModel.find({
     restaurante: restaurant,
   });
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
-    "EQUIPOS UTENCILIOS GET",
+    "UNIDAD_MEDIDA GET",
     req.body
   );
 
   return res.json({
     ok: true,
-    equipos_utencilios,
+    unidad_medida,
   });
 };
 
-const createEquiposUtencilios = async (req, res, next) => {
+const createUnidadMedida = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("EQUIPOS");
+    const consecutivo = await generateNewConsecutivo("UNIDAD_MEDIDA");
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
 
-    const equipos_utencilios = new EquiposModel(req.body);
+    const unidad_medida = new UnidadMedidaModel(req.body);
 
-    await equipos_utencilios.save();
+    await unidad_medida.save();
 
-    restaurantDB.equipos.push(equipos_utencilios);
+    restaurantDB.unidad_medida.push(unidad_medida);
 
     await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "EQUIPOS UTENCILIOS INSERT",
+      "UNIDAD_MEDIDA INSERT",
       req.body
     );
 
@@ -50,7 +50,7 @@ const createEquiposUtencilios = async (req, res, next) => {
 
     return res.json({
       ok: true,
-      equipos_utencilios,
+      unidad_medida,
       restaurantDB,
     });
   } catch (error) {
@@ -58,12 +58,12 @@ const createEquiposUtencilios = async (req, res, next) => {
   }
 };
 
-const updateEquiposUtencilios = async (req, res, next) => {
+const updateUnidadMedida = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const equipos_utencilios = await EquiposModel.findOneAndUpdate(
+    const unidad_medida = await UnidadMedidaModel.findOneAndUpdate(
       {
         restaurante: restaurant,
         _id: id,
@@ -76,47 +76,46 @@ const updateEquiposUtencilios = async (req, res, next) => {
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "EQUIPOS UTENCILIOS UPDATE",
+      "UNIDAD_MEDIDA UPDATE",
       req.body
     );
 
     return res.json({
       ok: true,
-      equipos_utencilios,
+      unidad_medida,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const deleteEquiposUtencilios = async (req, res, next) => {
+const deleteUnidadMedida = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { id } = req.params;
 
-    const equipos_utencilios = await EquiposModel.findOneAndRemove({
+    const unidad_medida = await UnidadMedidaModel.findOneAndRemove({
       restaurante: restaurant,
       _id: id,
     });
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "TECNOLOGIA DELETE",
+      "UNIDAD_MEDIDA DELETE",
       req.body
     );
 
     return res.json({
       ok: true,
-      equipos_utencilios,
+      unidad_medida,
     });
   } catch (error) {
     next(error);
   }
 };
-
 module.exports = {
-  getAllEquiposUtensiliosFromRestaurant,
-  createEquiposUtencilios,
-  updateEquiposUtencilios,
-  deleteEquiposUtencilios,
+  getAllUnidadMedida,
+  createUnidadMedida,
+  updateUnidadMedida,
+  deleteUnidadMedida,
 };
