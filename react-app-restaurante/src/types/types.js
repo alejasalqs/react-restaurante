@@ -30,4 +30,18 @@ export const types = {
   deleteTable: "[TABLE] Delete Job",
   tableLoaded: "[TABLE] Loading Tables",
   /////////////////
+  setActivesupplier: "[BRAND] Set Active brand",
+  removeActiveBrand: "[BRAND] Remove Active brand",
+  addBrand: "[BRAND] Add new brand",
+  editBrand: "[BRAND] Edit brand",
+  deleteBrand: "[BRAND] Delete Job",
+  brandLoaded: "[BRAND] Loading brands",
+  /////////////////
+  setActiveSupplier: "[SUPPLIERS] Set Active supplier",
+  removeActiveSupplier: "[SUPPLIERS] Remove Active supplier",
+  addSupplier: "[SUPPLIERS] Add new supplier",
+  editSupplier: "[SUPPLIERS] Edit supplier",
+  deleteSupplier: "[SUPPLIERS] Delete Job",
+  supplierLoaded: "[SUPPLIERS] Loading suppliers",
+  /////////////////
 };
