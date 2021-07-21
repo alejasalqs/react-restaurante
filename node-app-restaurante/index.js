@@ -31,6 +31,8 @@ app.use("/api/suppliers", require("./src/routes/supplier.route"));
 app.use("/api/consecutivos", require("./src/routes/consecutivos.route"));
 app.use("/api/clients", require("./src/routes/clients.route"));
 app.use("/api/rols", require("./src/routes/rol.route"));
+app.use("/api/countries", require("./src/routes/country.route"));
+app.use("/api/unidades-medida", require("./src/routes/unidad-medida.route"));
 app.use("/api/products/comestibles", require("./src/routes/comestibles.route"));
 app.use("/api/products/desechables", require("./src/routes/desechables.route"));
 app.use("/api/products/limpieza", require("./src/routes/limpieza.route"));

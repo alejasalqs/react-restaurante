@@ -8,7 +8,7 @@ const CountrySchema = Schema({
   },
   pais: {
     required: true,
-    type: Date,
+    type: String,
   },
 });
 
@@ -18,7 +18,7 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 CountrySchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["descripcion", "fecha"],
+  encryptedFields: ["pais"],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods
