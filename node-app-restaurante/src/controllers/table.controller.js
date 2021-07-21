@@ -28,6 +28,8 @@ const createTable = async (req, res, next) => {
     const consecutivo = await generateNewConsecutivo("MESAS");
     req.body.codigo = consecutivo;
 
+    console.log(req.body);
+
     const table = new TableModel({ ...req.body, restaurante: restaurant });
 
     await table.save();
@@ -55,12 +57,12 @@ const createTable = async (req, res, next) => {
 const updateTable = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const table = await TableModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -86,11 +88,11 @@ const updateTable = async (req, res, next) => {
 const deleteTable = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const table = await TableModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

@@ -19,8 +19,8 @@ router.get("/", getAllTablesFromRestaurant);
 
 router.post("/", createTable);
 
-router.put("/:id", updateTable);
+router.put("/:codigo", updateTable);
 
-router.delete("/:id", deleteTable);
+router.delete("/:codigo", deleteTable);
 
 module.exports = router;

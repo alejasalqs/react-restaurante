@@ -25,7 +25,7 @@ const createEmployee = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
-    const consecutivo = await generateNewConsecutivo("EMPLEADO");
+    const consecutivo = await generateNewConsecutivo("EMPLEADOS");
 
     req.body.codigo = consecutivo;
 
@@ -56,12 +56,12 @@ const createEmployee = async (req, res, next) => {
 const updateEmployee = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const employee = await EmployeesModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -87,11 +87,11 @@ const updateEmployee = async (req, res, next) => {
 const deleteEmployee = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const employee = await EmployeesModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

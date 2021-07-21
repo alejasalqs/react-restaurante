@@ -19,8 +19,8 @@ router.get("/", getAllEmployeesFromRestaurant);
 
 router.post("/", createEmployee);
 
-router.put("/:id", updateEmployee);
+router.put("/:codigo", updateEmployee);
 
-router.delete("/:id", deleteEmployee);
+router.delete("/:codigo", deleteEmployee);
 
 module.exports = router;
