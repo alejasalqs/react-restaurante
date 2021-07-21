@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveEmployee } from "../../../actions/employees.actions";
+import {
+  setActiveEmployee,
+  startLoadingEmployees,
+} from "../../../actions/employees.actions";
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
 import { EmpleadosModal } from "../../ui/modals/EmpleadosModal";
@@ -11,44 +14,49 @@ export const EmpleadosScreen = () => {
       {
         Header: "Código",
         accessor: "codigo",
+        //show: false,
       },
       {
         Header: "Cédula",
         accessor: "cedula",
       },
       {
-        Header: "",
+        Header: "Nombre",
         accessor: "nombre",
-        columns: [
-          {
-            Header: "Nombre completo",
-            accessor: "nombre",
-          },
-          {
-            accessor: "apellido1",
-          },
-          {
-            accessor: "apellido2",
-          },
-        ],
       },
       {
-        Header: "Teléfono",
-        accessor: "telefono",
+        Header: "Primer Apellido",
+        accessor: "apellido1",
+      },
+      {
+        Header: "Segundo Apellido",
+        accessor: "apellido2",
+      },
+      {
+        Header: "Teléfono 1",
+        accessor: "telefono1",
+      },
+      {
+        Header: "Teléfono 2",
+        accessor: "telefono2",
       },
       {
         Header: "Puesto",
         accessor: "puesto",
       },
       {
-        Header: "Restaurant",
-        accessor: "restaurant",
+        Header: "Restaurante",
+        accessor: "restaurante",
       },
     ],
     []
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(startLoadingEmployees());
+  }, [dispatch]);
 
   const { employees } = useSelector((state) => state.employees);
 

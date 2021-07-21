@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveTable } from "../../../actions/tables.actions";
+import { setActiveTable, startLoading } from "../../../actions/tables.actions";
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
 import { MesasModal } from "../../ui/modals/MesasModal";
@@ -17,18 +17,26 @@ export const MesasScreen = () => {
         accessor: "nombre",
       },
       {
-        Header: "Sillas",
-        accessor: "sillas",
+        Header: "Número",
+        accessor: "numero",
       },
       {
-        Header: "Restaurant",
-        accessor: "restaurant",
+        Header: "Sillas",
+        accessor: "cantidad_sillas",
+      },
+      {
+        Header: "Restaurante",
+        accessor: "restaurante",
       },
     ],
     []
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(startLoading());
+  }, [dispatch]);
 
   const { tables } = useSelector((state) => state.tables);
 

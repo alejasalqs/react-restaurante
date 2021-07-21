@@ -2,22 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
   checking: true,
-  tables: [
-    {
-      codigo: 1,
-      nombre: "Panchito",
-      numero: 1,
-      sillas: 4,
-      restaurant: "Patito SA",
-    },
-    {
-      codigo: 2,
-      nombre: "Cosa",
-      numero: 2,
-      sillas: 2,
-      restaurant: "Patito SA",
-    },
-  ],
+  tables: [],
   activeTable: null,
 };
 
@@ -35,6 +20,26 @@ export const tableReducer = (state = initialState, action) => {
         activeTable: null,
       };
 
+    case types.tableLoaded:
+      return {
+        ...state,
+        tables: action.payload,
+      };
+
+    case types.addTable:
+      return {
+        ...state,
+        tables: [...state.tables, action.payload],
+      };
+
+    case types.deleteTable:
+      return {
+        ...state,
+        tables: state.tables.filter(
+          (table) => table.codigo !== state.activeTable.codigo
+        ),
+        activeTable: null,
+      };
     default:
       return state;
   }

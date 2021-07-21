@@ -5,6 +5,7 @@ import {
   addNewEmployee,
   deleteEmployee,
   removeActiveEmployee,
+  startDeletingEmployee,
 } from "../../../actions/employees.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
@@ -13,12 +14,13 @@ import { customStyles } from "../../../helpers/modal.customStyles";
 Modal.setAppElement("#root");
 
 const initialValues = {
-  codigo: 4,
+  codigo: "",
   cedula: "",
   nombre: "",
   apellido1: "",
   apellido2: "",
-  telefono: "",
+  telefono1: "",
+  telefono2: "",
   puesto: "Lava Platos",
   restaurant: "Patitos SA",
 };
@@ -48,7 +50,8 @@ export const EmpleadosModal = () => {
     nombre,
     apellido1,
     apellido2,
-    telefono,
+    telefono1,
+    telefono2,
     puesto,
     restaurant,
   } = formValues;
@@ -87,7 +90,7 @@ export const EmpleadosModal = () => {
   };
 
   const handleDelete = () => {
-    dispatch(deleteEmployee());
+    dispatch(startDeletingEmployee(activeEmployee.codigo));
     handleCloseModal();
   };
 
@@ -195,9 +198,9 @@ export const EmpleadosModal = () => {
                   className="input"
                   type="text"
                   autoComplete="off"
-                  name="telefono"
+                  name="telefono1"
                   onChange={handleInputChange}
-                  value={telefono}
+                  value={telefono1}
                   placeholder="Teléfono #1"
                 />
               </div>
@@ -211,8 +214,9 @@ export const EmpleadosModal = () => {
                   className="input"
                   type="text"
                   autoComplete="off"
-                  name=""
+                  name="telefono2"
                   onChange={handleInputChange}
+                  value={telefono2}
                   placeholder="Teléfono #2"
                 />
               </div>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveJob } from "../../../actions/jobs.actions";
+import { setActiveJob, startLoadingJobs } from "../../../actions/jobs.actions";
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
 import { PuestosModal } from "../../ui/modals/PuestosModal";
@@ -27,6 +27,10 @@ export const PuestosScreen = () => {
   const dispatch = useDispatch();
 
   const { jobs } = useSelector((state) => state.jobs);
+
+  useEffect(() => {
+    dispatch(startLoadingJobs());
+  }, [dispatch]);
 
   const handleOnclik = (job) => {
     //console.log(job);

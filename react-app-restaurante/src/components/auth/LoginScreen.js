@@ -1,21 +1,22 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { login } from "../../actions/auth.actions";
+import { startLogin } from "../../actions/auth.actions";
 import { useForm } from "../../hooks/useForm";
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const [formValues, handleInputChange] = useForm({
-    email: "alejo@test.com",
+    login: "asalguero",
     password: "123456",
   });
 
-  const { email, password } = formValues;
+  const { login, password } = formValues;
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    console.log(login, password);
+    dispatch(startLogin(login, password));
   };
   return (
     <div className="column  is-half">
@@ -29,11 +30,11 @@ export const LoginScreen = () => {
                 <p class="control has-icons-left has-icons-right">
                   <input
                     class="input"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
+                    type="text"
+                    placeholder="Login"
+                    value={login}
                     onChange={handleInputChange}
-                    name="email"
+                    name="login"
                   />
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>

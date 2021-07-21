@@ -2,38 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
   checking: true,
-  employees: [
-    {
-      codigo: 1,
-      cedula: "117270430",
-      nombre: "Alejandro",
-      apellido1: "Salguero",
-      apellido2: "Quiros",
-      telefono: 84469756,
-      puesto: "Chef",
-      restaurant: "Patito SA",
-    },
-    {
-      codigo: 2,
-      cedula: "11287965",
-      nombre: "María",
-      apellido1: "Cedeño",
-      apellido2: "Aguero",
-      telefono: 88679025,
-      puesto: "Mesera",
-      restaurant: "Patito SA",
-    },
-    {
-      codigo: 3,
-      cedula: "1110567823",
-      nombre: "Jorge",
-      apellido1: "Quirós",
-      apellido2: "Ramírez",
-      telefono: 883373798,
-      puesto: "Mesero",
-      restaurant: "Patito SA",
-    },
-  ],
+  employees: [],
   activeEmployee: null,
 };
 
@@ -75,6 +44,12 @@ export const employeesReducer = (state = initialState, action) => {
           (e) => e.codigo !== state.activeEmployee.codigo
         ),
         activeEmployee: null,
+      };
+
+    case types.employeesLoaded:
+      return {
+        ...state,
+        employees: action.payload,
       };
 
     default:

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { removeActiveTable } from "../../../actions/tables.actions";
+import {
+  removeActiveTable,
+  startDeletingTable,
+  startTablesAddNew,
+} from "../../../actions/tables.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
@@ -9,21 +13,21 @@ import { customStyles } from "../../../helpers/modal.customStyles";
 Modal.setAppElement("#root");
 
 const initValues = {
-  codigo: 4,
+  codigo: "",
   nombre: "",
   numero: "",
-  sillas: "",
-  restaurant: "",
+  cantidad_sillas: "",
 };
 
 export const MesasModal = () => {
   const dispatch = useDispatch();
+
   const { tableModalOpen } = useSelector((state) => state.ui);
   const { activeTable } = useSelector((state) => state.tables);
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, numero, sillas, restaurant } = formValues;
+  const { codigo, nombre, numero, cantidad_sillas } = formValues;
 
   useEffect(() => {
     if (activeTable) {
@@ -39,13 +43,21 @@ export const MesasModal = () => {
     dispatch(removeActiveTable());
   };
 
-  const handleInputChange = () => {};
+  const handleInputChange = ({ target }) => {
+    setFormValues({
+      ...formValues,
+      [target.name]: target.value,
+    });
+  };
+  const handleDelete = () => {
+    dispatch(startDeletingTable(activeTable.codigo));
+    handleCloseModal();
+  };
 
-  const handleDelete = () => {};
-
-  const handleCancel = () => {};
-
-  const saveInformation = () => {};
+  const saveInformation = () => {
+    dispatch(startTablesAddNew(nombre, numero, cantidad_sillas));
+    handleCloseModal();
+  };
 
   const editInformation = () => {};
 
@@ -95,7 +107,7 @@ export const MesasModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Numero</label>
+          <label className="label">Número Mesa</label>
           <div className="control">
             <input
               className="input"
@@ -105,22 +117,22 @@ export const MesasModal = () => {
               id="numero"
               onChange={handleInputChange}
               value={numero}
-              placeholder="Rol Externo o Interno"
+              placeholder="Número mesa"
             />
           </div>
         </div>
         <div className="field">
-          <label className="label">Sillas</label>
+          <label className="label">Cantidad Sillas</label>
           <div className="control">
             <input
               className="input"
               type="number"
               autoComplete="off"
-              name="sillas"
+              name="cantidad_sillas"
               id="sillas"
               onChange={handleInputChange}
-              value={sillas}
-              placeholder="Rol Externo o Interno"
+              value={cantidad_sillas}
+              placeholder="Cantidad Sillas"
             />
           </div>
         </div>
@@ -129,7 +141,7 @@ export const MesasModal = () => {
             <div className="control mr-2">
               <button
                 className="button is-warning"
-                type="submit"
+                type="button"
                 onClick={editInformation}
               >
                 <i className="fas fa-edit" mr-2></i> Editar
@@ -138,7 +150,7 @@ export const MesasModal = () => {
             <div className="control mr-2">
               <button
                 className="button is-danger"
-                type="submit"
+                type="button"
                 onClick={handleDelete}
               >
                 <i class="fas fa-trash mr-2"></i>Eliminar
@@ -148,7 +160,7 @@ export const MesasModal = () => {
               <button
                 className="button is-danger is-light"
                 type="button"
-                onClick={handleCancel}
+                onClick={handleCloseModal}
               >
                 <i className="fas fa-window-close mr-2"></i>Cancelar
               </button>
@@ -159,7 +171,7 @@ export const MesasModal = () => {
             <div className="control mr-3">
               <button
                 className="button is-success"
-                type="submit"
+                type="button"
                 onClick={saveInformation}
               >
                 <i className="fas fa-save mr-2"></i> Guardar
@@ -169,7 +181,7 @@ export const MesasModal = () => {
               <button
                 className="button is-danger is-light"
                 type="button"
-                onClick={handleCancel}
+                onClick={handleCloseModal}
               >
                 <i className="fas fa-window-close mr-2"></i>Cancelar
               </button>

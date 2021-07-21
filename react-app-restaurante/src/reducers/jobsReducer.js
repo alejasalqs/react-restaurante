@@ -2,23 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
   checking: true,
-  jobs: [
-    {
-      codigo: 1,
-      nombre: "Chef",
-      rol: "externo",
-    },
-    {
-      codigo: 2,
-      nombre: "Mesero/a",
-      rol: "externo",
-    },
-    {
-      codigo: 3,
-      nombre: "Lava Platos",
-      rol: "externo",
-    },
-  ],
+  jobs: [],
   activeJob: null,
 };
 
@@ -55,6 +39,12 @@ export const jobsReducer = (state = initialState, action) => {
         ...state,
         jobs: state.jobs.filter((j) => j.codigo !== state.activeJob.codigo),
         activeJob: null,
+      };
+
+    case types.jobsLoaded:
+      return {
+        ...state,
+        jobs: action.payload,
       };
 
     default:

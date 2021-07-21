@@ -7,6 +7,11 @@ export const Table = ({ columns, data, onClick }) => {
     useTable({
       columns,
       data,
+      initialState: {
+        hiddenColumns: columns.map((column) => {
+          if (column.show === false) return column.accessor || column.id;
+        }),
+      },
     });
 
   // Render the UI for your table

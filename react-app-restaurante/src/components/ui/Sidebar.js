@@ -31,17 +31,17 @@ export const Sidebar = () => {
         <p className="menu-label">Clientes</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/marcas">
               <i className="far fa-copyright"></i> Marcas
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/productos">
               <i className="fab fa-product-hunt"></i> Productos
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/proveedores">
               <i className="fas fa-truck"></i> Proveedores
             </NavLink>
           </li>
@@ -49,17 +49,17 @@ export const Sidebar = () => {
         <p className="menu-label">Reportes</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/bitacora">
               <i className="far fa-clipboard"></i> Bitácora
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/reporte-clientes">
               <i className="fas fa-chart-pie"></i> Reporte Clientes
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/reporte-facturacion">
               <i className="fas fa-chart-bar"></i> Reporte Facturación
             </NavLink>
           </li>

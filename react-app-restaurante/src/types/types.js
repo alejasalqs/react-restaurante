@@ -14,17 +14,20 @@ export const types = {
   addEmployee: "[Employees] Add new Employee",
   editEmployee: "[Employees] Edit Employee",
   deleteEmployee: "[Employees] Delete Employee",
+  employeesLoaded: "[Employees] Loaded",
   /////////////////
   setActiveJob: "[Jobs] Set Active Job",
   removeActiveJob: "[Jobs] Remove Active Job",
   addJob: "[Jobs] Add new Job",
   editJob: "[Jobs] Edit Job",
   deleteJob: "[Jobs] Delete Job",
+  jobsLoaded: "[JOBS] Loaded",
   /////////////////
-  setActiveTable: "[Tables] Set Active Table",
-  removeActiveTable: "[Tables] Remove Active Table",
-  addTable: "[Tables] Add new Table",
-  editTable: "[Tables] Edit Table",
-  deleteTable: "[Jobs] Delete Job",
+  setActiveTable: "[TABLE] Set Active Table",
+  removeActiveTable: "[TABLE] Remove Active Table",
+  addTable: "[TABLE] Add new Table",
+  editTable: "[TABLE] Edit Table",
+  deleteTable: "[TABLE] Delete Job",
+  tableLoaded: "[TABLE] Loading Tables",
   /////////////////
 };
