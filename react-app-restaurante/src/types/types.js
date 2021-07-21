@@ -44,4 +44,39 @@ export const types = {
   deleteSupplier: "[SUPPLIERS] Delete Job",
   supplierLoaded: "[SUPPLIERS] Loading suppliers",
   /////////////////
+  setActiveUser: "[USERS] Set Active User",
+  removeActiveUser: "[USERS] Remove Active User",
+  addUser: "[USERS] Add new User",
+  editUser: "[USERS] Edit User",
+  deleteUser: "[USERS] Delete User",
+  userLoaded: "[USERS] Loading Users",
+  /////////////////
+  setActiveConsecutivos: "[CONSECUTIVOS] Set Active Consecutivos",
+  removeActiveConsecutivos: "[CONSECUTIVOS] Remove Active Consecutivos",
+  addConsecutivos: "[CONSECUTIVOS] Add new Consecutivos",
+  editConsecutivos: "[CONSECUTIVOS] Edit Consecutivos",
+  deleteConsecutivos: "[CONSECUTIVOS] Delete Consecutivo",
+  consecutivosLoaded: "[CONSECUTIVOS] Loading Consecutivo",
+  /////////////////
+  setActiveCountry: "[COUNTRY] Set Active Country",
+  removeActiveCountry: "[COUNTRY] Remove Active Country",
+  addCountry: "[COUNTRY] Add new Country",
+  editCountry: "[COUNTRY] Edit Country",
+  deleteCountry: "[COUNTRY] Delete Country",
+  countryLoaded: "[COUNTRY] Loading Country",
+  /////////////////
+  setActiveRol: "[ROLS] Set Active Rol",
+  removeActiveRol: "[ROLS] Remove Active Rol",
+  addRol: "[ROLS] Add new Rol",
+  editRol: "[ROLS] Edit Rol",
+  deleteRol: "[ROLS] Delete Rol",
+  rolLoaded: "[ROLS] Loading Rols",
+  /////////////////
+  setActiveUnidadMedida: "[UNIDADES_MEDIDA] Set Active UnidadMedida",
+  removeActiveUnidadMedida: "[UNIDADES_MEDIDA] Remove Active UnidadMedida",
+  addUnidadMedida: "[UNIDADES_MEDIDA] Add new UnidadMedida",
+  editUnidadMedida: "[UNIDADES_MEDIDA] Edit UnidadMedida",
+  deleteUnidadMedida: "[UNIDADES_MEDIDA] Delete UnidadMedida",
+  unidadMedidaLoaded: "[UNIDADES_MEDIDA] Loading UnidadMedidas",
+  /////////////////
 };

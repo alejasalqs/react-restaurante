@@ -11,6 +11,11 @@ import { HomeScreen } from "../components/dashboard/HomeScreen";
 import { BitacoraScreen } from "../components/dashboard/reportes/BitacoraScreen";
 import { ReporteClientesScreen } from "../components/dashboard/reportes/ReporteClientesScreen";
 import { ReporteFacturacionScreen } from "../components/dashboard/reportes/ReporteFacturacionScreen";
+import { ConsecutivosScreen } from "../components/dashboard/seguridad/ConsecutivosScreen";
+import { CountryScreen } from "../components/dashboard/seguridad/CountryScreen";
+import { RolScreen } from "../components/dashboard/seguridad/RolScreen";
+import { UnidadMedidaScreen } from "../components/dashboard/seguridad/UnidadMedidaScreen";
+import { UsuariosScreen } from "../components/dashboard/seguridad/UsuariosScreen";
 //import { Footer } from "../components/ui/Footer";
 import { Navbar } from "../components/ui/Navbar";
 import { Sidebar } from "../components/ui/Sidebar";
@@ -71,6 +76,28 @@ export const DashboardRouter = () => {
                 exact
                 path="/dashboard/reporte-facturacion"
                 component={ReporteFacturacionScreen}
+              />
+
+              <Route
+                exact
+                path="/dashboard/usuarios"
+                component={UsuariosScreen}
+              />
+
+              <Route
+                exact
+                path="/dashboard/consecutivos"
+                component={ConsecutivosScreen}
+              />
+
+              <Route exact path="/dashboard/paises" component={CountryScreen} />
+
+              <Route exact path="/dashboard/roles" component={RolScreen} />
+
+              <Route
+                exact
+                path="/dashboard/unidades"
+                component={UnidadMedidaScreen}
               />
 
               <Route path="/dashboard" component={HomeScreen} />

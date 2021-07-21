@@ -80,32 +80,32 @@ export const Sidebar = () => {
         <p className="menu-label">Seguridad</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/usuarios">
               <i className="fas fa-users"></i> Usuarios
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/consecutivos">
               <i className="fas fa-list-ol"></i> Consecutivos
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/paises">
               <i className="fas fa-flag"></i> Países
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/cajas">
               <i className="fas fa-boxes"></i> Cajas
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/roles">
               <i className="fas fa-calendar-week"></i> Roles o eventos
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/unidades">
               <i className="fas fa-balance-scale"></i> Unidades de Medida
             </NavLink>
           </li>
