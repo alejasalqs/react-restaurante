@@ -11,8 +11,8 @@ const ClientSchema = Schema({
     type: String,
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
   monto_pagado: {
     required: true,

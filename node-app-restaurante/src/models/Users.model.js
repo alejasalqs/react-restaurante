@@ -18,8 +18,8 @@ const UsersSchema = Schema({
     type: String,
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
   telefono: {
     type: String,

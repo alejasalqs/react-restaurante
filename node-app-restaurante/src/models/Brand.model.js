@@ -15,12 +15,12 @@ const BrandSchema = Schema({
     type: String,
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
   nacionalidad: {
-    required: true,
-    type: Number,
+    type: Schema.Types.ObjectId,
+    ref: "Country",
   },
   empresa: {
     required: true,

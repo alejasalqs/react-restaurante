@@ -18,8 +18,8 @@ const EmployeeSchema = Schema({
     type: String,
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
   cedula: {
     required: true,

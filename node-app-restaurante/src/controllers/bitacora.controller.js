@@ -3,7 +3,7 @@ const ConsecutivosModel = require("../models/Consecutivos.model");
 const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getBitacora = async (req, res, next) => {
-  const bitacora = await BitacoraModel.find().populate("usuario restaurante");
+  const bitacora = await BitacoraModel.find().populate("usuario", "login");
 
   return res.json({
     ok: true,

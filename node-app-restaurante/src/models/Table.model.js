@@ -15,8 +15,8 @@ const TableSchema = Schema({
     type: Number,
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
   cantidad_sillas: {
     required: true,

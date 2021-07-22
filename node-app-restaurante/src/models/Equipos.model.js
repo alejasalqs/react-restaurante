@@ -23,8 +23,8 @@ const EquiposSchema = Schema({
     ref: "Brand",
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
 });
 

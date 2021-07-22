@@ -5,7 +5,10 @@ const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllTablesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
-  const tables = await TableModel.find({ restaurante: restaurant });
+  const tables = await TableModel.find({ restaurante: restaurant }).populate(
+    "restaurante",
+    "restaurante.nombre"
+  );
 
   const bitacora = await createNewBitacoraEntry(
     req.user,

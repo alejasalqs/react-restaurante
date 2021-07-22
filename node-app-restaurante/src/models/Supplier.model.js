@@ -27,8 +27,8 @@ const SupplierSchema = Schema({
     type: String,
   },
   restaurante: {
-    required: true,
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
   },
 });
 
