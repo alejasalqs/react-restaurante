@@ -7,7 +7,7 @@ const getAllDesechablesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const productos_desechables = await DesechablesModel.find({
     restaurante: restaurant,
-  });
+  }).populate("restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
@@ -27,7 +27,7 @@ const createDesechables = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("DESECHABLE");
+    const consecutivo = await generateNewConsecutivo("DESECHABLES");
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;

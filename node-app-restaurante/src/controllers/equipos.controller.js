@@ -7,7 +7,7 @@ const getAllEquiposUtensiliosFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const equipos_utencilios = await EquiposModel.find({
     restaurante: restaurant,
-  });
+  }).populate("restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,

@@ -5,7 +5,9 @@ const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllComestiblesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
-  const comestibles = await comestiblesModel.find({ restaurante: restaurant });
+  const comestibles = await comestiblesModel
+    .find({ restaurante: restaurant })
+    .populate("restaurante");
 
   return res.json({
     ok: true,

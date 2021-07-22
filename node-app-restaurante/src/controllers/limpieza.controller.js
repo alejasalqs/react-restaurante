@@ -7,7 +7,7 @@ const getAllProductosLimpiezaFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const productos_desechables = await LimpiezaModel.find({
     restaurante: restaurant,
-  });
+  }).populate("restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,

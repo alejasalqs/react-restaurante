@@ -7,7 +7,7 @@ const getAllProductosTecnologiaFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const productos_tecnologia = await TecnologiaModel.find({
     restaurante: restaurant,
-  });
+  }).populate("restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
@@ -27,7 +27,7 @@ const createProductosTecnologia = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("TECNOLOGIA");
+    const consecutivo = await generateNewConsecutivo("TECNOLOGIAS");
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
