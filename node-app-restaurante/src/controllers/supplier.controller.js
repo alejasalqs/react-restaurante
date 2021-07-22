@@ -4,7 +4,11 @@ const { generateNewConsecutivo } = require("./consecutivos.controller");
 const { createNewBitacoraEntry } = require("./bitacora.controller");
 
 const getAllSuppliersFromRestaurant = async (req, res, next) => {
-  const suppliers = await SupplierModel.find();
+  const { restaurant } = req.user;
+
+  const suppliers = await SupplierModel.find({
+    restaurante: restaurant,
+  }).populate("restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
@@ -24,7 +28,7 @@ const createSupplier = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
-    const consecutivo = await generateNewConsecutivo("PROVEEDOR");
+    const consecutivo = await generateNewConsecutivo("PROVEEDORES");
 
     req.body.codigo = consecutivo;
 

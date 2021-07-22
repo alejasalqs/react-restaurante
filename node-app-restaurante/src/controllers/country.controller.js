@@ -34,8 +34,6 @@ const createCountry = async (req, res, next) => {
       req.body
     );
 
-    console.log(bitacora);
-
     return res.json({
       ok: true,
       country,

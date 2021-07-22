@@ -5,7 +5,9 @@ const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllEmployeesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
-  const employees = await EmployeesModel.find({ restaurante: restaurant });
+  const employees = await EmployeesModel.find({
+    restaurante: restaurant,
+  }).populate("puesto nacionalidad restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,

@@ -24,7 +24,7 @@ const BrandSchema = Schema({
   },
   empresa: {
     required: true,
-    type: Number,
+    type: String,
   },
   telefono_empresa: {
     required: true,
@@ -38,7 +38,7 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 BrandSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre", "descripcion", "telefono_empresa"],
+  encryptedFields: ["nombre", "descripcion", "telefono_empresa", "empresa"],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods

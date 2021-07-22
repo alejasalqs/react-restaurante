@@ -36,7 +36,7 @@ const createProductosTecnologia = async (req, res, next) => {
 
     await producto_tecnologia.save();
 
-    restaurantDB.limpieza.push(producto_tecnologia);
+    restaurantDB.tecnologia.push(producto_tecnologia);
 
     await restaurantDB.save();
 

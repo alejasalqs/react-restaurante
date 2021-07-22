@@ -30,7 +30,7 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 TableSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre"],
+  encryptedFields: ["nombre", "numero", "cantidad_sillas"],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods

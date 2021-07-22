@@ -12,11 +12,11 @@ const {
 const { checkJWT } = require("../middlewares/jwt-validator");
 const router = express.Router();
 
+router.post("/", createUser);
+
 router.use(checkJWT);
 
 router.get("/", getAllUsersFromRestaurant);
-
-router.post("/", createUser);
 
 router.put("/:id", updateUser);
 

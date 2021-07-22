@@ -36,7 +36,7 @@ const createEquiposUtencilios = async (req, res, next) => {
 
     await equipos_utencilios.save();
 
-    restaurantDB.equipos.push(equipos_utencilios);
+    restaurantDB.equipos_cocina.push(equipos_utencilios);
 
     await restaurantDB.save();
 

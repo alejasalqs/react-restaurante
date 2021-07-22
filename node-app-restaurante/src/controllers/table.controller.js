@@ -6,8 +6,7 @@ const { generateNewConsecutivo } = require("./consecutivos.controller");
 const getAllTablesFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
   const tables = await TableModel.find({ restaurante: restaurant }).populate(
-    "restaurante",
-    "restaurante.nombre"
+    "restaurante"
   );
 
   const bitacora = await createNewBitacoraEntry(
@@ -31,8 +30,6 @@ const createTable = async (req, res, next) => {
     const consecutivo = await generateNewConsecutivo("MESAS");
     req.body.codigo = consecutivo;
 
-    console.log(req.body);
-
     const table = new TableModel({ ...req.body, restaurante: restaurant });
 
     await table.save();
@@ -43,7 +40,7 @@ const createTable = async (req, res, next) => {
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "MESAS GET",
+      "MESAS INSERT",
       req.body
     );
 

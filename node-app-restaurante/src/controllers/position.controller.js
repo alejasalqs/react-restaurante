@@ -21,13 +21,14 @@ const getAllPositions = async (req, res, next) => {
 
 const createPosition = async (req, res, next) => {
   try {
-    //const { restaurant } = req.user;
+    const { restaurant } = req.user;
 
-    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
+    const restaurantDB = await RestaurantModel.findById(restaurant);
 
     const consecutivo = await generateNewConsecutivo("PUESTO");
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
     const position = new PositionModel(req.body);
 

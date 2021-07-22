@@ -3,17 +3,20 @@ const RestaurantModel = require("../models/Restaurant.model");
 const {
   createNewBitacoraEntry,
 } = require("../controllers/bitacora.controller");
+const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllBrandsFromRestaurant = async (req, res, next) => {
-  const brands = await BrandModel.find();
+  const { restaurant } = req.user;
+
+  const brands = await BrandModel.find({ restaurante: restaurant }).populate(
+    "nacionalidad restaurante"
+  );
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
     "MARCAS GET",
     req.body
   );
-
-  console.log(bitacora);
 
   return res.json({
     ok: true,
@@ -30,6 +33,7 @@ const createBrand = async (req, res, next) => {
     const consecutivo = await generateNewConsecutivo("MARCAS");
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
     const brand = new BrandModel(req.body);
 
@@ -44,8 +48,6 @@ const createBrand = async (req, res, next) => {
       "MARCAS INSERT",
       req.body
     );
-
-    console.log(bitacora);
 
     return res.json({
       ok: true,

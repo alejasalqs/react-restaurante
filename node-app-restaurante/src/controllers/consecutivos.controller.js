@@ -15,10 +15,7 @@ const getConsecutivos = async (req, res, next) => {
 
 const createConsecuivo = async (req, res, next) => {
   try {
-    const { restaurant } = req.user;
-
-    const restaurantDB = await RestaurantModel.findById(restaurant);
-    //console.log(restaurantDB);
+    const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
     const consecutivo = new ConsecutivosModel(req.body);
 
@@ -28,9 +25,11 @@ const createConsecuivo = async (req, res, next) => {
 
     await restaurantDB.save();
 
-    const bitacora = await createNewBitacoraEntry(req.user, "INSERT", req.body);
-
-    console.log(bitacora);
+    const bitacora = await createNewBitacoraEntry(
+      req.user,
+      "CONSECUTIVOS INSERT",
+      req.body
+    );
 
     return res.json({
       ok: true,

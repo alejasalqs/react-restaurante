@@ -15,7 +15,7 @@ const { checkJWT } = require("../middlewares/jwt-validator");
 
 const router = express.Router();
 
-router.use(checkJWT);
+//router.use(checkJWT);
 
 router.get("/", getConsecutivos);
 

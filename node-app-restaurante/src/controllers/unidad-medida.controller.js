@@ -36,7 +36,7 @@ const createUnidadMedida = async (req, res, next) => {
 
     await unidad_medida.save();
 
-    restaurantDB.unidad_medida.push(unidad_medida);
+    restaurantDB.unidades_medida.push(unidad_medida);
 
     await restaurantDB.save();
 

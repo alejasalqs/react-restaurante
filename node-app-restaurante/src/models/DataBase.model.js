@@ -18,6 +18,12 @@ const DataBaseSchema = Schema({
       ref: "User",
     },
   ],
+  countries: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Country",
+    },
+  ],
 });
 
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;

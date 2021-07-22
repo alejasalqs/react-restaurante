@@ -38,7 +38,7 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 ConsecutivoSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["descripcion", "fecha"],
+  encryptedFields: ["descripcion", "contiene_prefijo", "prefijo"],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods

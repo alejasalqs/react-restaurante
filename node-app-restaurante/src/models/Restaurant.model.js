@@ -5,10 +5,10 @@ const RestaurantSchema = Schema({
   nombre: {
     require: true,
     type: String,
-    unique: true,
   },
-  consecutivo: {
+  codigo: {
     type: String,
+    unique: true,
   },
   direccion: {
     type: String,
@@ -51,10 +51,52 @@ const RestaurantSchema = Schema({
       ref: "Suplier",
     },
   ],
-  productos: [
+  buffets: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Products",
+      ref: "Buffet",
+    },
+  ],
+  comestibles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comestible",
+    },
+  ],
+  desechables: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Desechables",
+    },
+  ],
+  equipos_cocina: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Equipos",
+    },
+  ],
+  especiales: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Especiales",
+    },
+  ],
+  limpieza: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Limpieza",
+    },
+  ],
+  tecnologia: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tecnologia",
+    },
+  ],
+  unidades_medida: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "UnidadMedida",
     },
   ],
   mesas: [
@@ -87,6 +129,18 @@ const RestaurantSchema = Schema({
       ref: "Caja",
     },
   ],
+  bitacora: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Bitacora",
+    },
+  ],
+  marcas: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Brand",
+    },
+  ],
 });
 
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
@@ -95,7 +149,30 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 RestaurantSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre", "direccion", "cantidad_clientes", "telefono"],
+  encryptedFields: [
+    "nombre",
+    "direccion",
+    "cantidad_clientes",
+    "telefono",
+    "empleados",
+    "especiales",
+    "bebidas",
+    "clientes",
+    "proveedores",
+    "buffets",
+    "comestibles",
+    "desechables",
+    "equipos_cocina",
+    "limpieza",
+    "tecnologia",
+    "unidades_medida",
+    "mesas",
+    "puestos",
+    "consecutivos",
+    "roles",
+    "cajas",
+    "bitacora",
+  ],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods

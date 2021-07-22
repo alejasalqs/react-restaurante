@@ -48,7 +48,14 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 UsersSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre", "apellido1", "apellido2", "telefono", "celular"],
+  encryptedFields: [
+    "nombre",
+    "apellido1",
+    "apellido2",
+    "telefono",
+    "celular",
+    "tipo_usuario",
+  ],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods
