@@ -1,6 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { startLogOut } from "../../actions/auth.actions";
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const onLogOut = () => {
+    dispatch(startLogOut());
+  };
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -31,7 +38,11 @@ export const Navbar = () => {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <button className="button is-danger is-outlined">
+            <button
+              type="button"
+              className="button is-danger is-outlined"
+              onClick={onLogOut}
+            >
               <i className="fas fa-sign-out-alt"></i>
               <span>Cerrar Sesión</span>
             </button>

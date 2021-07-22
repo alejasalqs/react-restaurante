@@ -42,11 +42,11 @@ export const EmpleadosScreen = () => {
       },
       {
         Header: "Puesto",
-        accessor: "puesto",
+        accessor: "puesto.nombre",
       },
       {
         Header: "Restaurante",
-        accessor: "restaurante",
+        accessor: "restaurante.nombre",
       },
     ],
     []

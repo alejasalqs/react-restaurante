@@ -20,7 +20,7 @@ export const MarcasScreen = () => {
       },
       {
         Header: "Nacionalidad",
-        accessor: "nacionalidad",
+        accessor: "nacionalidad.pais",
       },
       {
         Header: "Empresa",

@@ -12,27 +12,7 @@ export const CountryScreen = () => {
       },
       {
         Header: "Nombre",
-        accessor: "nombre",
-      },
-      {
-        Header: "Primer apellido",
-        accessor: "apellido1",
-      },
-      {
-        Header: "Segundo apellido",
-        accessor: "apellido2",
-      },
-      {
-        Header: "Teléfono",
-        accessor: "telefono",
-      },
-      {
-        Header: "Celular",
-        accessor: "celular",
-      },
-      {
-        Header: "Login",
-        accessor: "login",
+        accessor: "pais",
       },
     ],
     []

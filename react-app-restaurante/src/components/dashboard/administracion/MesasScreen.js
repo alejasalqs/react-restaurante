@@ -26,7 +26,7 @@ export const MesasScreen = () => {
       },
       {
         Header: "Restaurante",
-        accessor: "restaurante",
+        accessor: "restaurante.nombre",
       },
     ],
     []

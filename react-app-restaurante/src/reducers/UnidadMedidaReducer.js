@@ -8,7 +8,7 @@ const initialState = {
 
 export const unidadMedidaReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.userLoaded:
+    case types.unidadMedidaLoaded:
       return {
         ...state,
         unidades_medida: action.payload,

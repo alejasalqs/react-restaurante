@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingUnidadesMedida } from "../../../actions/unidad-medida.action";
+import { startLoadingEquipos } from "../../../actions/equipos.actions";
 import { Table } from "../../../helpers/Table.helper";
 
-export const UnidadMedidaScreen = () => {
+export const ProductosEquiposScreen = () => {
   const columns = React.useMemo(
     () => [
       {
@@ -11,20 +11,16 @@ export const UnidadMedidaScreen = () => {
         accessor: "codigo",
       },
       {
-        Header: "Unidad Medida",
-        accessor: "unidad",
+        Header: "Nombre",
+        accessor: "nombre",
       },
       {
-        Header: "Escala",
-        accessor: "escala",
+        Header: "Cantidad",
+        accessor: "cantidad",
       },
       {
-        Header: "Detalle",
-        accessor: "detalle",
-      },
-      {
-        Header: "Simbología",
-        accessor: "simbologia",
+        Header: "Restaurante",
+        accessor: "restaurante.nombre",
       },
     ],
     []
@@ -33,18 +29,15 @@ export const UnidadMedidaScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(startLoadingUnidadesMedida());
+    dispatch(startLoadingEquipos());
   }, [dispatch]);
 
-  const { unidades_medida } = useSelector((state) => state.unidadMedida);
+  const { equipos } = useSelector((state) => state.equipos);
 
   const handleOnclik = () => {};
 
   return (
     <div className="block animate__animated animate__fadeIn">
-      <div className="column">
-        <h1 className="title">Unidades de Medida</h1>
-      </div>
       <div className="column">
         <div className="card">
           <div className="card-content">
@@ -57,11 +50,7 @@ export const UnidadMedidaScreen = () => {
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
               </button>
-              <Table
-                columns={columns}
-                data={unidades_medida}
-                onClick={handleOnclik}
-              />
+              <Table columns={columns} data={equipos} onClick={handleOnclik} />
             </div>
           </div>
         </div>

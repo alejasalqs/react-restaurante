@@ -80,4 +80,39 @@ export const types = {
   unidadMedidaLoaded: "[UNIDADES_MEDIDA] Loading UnidadMedidas",
   /////////////////
   bitacoraLoaded: "[BITACORA] Bitacora Loaded",
+  /////////////////
+  setActiveComestibles: "[COMESTIBLES] Set Active Comestibles",
+  removeActiveComestibles: "[COMESTIBLES] Remove Active Comestibles",
+  addComestibles: "[COMESTIBLES] Add new Comestibles",
+  editComestibles: "[COMESTIBLES] Edit Comestibles",
+  deleteComestibles: "[COMESTIBLES] Delete Comestibles",
+  comestiblesLoaded: "[COMESTIBLES] Loading Comestibless",
+  /////////////////
+  setActiveDesechables: "[DESECHABLES] Set Active Desechables",
+  removeActiveDesechables: "[DESECHABLES] Remove Active Desechables",
+  addDesechables: "[DESECHABLES] Add new Desechables",
+  editDesechables: "[DESECHABLES] Edit Desechables",
+  deleteDesechables: "[DESECHABLES] Delete Desechables",
+  desechablesLoaded: "[DESECHABLES] Loading Desechables",
+  /////////////////
+  setActiveLimpieza: "[Limpieza] Set Active Limpieza",
+  removeActiveLimpieza: "[Limpieza] Remove Active Limpieza",
+  addLimpieza: "[Limpieza] Add new Limpieza",
+  editLimpieza: "[Limpieza] Edit Limpieza",
+  deleteLimpieza: "[Limpieza] Delete Limpieza",
+  limpiezaLoaded: "[Limpieza] Loading Limpieza",
+  /////////////////
+  setActiveTecnologia: "[Tecnologia] Set Active Tecnologia",
+  removeActiveTecnologia: "[Tecnologia] Remove Active Tecnologia",
+  addTecnologia: "[Tecnologia] Add new Tecnologia",
+  editTecnologia: "[Tecnologia] Edit Tecnologia",
+  deleteTecnologia: "[Tecnologia] Delete Tecnologia",
+  tecnologiaLoaded: "[Tecnologia] Loading Tecnologia",
+  /////////////////
+  setActiveEquipos: "[Equipos] Set Active Equipos",
+  removeActiveEquipos: "[Equipos] Remove Active Equipos",
+  addEquipos: "[Equipos] Add new Equipos",
+  editEquipos: "[Equipos] Edit Equipos",
+  deleteEquipos: "[Equipos] Delete Equipos",
+  equiposLoaded: "[Equipos] Loading Equipos",
 };

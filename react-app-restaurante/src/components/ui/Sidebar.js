@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { startLogOut } from "../../actions/auth.actions";
 
 export const Sidebar = () => {
+  const dispatch = useDispatch();
+
+  const onLogOut = () => {
+    dispatch(startLogOut());
+  };
   return (
     <div className="column is-one-fifth pl-3">
       <aside className="menu is-primary">
@@ -110,9 +117,9 @@ export const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <a onClick={onLogOut}>
               <i className="fas fa-power-off"></i> Cerrar Sesión
-            </NavLink>
+            </a>
           </li>
         </ul>
       </aside>
