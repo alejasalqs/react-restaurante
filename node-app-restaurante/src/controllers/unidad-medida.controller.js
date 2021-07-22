@@ -27,7 +27,10 @@ const createUnidadMedida = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("UNIDAD_MEDIDA");
+    const consecutivo = await generateNewConsecutivo(
+      "UNIDAD_MEDIDA",
+      restaurant
+    );
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;

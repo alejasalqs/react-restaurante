@@ -4,7 +4,6 @@ const encrypt = require("mongoose-encryption");
 const UnidadMedidaSchema = Schema({
   codigo: {
     type: String,
-    unique: true,
   },
   unidad: {
     required: true,

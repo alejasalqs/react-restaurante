@@ -85,8 +85,11 @@ const deleteConsecutivo = async (req, res, next) => {
   }
 };
 
-const generateNewConsecutivo = async (tipo) => {
-  let consecutivo = await ConsecutivosModel.find({ tipo });
+const generateNewConsecutivo = async (tipo, restaurant) => {
+  let consecutivo = await ConsecutivosModel.find({
+    restaurante: restaurant,
+    tipo,
+  });
 
   if (!consecutivo)
     throw new Error(

@@ -28,7 +28,7 @@ const createBuffet = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("BUFFET");
+    const consecutivo = await generateNewConsecutivo("BUFFET", restaurant);
 
     req.body.codigo = consecutivo;
 
