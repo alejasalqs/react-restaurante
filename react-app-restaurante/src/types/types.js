@@ -79,4 +79,5 @@ export const types = {
   deleteUnidadMedida: "[UNIDADES_MEDIDA] Delete UnidadMedida",
   unidadMedidaLoaded: "[UNIDADES_MEDIDA] Loading UnidadMedidas",
   /////////////////
+  bitacoraLoaded: "[BITACORA] Bitacora Loaded",
 };

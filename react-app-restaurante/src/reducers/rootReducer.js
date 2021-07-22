@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./authReducer";
+import { bitacoraReducer } from "./bitacoraReducer";
 import { consecutivosReducer } from "./consecutivosReducer";
 import { countryReducer } from "./countryReducer";
 import { employeesReducer } from "./employeesReducer";
@@ -25,4 +26,5 @@ export const rootReducer = combineReducers({
   countries: countryReducer,
   rols: rolReducer,
   unidadMedida: unidadMedidaReducer,
+  bitacora: bitacoraReducer,
 });
