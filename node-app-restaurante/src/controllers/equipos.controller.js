@@ -27,7 +27,7 @@ const createEquiposUtencilios = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("EQUIPOS");
+    const consecutivo = await generateNewConsecutivo("EQUIPOS", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -38,7 +38,7 @@ const createEquiposUtencilios = async (req, res, next) => {
 
     restaurantDB.equipos_cocina.push(equipos_utencilios);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -61,12 +61,12 @@ const createEquiposUtencilios = async (req, res, next) => {
 const updateEquiposUtencilios = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const equipos_utencilios = await EquiposModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -92,11 +92,11 @@ const updateEquiposUtencilios = async (req, res, next) => {
 const deleteEquiposUtencilios = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const equipos_utencilios = await EquiposModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

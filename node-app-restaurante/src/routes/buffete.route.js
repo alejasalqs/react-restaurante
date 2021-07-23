@@ -19,8 +19,8 @@ router.get("/", getAllBuffetsFromRestaurant);
 
 router.post("/", createBuffet);
 
-router.put("/:id", updateBuffet);
+router.put("/:codigo", updateBuffet);
 
-router.delete("/:id", deleteBuffet);
+router.delete("/:codigo", deleteBuffet);
 
 module.exports = router;

@@ -19,8 +19,8 @@ router.get("/", getAllClientsFromRestaurant);
 
 router.post("/", createClient);
 
-router.put("/:id", updateClient);
+router.put("/:codigo", updateClient);
 
-router.delete("/:id", deleteClient);
+router.delete("/:codigo", deleteClient);
 
 module.exports = router;

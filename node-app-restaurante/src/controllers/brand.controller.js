@@ -30,7 +30,7 @@ const createBrand = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("MARCAS");
+    const consecutivo = await generateNewConsecutivo("MARCAS", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -62,12 +62,12 @@ const createBrand = async (req, res, next) => {
 const updateBrand = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const brand = await BrandModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -95,11 +95,11 @@ const updateBrand = async (req, res, next) => {
 const deleteBrand = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const brand = await BrandModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

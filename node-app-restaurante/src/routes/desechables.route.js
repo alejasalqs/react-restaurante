@@ -19,8 +19,8 @@ router.get("/", getAllDesechablesFromRestaurant);
 
 router.post("/", createDesechables);
 
-router.put("/:id", updateDesechables);
+router.put("/:codigo", updateDesechables);
 
-router.delete("/:id", deleteDesechables);
+router.delete("/:codigo", deleteDesechables);
 
 module.exports = router;

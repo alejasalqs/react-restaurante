@@ -15,13 +15,13 @@ const { checkJWT } = require("../middlewares/jwt-validator");
 
 const router = express.Router();
 
-//router.use(checkJWT);
+router.post("/", createConsecuivo);
+
+router.use(checkJWT);
 
 router.get("/", getConsecutivos);
 
 router.get("/:tipo", generateNewConsecutivo);
-
-router.post("/", createConsecuivo);
 
 router.put("/:id", updateConsecutivo);
 

@@ -27,7 +27,7 @@ const createTable = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("MESAS");
+    const consecutivo = await generateNewConsecutivo("MESAS", restaurant);
     req.body.codigo = consecutivo;
 
     const table = new TableModel({ ...req.body, restaurante: restaurant });
@@ -36,7 +36,9 @@ const createTable = async (req, res, next) => {
 
     restaurantDB.mesas.push(table);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
+
+    console.log("CUARTO", restaurantDB);
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

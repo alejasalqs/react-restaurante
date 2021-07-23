@@ -36,7 +36,7 @@ const createBuffet = async (req, res, next) => {
 
     await buffet.save();
 
-    restaurantDB.buffets.push(buffet);
+    //restaurantDB.buffets.push(buffet);
 
     await restaurantDB.save();
 
@@ -61,12 +61,12 @@ const createBuffet = async (req, res, next) => {
 const updateBuffet = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const buffet = await BuffetModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -94,11 +94,11 @@ const updateBuffet = async (req, res, next) => {
 const deleteBuffet = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const buffet = await BuffetModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

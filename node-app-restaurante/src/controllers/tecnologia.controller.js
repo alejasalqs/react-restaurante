@@ -27,7 +27,7 @@ const createProductosTecnologia = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("TECNOLOGIAS");
+    const consecutivo = await generateNewConsecutivo("TECNOLOGIAS", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -38,7 +38,7 @@ const createProductosTecnologia = async (req, res, next) => {
 
     restaurantDB.tecnologia.push(producto_tecnologia);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -61,12 +61,12 @@ const createProductosTecnologia = async (req, res, next) => {
 const updateProductosTecnologia = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const producto_tecnologia = await TecnologiaModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -92,11 +92,11 @@ const updateProductosTecnologia = async (req, res, next) => {
 const deleteProductosTecnologia = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const producto_tecnologia = await TecnologiaModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

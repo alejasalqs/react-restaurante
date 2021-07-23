@@ -25,7 +25,7 @@ const createPosition = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("PUESTO");
+    const consecutivo = await generateNewConsecutivo("PUESTO", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -36,7 +36,7 @@ const createPosition = async (req, res, next) => {
 
     restaurantDB.puestos.push(position);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -59,12 +59,12 @@ const createPosition = async (req, res, next) => {
 const updatePosition = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const position = await PositionModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -90,11 +90,11 @@ const updatePosition = async (req, res, next) => {
 const deletePosition = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const position = await PositionModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

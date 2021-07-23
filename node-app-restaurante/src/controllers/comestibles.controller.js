@@ -21,7 +21,7 @@ const createComestible = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("COMESTIBLES");
+    const consecutivo = await generateNewConsecutivo("COMESTIBLES", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -32,7 +32,7 @@ const createComestible = async (req, res, next) => {
 
     restaurantDB.comestibles.push(comestible);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

@@ -28,7 +28,7 @@ const createSupplier = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
-    const consecutivo = await generateNewConsecutivo("PROVEEDORES");
+    const consecutivo = await generateNewConsecutivo("PROVEEDORES", restaurant);
 
     req.body.codigo = consecutivo;
 
@@ -38,7 +38,7 @@ const createSupplier = async (req, res, next) => {
 
     restaurantDB.proveedores.push(supplier);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -59,12 +59,12 @@ const createSupplier = async (req, res, next) => {
 const updateSupplier = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const supplier = await SupplierModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -90,11 +90,11 @@ const updateSupplier = async (req, res, next) => {
 const deleteSupplier = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const supplier = await SupplierModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

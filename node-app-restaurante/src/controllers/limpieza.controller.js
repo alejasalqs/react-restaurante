@@ -27,7 +27,7 @@ const createProductosLimpieza = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("LIMPIEZA");
+    const consecutivo = await generateNewConsecutivo("LIMPIEZA", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -38,7 +38,7 @@ const createProductosLimpieza = async (req, res, next) => {
 
     restaurantDB.limpieza.push(producto_limpieza);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -61,12 +61,12 @@ const createProductosLimpieza = async (req, res, next) => {
 const updateProductosLimpieza = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const producto_limpieza = await LimpiezaModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -92,11 +92,11 @@ const updateProductosLimpieza = async (req, res, next) => {
 const deleteProductosLimpieza = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const producto_limpieza = await LimpiezaModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

@@ -19,8 +19,8 @@ router.get("/", getAllProductosTecnologiaFromRestaurant);
 
 router.post("/", createProductosTecnologia);
 
-router.put("/:id", updateProductosTecnologia);
+router.put("/:codigo", updateProductosTecnologia);
 
-router.delete("/:id", deleteProductosTecnologia);
+router.delete("/:codigo", deleteProductosTecnologia);
 
 module.exports = router;

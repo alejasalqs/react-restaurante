@@ -19,8 +19,8 @@ router.get("/", getAllBrandsFromRestaurant);
 
 router.post("/", createBrand);
 
-router.put("/:id", updateBrand);
+router.put("/:codigo", updateBrand);
 
-router.delete("/:id", deleteBrand);
+router.delete("/:codigo", deleteBrand);
 
 module.exports = router;

@@ -19,8 +19,8 @@ router.get("/", getAllProductosLimpiezaFromRestaurant);
 
 router.post("/", createProductosLimpieza);
 
-router.put("/:id", updateProductosLimpieza);
+router.put("/:codigo", updateProductosLimpieza);
 
-router.delete("/:id", deleteProductosLimpieza);
+router.delete("/:codigo", deleteProductosLimpieza);
 
 module.exports = router;

@@ -19,8 +19,8 @@ router.get("/", getAllEquiposUtensiliosFromRestaurant);
 
 router.post("/", createEquiposUtencilios);
 
-router.put("/:id", updateEquiposUtencilios);
+router.put("/:codigo", updateEquiposUtencilios);
 
-router.delete("/:id", deleteEquiposUtencilios);
+router.delete("/:codigo", deleteEquiposUtencilios);
 
 module.exports = router;

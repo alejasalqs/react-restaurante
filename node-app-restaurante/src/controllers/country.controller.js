@@ -20,7 +20,7 @@ const getAllCountries = async (req, res, next) => {
 
 const createCountry = async (req, res, next) => {
   try {
-    const consecutivo = await generateNewConsecutivo("PAIS");
+    const consecutivo = await generateNewConsecutivo("PAIS", restaurant);
 
     req.body.codigo = consecutivo;
 
@@ -45,11 +45,11 @@ const createCountry = async (req, res, next) => {
 
 const updateCountry = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const country = await CountryModel.findOneAndUpdate(
       {
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -74,10 +74,10 @@ const updateCountry = async (req, res, next) => {
 
 const deleteCountry = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const country = await CountryModel.findOneAndRemove({
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

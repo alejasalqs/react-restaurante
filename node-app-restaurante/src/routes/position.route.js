@@ -19,8 +19,8 @@ router.get("/", getAllPositions);
 
 router.post("/", createPosition);
 
-router.put("/:id", updatePosition);
+router.put("/:codigo", updatePosition);
 
-router.delete("/:id", deletePosition);
+router.delete("/:codigo", deletePosition);
 
 module.exports = router;

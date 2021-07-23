@@ -20,8 +20,8 @@ router.get("/", getAllRolsFromRestaurant);
 
 router.post("/", createRol);
 
-router.put("/:id", updateRol);
+router.put("/:codigo", updateRol);
 
-router.delete("/:id", deleteRol);
+router.delete("/:codigo", deleteRol);
 
 module.exports = router;

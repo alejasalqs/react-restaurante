@@ -19,8 +19,8 @@ router.get("/", getAllSuppliersFromRestaurant);
 
 router.post("/", createSupplier);
 
-router.put("/:id", updateSupplier);
+router.put("/:codigo", updateSupplier);
 
-router.delete("/:id", deleteSupplier);
+router.delete("/:codigo", deleteSupplier);
 
 module.exports = router;

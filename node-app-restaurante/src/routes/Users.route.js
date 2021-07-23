@@ -18,8 +18,8 @@ router.use(checkJWT);
 
 router.get("/", getAllUsersFromRestaurant);
 
-router.put("/:id", updateUser);
+router.put("/:codigo", updateUser);
 
-router.delete("/:id", deleteUser);
+router.delete("/:codigo", deleteUser);
 
 module.exports = router;

@@ -19,8 +19,8 @@ router.get("/", getAllComestiblesFromRestaurant);
 
 router.post("/", createComestible);
 
-router.put("/:id", updateComestible);
+router.put("/:codigo", updateComestible);
 
-router.delete("/:id", deleteComestible);
+router.delete("/:codigo", deleteComestible);
 
 module.exports = router;

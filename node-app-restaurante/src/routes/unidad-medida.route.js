@@ -19,8 +19,8 @@ router.get("/", getAllUnidadMedida);
 
 router.post("/", createUnidadMedida);
 
-router.put("/:id", updateUnidadMedida);
+router.put("/:codigo", updateUnidadMedida);
 
-router.delete("/:id", deleteUnidadMedida);
+router.delete("/:codigo", deleteUnidadMedida);
 
 module.exports = router;

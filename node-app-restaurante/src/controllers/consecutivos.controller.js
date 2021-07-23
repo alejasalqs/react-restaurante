@@ -5,7 +5,10 @@ const {
 const ConsecutivosModel = require("../models/Consecutivos.model");
 
 const getConsecutivos = async (req, res, next) => {
-  const consecutivos = await ConsecutivosModel.find();
+  const { restaurant } = req.user;
+  const consecutivos = await ConsecutivosModel.find({
+    restaurante: restaurant,
+  });
 
   return res.json({
     ok: true,
@@ -23,7 +26,7 @@ const createConsecuivo = async (req, res, next) => {
 
     restaurantDB.consecutivos.push(consecutivo);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -90,6 +93,8 @@ const generateNewConsecutivo = async (tipo, restaurant) => {
     restaurante: restaurant,
     tipo,
   });
+
+  console.log(consecutivo);
 
   if (!consecutivo)
     throw new Error(

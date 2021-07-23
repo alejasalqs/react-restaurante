@@ -27,7 +27,7 @@ const createDesechables = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("DESECHABLES");
+    const consecutivo = await generateNewConsecutivo("DESECHABLES", restaurant);
 
     req.body.codigo = consecutivo;
     req.body.restaurante = restaurant;
@@ -38,7 +38,7 @@ const createDesechables = async (req, res, next) => {
 
     restaurantDB.desechables.push(desechable);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -61,12 +61,12 @@ const createDesechables = async (req, res, next) => {
 const updateDesechables = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const desechable = await DesechablesModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {

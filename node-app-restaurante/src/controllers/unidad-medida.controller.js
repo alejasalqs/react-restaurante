@@ -41,7 +41,7 @@ const createUnidadMedida = async (req, res, next) => {
 
     restaurantDB.unidades_medida.push(unidad_medida);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -64,12 +64,12 @@ const createUnidadMedida = async (req, res, next) => {
 const updateUnidadMedida = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const unidad_medida = await UnidadMedidaModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -95,11 +95,11 @@ const updateUnidadMedida = async (req, res, next) => {
 const deleteUnidadMedida = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const unidad_medida = await UnidadMedidaModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

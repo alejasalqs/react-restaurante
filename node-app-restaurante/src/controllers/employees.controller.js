@@ -27,7 +27,7 @@ const createEmployee = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
-    const consecutivo = await generateNewConsecutivo("EMPLEADOS");
+    const consecutivo = await generateNewConsecutivo("EMPLEADOS", restaurant);
 
     req.body.codigo = consecutivo;
 
@@ -37,7 +37,7 @@ const createEmployee = async (req, res, next) => {
 
     restaurantDB.empleados.push(employee);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

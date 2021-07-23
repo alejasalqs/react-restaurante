@@ -22,7 +22,7 @@ const createClient = async (req, res, next) => {
   try {
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
-    const consecutivo = await generateNewConsecutivo("CLIENTE");
+    const consecutivo = await generateNewConsecutivo("CLIENTE", restaurant);
 
     req.body.consecutivo = consecutivo;
     req.body.fecha = new Date();
@@ -33,7 +33,7 @@ const createClient = async (req, res, next) => {
 
     restaurantDB.clientes.push(client);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

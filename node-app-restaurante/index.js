@@ -35,6 +35,10 @@ app.use("/api/countries", require("./src/routes/country.route"));
 app.use("/api/unidades-medida", require("./src/routes/unidad-medida.route"));
 app.use("/api/bitacora", require("./src/routes/bitacora.route"));
 app.use("/api/specials/buffet", require("./src/routes/buffete.route"));
+app.use(
+  "/api/specials/especialidades",
+  require("./src/routes/especiales.route")
+);
 app.use("/api/products/comestibles", require("./src/routes/comestibles.route"));
 app.use("/api/products/desechables", require("./src/routes/desechables.route"));
 app.use("/api/products/limpieza", require("./src/routes/limpieza.route"));

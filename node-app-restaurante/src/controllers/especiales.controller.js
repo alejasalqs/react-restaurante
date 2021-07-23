@@ -27,7 +27,7 @@ const createEspeciales = async (req, res, next) => {
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("ESPECIALES");
+    const consecutivo = await generateNewConsecutivo("ESPECIALES", restaurant);
 
     req.body.codigo = consecutivo;
 
@@ -37,7 +37,7 @@ const createEspeciales = async (req, res, next) => {
 
     restaurantDB.especiales.push(especiales);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
@@ -60,12 +60,12 @@ const createEspeciales = async (req, res, next) => {
 const updateEspeciales = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const especiales = await EspecialesModel.findOneAndUpdate(
       {
         restaurante: restaurant,
-        _id: id,
+        codigo,
       },
       req.body,
       {
@@ -93,11 +93,11 @@ const updateEspeciales = async (req, res, next) => {
 const deleteEspeciales = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
-    const { id } = req.params;
+    const { codigo } = req.params;
 
     const especiales = await EspecialesModel.findOneAndRemove({
       restaurante: restaurant,
-      _id: id,
+      codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(

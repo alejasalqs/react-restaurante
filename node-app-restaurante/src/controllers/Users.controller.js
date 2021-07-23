@@ -22,7 +22,7 @@ const getAllUsersFromRestaurant = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   try {
-    const consecutivo = await generateNewConsecutivo("USUARIOS");
+    const consecutivo = await generateNewConsecutivo("USUARIOS", restaurant);
     req.body.codigo = consecutivo;
 
     const user = new UsersModel(req.body);
@@ -51,9 +51,9 @@ const createUser = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
   try {
     // Hay que revisar este metodo por los campos encriptados
-    const { id } = req.params;
+    const { codigo } = req.params;
 
-    const user = await UsersModel.findById(id);
+    const user = await UsersModel.findOne({ codigo });
 
     if (!user) {
       return res.status(400).json({
@@ -83,9 +83,9 @@ const updateUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { codigo } = req.params;
 
-    const user = await UsersModel.findById(id);
+    const user = await UsersModel.findOne({ codigo });
 
     if (!user) {
       return res.status(400).json({
