@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingCountry } from "../../../actions/country.actions";
+import {
+  setActiveCountry,
+  startLoadingCountry,
+} from "../../../actions/country.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { CountryModal } from "../../ui/modals/CountryModal";
 
 export const CountryScreen = () => {
   const columns = React.useMemo(
@@ -26,7 +31,15 @@ export const CountryScreen = () => {
 
   const { countries } = useSelector((state) => state.countries);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (country) => {
+    //console.log(job);
+    dispatch(setActiveCountry(country));
+    dispatch(openModal("country"));
+  };
+
+  const handleAdd = () => {
+    dispatch(openModal("country"));
+  };
 
   return (
     <div className="block animate__animated animate__fadeIn">
@@ -40,7 +53,7 @@ export const CountryScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -54,6 +67,7 @@ export const CountryScreen = () => {
           </div>
         </div>
       </div>
+      <CountryModal />
     </div>
   );
 };

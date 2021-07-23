@@ -8,6 +8,18 @@ const initialState = {
 
 export const tecnologiaReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.setActiveTecnologia:
+      return {
+        ...state,
+        activeTecnologia: action.payload,
+      };
+
+    case types.removeActiveTecnologia:
+      return {
+        ...state,
+        activeTecnologia: null,
+      };
+
     case types.tecnologiaLoaded:
       return {
         ...state,

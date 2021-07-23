@@ -19,3 +19,12 @@ const loaded = (brands) => ({
   type: types.brandLoaded,
   payload: brands,
 });
+
+export const setActiveBrand = (brand) => ({
+  type: types.setActiveBrand,
+  payload: brand,
+});
+
+export const removeActiveBrand = () => ({
+  type: types.removeActiveBrand,
+});

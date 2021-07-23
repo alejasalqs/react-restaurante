@@ -4,6 +4,17 @@ const initialState = {
   empleadosModalOpen: false,
   puestosModalOpen: false,
   tableModalOpen: false,
+  brandsModalOpen: false,
+  supplierModalOpen: false,
+  userModalOpen: false,
+  rolModalOpen: false,
+  consecutivoModalOpen: false,
+  unidadMedidaModalOpen: false,
+  comestiblesModalOpen: false,
+  desechablesModalOpen: false,
+  limpiezaModalOpen: false,
+  equiposModalOpen: false,
+  tecnologiaModalOpen: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -42,6 +53,150 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         tableModalOpen: false,
+      };
+
+    case types.uiOpenBrandModal:
+      return {
+        ...state,
+        brandsModalOpen: true,
+      };
+
+    case types.uiCloseBrandModal:
+      return {
+        ...state,
+        brandsModalOpen: false,
+      };
+
+    case types.uiOpenSupplierModal:
+      return {
+        ...state,
+        supplierModalOpen: true,
+      };
+
+    case types.uiCloseSupplierModal:
+      return {
+        ...state,
+        supplierModalOpen: false,
+      };
+
+    case types.uiOpenUserModal:
+      return {
+        ...state,
+        userModalOpen: true,
+      };
+
+    case types.uiCloseUserModal:
+      return {
+        ...state,
+        userModalOpen: false,
+      };
+
+    case types.uiOpenRolModal:
+      return {
+        ...state,
+        rolModalOpen: true,
+      };
+
+    case types.uiCloseRolModal:
+      return {
+        ...state,
+        rolModalOpen: false,
+      };
+
+    case types.uiOpenConsecutivoModal:
+      return {
+        ...state,
+        consecutivoModalOpen: true,
+      };
+
+    case types.uiCloseConsecutivoModal:
+      return {
+        ...state,
+        consecutivoModalOpen: false,
+      };
+
+    case types.uiOpenUnidadMedidaModal:
+      return {
+        ...state,
+        unidadMedidaModalOpen: true,
+      };
+
+    case types.uiCloseUnidadMedidaModal:
+      return {
+        ...state,
+        unidadMedidaModalOpen: false,
+      };
+
+    case types.uiOpenCountryModal:
+      return {
+        ...state,
+        countryModalOpen: true,
+      };
+
+    case types.uiCloseCountryModal:
+      return {
+        ...state,
+        countryModalOpen: false,
+      };
+
+    case types.uiOpenComestiblesModal:
+      return {
+        ...state,
+        comestiblesModalOpen: true,
+      };
+
+    case types.uiCloseComestiblesModal:
+      return {
+        ...state,
+        comestiblesModalOpen: false,
+      };
+
+    case types.uiOpenDesechablesModal:
+      return {
+        ...state,
+        desechablesModalOpen: true,
+      };
+
+    case types.uiCloseDesechablesModal:
+      return {
+        ...state,
+        desechablesModalOpen: false,
+      };
+
+    case types.uiOpenLimpiezaModal:
+      return {
+        ...state,
+        limpiezaModalOpen: true,
+      };
+
+    case types.uiCloseLimpiezaModal:
+      return {
+        ...state,
+        limpiezaModalOpen: false,
+      };
+
+    case types.uiOpenEquiposModal:
+      return {
+        ...state,
+        equiposModalOpen: true,
+      };
+
+    case types.uiCloseEquiposModal:
+      return {
+        ...state,
+        equiposModalOpen: false,
+      };
+
+    case types.uiOpenTecnologiaModal:
+      return {
+        ...state,
+        tecnologiaModalOpen: true,
+      };
+
+    case types.uiCloseTecnologiaModal:
+      return {
+        ...state,
+        tecnologiaModalOpen: false,
       };
 
     default:

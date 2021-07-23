@@ -8,6 +8,18 @@ const initialState = {
 
 export const proveedoresReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.setActiveSupplier:
+      return {
+        ...state,
+        activeSupplier: action.payload,
+      };
+
+    case types.removeActiveSupplier:
+      return {
+        ...state,
+        activeSupplier: null,
+      };
+
     case types.supplierLoaded:
       return {
         ...state,

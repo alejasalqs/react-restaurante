@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingConsecutivos } from "../../../actions/consecutivos.actions";
+import {
+  setActiveConsecutivo,
+  startLoadingConsecutivos,
+} from "../../../actions/consecutivos.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { ConsecutivosModal } from "../../ui/modals/ConsecutivosModal";
 
 export const ConsecutivosScreen = () => {
   const columns = React.useMemo(
@@ -23,8 +28,8 @@ export const ConsecutivosScreen = () => {
         accessor: "valor_consecutivo",
       },
       {
-        Header: "Contiene Prefijo",
-        accessor: "contiene_prefijo",
+        Header: "Prefijo",
+        accessor: "prefijo",
       },
     ],
     []
@@ -38,8 +43,15 @@ export const ConsecutivosScreen = () => {
 
   const { consecutivos } = useSelector((state) => state.consecutivos);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (consecutivo) => {
+    //console.log(job);
+    dispatch(setActiveConsecutivo(consecutivo));
+    dispatch(openModal("consecutivos"));
+  };
 
+  const handleAdd = () => {
+    dispatch(openModal("consecutivos"));
+  };
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -52,7 +64,7 @@ export const ConsecutivosScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -66,6 +78,7 @@ export const ConsecutivosScreen = () => {
           </div>
         </div>
       </div>
+      <ConsecutivosModal />
     </div>
   );
 };

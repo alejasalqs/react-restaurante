@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingDesechables } from "../../../actions/desechables.actions";
+import {
+  setActiveDesechable,
+  startLoadingDesechables,
+} from "../../../actions/desechables.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { DesechablesModal } from "../modals/DesechablesModal";
 
 export const ProductosDesechablesScreen = () => {
   const columns = React.useMemo(
@@ -34,8 +39,15 @@ export const ProductosDesechablesScreen = () => {
 
   const { desechables } = useSelector((state) => state.desechables);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (desechable) => {
+    //console.log(job);
+    dispatch(setActiveDesechable(desechable));
+    dispatch(openModal("desechables"));
+  };
 
+  const handleAdd = () => {
+    dispatch(openModal("desechables"));
+  };
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -45,7 +57,7 @@ export const ProductosDesechablesScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -59,6 +71,7 @@ export const ProductosDesechablesScreen = () => {
           </div>
         </div>
       </div>
+      <DesechablesModal />
     </div>
   );
 };

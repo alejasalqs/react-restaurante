@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingSuppliers } from "../../../actions/proveedores.actions";
+import {
+  setActiveSupplier,
+  startLoadingSuppliers,
+} from "../../../actions/proveedores.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { ProveedoresModal } from "../../ui/modals/ProveedoresModal";
 
 export const ProveedoresScreen = () => {
   const columns = React.useMemo(
@@ -42,8 +47,15 @@ export const ProveedoresScreen = () => {
 
   const { suppliers } = useSelector((state) => state.suppliers);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (supplier) => {
+    //console.log(supplier);
+    dispatch(setActiveSupplier(supplier));
+    dispatch(openModal("suppliers"));
+  };
 
+  const handleAdd = () => {
+    dispatch(openModal("suppliers"));
+  };
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -56,7 +68,7 @@ export const ProveedoresScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -70,6 +82,7 @@ export const ProveedoresScreen = () => {
           </div>
         </div>
       </div>
+      <ProveedoresModal />
     </div>
   );
 };

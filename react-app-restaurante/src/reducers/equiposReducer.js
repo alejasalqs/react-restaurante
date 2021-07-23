@@ -8,6 +8,18 @@ const initialState = {
 
 export const equiposReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.setActiveEquipos:
+      return {
+        ...state,
+        activeEquipos: action.payload,
+      };
+
+    case types.removeActiveEquipos:
+      return {
+        ...state,
+        activeEquipos: null,
+      };
+
     case types.equiposLoaded:
       return {
         ...state,

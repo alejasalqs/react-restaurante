@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startDeletingJob,
-  removeActiveJob,
-  startJobsAddNew,
-  updateJob,
-} from "../../../actions/jobs.actions";
+import { removeActiveCountry } from "../../../actions/country.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
@@ -18,23 +13,22 @@ const initValues = {
   nombre: "",
   rol: "",
 };
-
-export const PuestosModal = () => {
+export const CountryModal = () => {
   const dispatch = useDispatch();
-  const { puestosModalOpen } = useSelector((state) => state.ui);
-  const { activeJob } = useSelector((state) => state.jobs);
+  const { countryModalOpen } = useSelector((state) => state.ui);
+  const { activeCountry } = useSelector((state) => state.countries);
 
   const [formValues, setFormValues] = useState(initValues);
 
   const { codigo, nombre, rol } = formValues;
 
   useEffect(() => {
-    if (activeJob) {
-      setFormValues(activeJob);
+    if (activeCountry) {
+      setFormValues(activeCountry);
     } else {
       setFormValues(initValues);
     }
-  }, [activeJob, setFormValues]);
+  }, [activeCountry, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -49,18 +43,18 @@ export const PuestosModal = () => {
 
   const handleCloseModal = () => {
     reset();
-    dispatch(closeModal("jobs"));
-    dispatch(removeActiveJob());
+    dispatch(closeModal("country"));
+    dispatch(removeActiveCountry());
   };
 
   const editInformation = (e) => {
     e.preventDefault();
-    dispatch(updateJob(formValues));
+    //dispatch(updateJob(formValues));
     handleCloseModal();
   };
 
   const handleDelete = () => {
-    dispatch(startDeletingJob(activeJob.codigo));
+    //dispatch(startDeletingJob(activeCountry.codigo));
     handleCloseModal();
   };
 
@@ -70,13 +64,13 @@ export const PuestosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    dispatch(startJobsAddNew(nombre, rol));
+    //dispatch(startJobsAddNew(nombre, rol));
     handleCloseModal();
   };
 
   return (
     <Modal
-      isOpen={puestosModalOpen}
+      isOpen={countryModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -84,10 +78,10 @@ export const PuestosModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeJob ? (
-        <h1 className="title"> Editar puesto </h1>
+      {activeCountry ? (
+        <h1 className="title"> Editar país </h1>
       ) : (
-        <h1 className="title"> Agregar puesto </h1>
+        <h1 className="title"> Agregar país </h1>
       )}
       <hr />
       <form>
@@ -134,7 +128,7 @@ export const PuestosModal = () => {
             />
           </div>
         </div>
-        {activeJob ? (
+        {activeCountry ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

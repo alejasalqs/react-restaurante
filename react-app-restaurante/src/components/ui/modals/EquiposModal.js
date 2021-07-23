@@ -1,40 +1,36 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startDeletingJob,
-  removeActiveJob,
-  startJobsAddNew,
-  updateJob,
-} from "../../../actions/jobs.actions";
+import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
+import { removeActiveEquipos } from "../../../actions/equipos.actions";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
 
-const initValues = {
+const initialValues = {
   codigo: "",
   nombre: "",
-  rol: "",
+  cantidad: "",
+  restaurante: "",
 };
 
-export const PuestosModal = () => {
+export const EquiposModal = () => {
   const dispatch = useDispatch();
-  const { puestosModalOpen } = useSelector((state) => state.ui);
-  const { activeJob } = useSelector((state) => state.jobs);
+  const { equiposModalOpen } = useSelector((state) => state.ui);
+  const { activeEquipos } = useSelector((state) => state.equipos);
 
-  const [formValues, setFormValues] = useState(initValues);
+  const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, nombre, cantidad } = formValues;
 
   useEffect(() => {
-    if (activeJob) {
-      setFormValues(activeJob);
+    if (activeEquipos) {
+      setFormValues(activeEquipos);
     } else {
-      setFormValues(initValues);
+      setFormValues(initialValues);
     }
-  }, [activeJob, setFormValues]);
+  }, [activeEquipos, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -44,23 +40,23 @@ export const PuestosModal = () => {
   };
 
   const reset = () => {
-    setFormValues(initValues);
+    setFormValues(initialValues);
   };
 
   const handleCloseModal = () => {
     reset();
-    dispatch(closeModal("jobs"));
-    dispatch(removeActiveJob());
+    dispatch(closeModal("equipos"));
+    dispatch(removeActiveEquipos());
   };
 
   const editInformation = (e) => {
     e.preventDefault();
-    dispatch(updateJob(formValues));
+    //dispatch(updateJob(formValues));
     handleCloseModal();
   };
 
   const handleDelete = () => {
-    dispatch(startDeletingJob(activeJob.codigo));
+    //dispatch(startDeletingJob(activeEquipos.codigo));
     handleCloseModal();
   };
 
@@ -70,13 +66,13 @@ export const PuestosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    dispatch(startJobsAddNew(nombre, rol));
+    //dispatch(startJobsAddNew(nombre, rol));
     handleCloseModal();
   };
 
   return (
     <Modal
-      isOpen={puestosModalOpen}
+      isOpen={equiposModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -84,10 +80,10 @@ export const PuestosModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeJob ? (
-        <h1 className="title"> Editar puesto </h1>
+      {activeEquipos ? (
+        <h1 className="title"> Editar Equipos </h1>
       ) : (
-        <h1 className="title"> Agregar puesto </h1>
+        <h1 className="title"> Agregar Equipos </h1>
       )}
       <hr />
       <form>
@@ -120,21 +116,20 @@ export const PuestosModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Rol</label>
+          <label className="label">Cantidad</label>
           <div className="control">
             <input
               className="input"
-              type="text"
+              type="number"
               autoComplete="off"
-              name="rol"
-              id="rol"
+              name="cantidad"
               onChange={handleInputChange}
-              value={rol}
-              placeholder="Rol Externo o Interno"
+              value={cantidad}
+              placeholder="cantidad"
             />
           </div>
         </div>
-        {activeJob ? (
+        {activeEquipos ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

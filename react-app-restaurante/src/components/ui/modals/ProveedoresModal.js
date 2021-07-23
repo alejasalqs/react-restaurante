@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startDeletingJob,
-  removeActiveJob,
-  startJobsAddNew,
-  updateJob,
-} from "../../../actions/jobs.actions";
+import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
+import { removeActiveSupplier } from "../../../actions/proveedores.actions";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -16,25 +11,28 @@ Modal.setAppElement("#root");
 const initValues = {
   codigo: "",
   nombre: "",
-  rol: "",
+  apellido1: "",
+  apellido2: "",
+  telefono: "",
+  fax: "",
 };
 
-export const PuestosModal = () => {
+export const ProveedoresModal = () => {
   const dispatch = useDispatch();
-  const { puestosModalOpen } = useSelector((state) => state.ui);
-  const { activeJob } = useSelector((state) => state.jobs);
+  const { supplierModalOpen } = useSelector((state) => state.ui);
+  const { activeSupplier } = useSelector((state) => state.suppliers);
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, nombre, apellido1, apellido2, telefono, fax } = formValues;
 
   useEffect(() => {
-    if (activeJob) {
-      setFormValues(activeJob);
+    if (activeSupplier) {
+      setFormValues(activeSupplier);
     } else {
       setFormValues(initValues);
     }
-  }, [activeJob, setFormValues]);
+  }, [activeSupplier, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -49,18 +47,18 @@ export const PuestosModal = () => {
 
   const handleCloseModal = () => {
     reset();
-    dispatch(closeModal("jobs"));
-    dispatch(removeActiveJob());
+    dispatch(closeModal("suppliers"));
+    dispatch(removeActiveSupplier());
   };
 
   const editInformation = (e) => {
     e.preventDefault();
-    dispatch(updateJob(formValues));
+    //dispatch(updateJob(formValues));
     handleCloseModal();
   };
 
   const handleDelete = () => {
-    dispatch(startDeletingJob(activeJob.codigo));
+    //dispatch(startDeletingJob(activeSupplier.codigo));
     handleCloseModal();
   };
 
@@ -70,13 +68,13 @@ export const PuestosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    dispatch(startJobsAddNew(nombre, rol));
+    //dispatch(startJobsAddNew(nombre, rol));
     handleCloseModal();
   };
 
   return (
     <Modal
-      isOpen={puestosModalOpen}
+      isOpen={supplierModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -84,10 +82,10 @@ export const PuestosModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeJob ? (
-        <h1 className="title"> Editar puesto </h1>
+      {activeSupplier ? (
+        <h1 className="title"> Editar Proveedor </h1>
       ) : (
-        <h1 className="title"> Agregar puesto </h1>
+        <h1 className="title"> Agregar Proveedor </h1>
       )}
       <hr />
       <form>
@@ -120,21 +118,66 @@ export const PuestosModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Rol</label>
+          <label className="label">Primer Apellido</label>
           <div className="control">
             <input
               className="input"
               type="text"
               autoComplete="off"
-              name="rol"
-              id="rol"
+              name="apellido1"
+              id="apellido1"
               onChange={handleInputChange}
-              value={rol}
-              placeholder="Rol Externo o Interno"
+              value={apellido1}
+              placeholder="Primer Apellido"
             />
           </div>
         </div>
-        {activeJob ? (
+        <div className="field">
+          <label className="label">Segundo Apellido</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="apellido2"
+              id="apellido2"
+              onChange={handleInputChange}
+              value={apellido2}
+              placeholder="Segundo Apellido"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Teléfono</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="telefono"
+              id="telefono"
+              onChange={handleInputChange}
+              value={telefono}
+              placeholder="Teléfono"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Fax</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="fax"
+              id="fax"
+              onChange={handleInputChange}
+              value={fax}
+              placeholder="Fax"
+            />
+          </div>
+        </div>
+        {activeSupplier ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

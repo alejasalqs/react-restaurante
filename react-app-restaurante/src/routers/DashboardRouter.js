@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router";
 import { EmpleadosScreen } from "../components/dashboard/administracion/EmpleadosScreen";
 import { EspecialesScreen } from "../components/dashboard/administracion/EspecialesScreen";
@@ -21,7 +22,9 @@ import { Navbar } from "../components/ui/Navbar";
 import { Sidebar } from "../components/ui/Sidebar";
 
 export const DashboardRouter = () => {
-  return (
+  const { checking, logged } = useSelector((state) => state.auth);
+
+  return logged === true ? (
     <div className="columns app">
       <div className="column">
         <Navbar />
@@ -108,5 +111,7 @@ export const DashboardRouter = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to="/auth/login" />
   );
 };

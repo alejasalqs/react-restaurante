@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingUnidadesMedida } from "../../../actions/unidad-medida.action";
+import { openModal } from "../../../actions/ui.actions";
+import {
+  setActiveUnidadMedida,
+  startLoadingUnidadesMedida,
+} from "../../../actions/unidad-medida.action";
 import { Table } from "../../../helpers/Table.helper";
+import { UnidadMedidaModal } from "../../ui/modals/UnidadMedidaModal";
 
 export const UnidadMedidaScreen = () => {
   const columns = React.useMemo(
@@ -38,7 +43,15 @@ export const UnidadMedidaScreen = () => {
 
   const { unidades_medida } = useSelector((state) => state.unidadMedida);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (unidad_medida) => {
+    //console.log(job);
+    dispatch(setActiveUnidadMedida(unidad_medida));
+    dispatch(openModal("unidad_medida"));
+  };
+
+  const handleAdd = () => {
+    dispatch(openModal("unidad_medida"));
+  };
 
   return (
     <div className="block animate__animated animate__fadeIn">
@@ -52,7 +65,7 @@ export const UnidadMedidaScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -66,6 +79,7 @@ export const UnidadMedidaScreen = () => {
           </div>
         </div>
       </div>
+      <UnidadMedidaModal />
     </div>
   );
 };

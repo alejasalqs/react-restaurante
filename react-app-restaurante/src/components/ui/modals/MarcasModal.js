@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startDeletingJob,
-  removeActiveJob,
-  startJobsAddNew,
-  updateJob,
-} from "../../../actions/jobs.actions";
+import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
+import { removeActiveBrand } from "../../../actions/marcas.actions";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
 
-const initValues = {
+const initialValues = {
   codigo: "",
   nombre: "",
-  rol: "",
+  descripcion: "",
+  nacionalidad: "",
+  empresa: "",
+  telefono_empresa: "",
 };
 
-export const PuestosModal = () => {
+export const MarcasModal = () => {
   const dispatch = useDispatch();
-  const { puestosModalOpen } = useSelector((state) => state.ui);
-  const { activeJob } = useSelector((state) => state.jobs);
+  const { brandsModalOpen } = useSelector((state) => state.ui);
+  const { activeBrand } = useSelector((state) => state.brands);
 
-  const [formValues, setFormValues] = useState(initValues);
+  const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, nombre, descripcion, empresa, telefono_empresa } = formValues;
 
   useEffect(() => {
-    if (activeJob) {
-      setFormValues(activeJob);
+    if (activeBrand) {
+      setFormValues(activeBrand);
     } else {
-      setFormValues(initValues);
+      setFormValues(initialValues);
     }
-  }, [activeJob, setFormValues]);
+  }, [activeBrand, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -44,23 +42,20 @@ export const PuestosModal = () => {
   };
 
   const reset = () => {
-    setFormValues(initValues);
+    setFormValues(initialValues);
   };
 
   const handleCloseModal = () => {
     reset();
-    dispatch(closeModal("jobs"));
-    dispatch(removeActiveJob());
+    dispatch(closeModal("brands"));
+    dispatch(removeActiveBrand());
   };
 
   const editInformation = (e) => {
     e.preventDefault();
-    dispatch(updateJob(formValues));
-    handleCloseModal();
   };
 
   const handleDelete = () => {
-    dispatch(startDeletingJob(activeJob.codigo));
     handleCloseModal();
   };
 
@@ -70,13 +65,12 @@ export const PuestosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    dispatch(startJobsAddNew(nombre, rol));
     handleCloseModal();
   };
 
   return (
     <Modal
-      isOpen={puestosModalOpen}
+      isOpen={brandsModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -84,10 +78,10 @@ export const PuestosModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeJob ? (
-        <h1 className="title"> Editar puesto </h1>
+      {activeBrand ? (
+        <h1 className="title"> Editar Marca </h1>
       ) : (
-        <h1 className="title"> Agregar puesto </h1>
+        <h1 className="title"> Agregar Marca </h1>
       )}
       <hr />
       <form>
@@ -120,7 +114,7 @@ export const PuestosModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Rol</label>
+          <label className="label">Descripcion</label>
           <div className="control">
             <input
               className="input"
@@ -129,12 +123,60 @@ export const PuestosModal = () => {
               name="rol"
               id="rol"
               onChange={handleInputChange}
-              value={rol}
-              placeholder="Rol Externo o Interno"
+              value={descripcion}
+              placeholder="Descripcion"
             />
           </div>
         </div>
-        {activeJob ? (
+        <div className="field">
+          <p className="control has-icons-left">
+            <span className="select">
+              <select>
+                <option selected>Nacionalidad</option>
+                <option>Select dropdown</option>
+                <option>With options</option>
+              </select>
+            </span>
+            <span className="icon is-small is-left">
+              <i className="fas fa-globe"></i>
+            </span>
+          </p>
+        </div>
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Empresa</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="nombre"
+                  onChange={handleInputChange}
+                  value={empresa}
+                  placeholder="Empresa"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Teléfono Empresa</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="apellido1"
+                  onChange={handleInputChange}
+                  value={telefono_empresa}
+                  placeholder="Teléfono Empresa"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        {activeBrand ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

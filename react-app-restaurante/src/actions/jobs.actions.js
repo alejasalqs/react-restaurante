@@ -29,7 +29,25 @@ const loaded = (jobs) => ({
   payload: jobs,
 });
 
-export const addJob = (job) => ({
+export const startJobsAddNew = (nombre, rol) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchWithToken("positions", { nombre, rol }, "POST");
+
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(addNewJob(body.position));
+      } else {
+        console.log("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const addNewJob = (job) => ({
   type: types.addJob,
   payload: job,
 });
@@ -39,6 +57,20 @@ export const updateJob = (job) => ({
   payload: job,
 });
 
-export const deleteJob = () => ({
+export const startDeletingJob = (codigo) => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken(`positions/${codigo}`, {}, "DELETE");
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(deleteJob(codigo));
+    } else {
+      console.log("");
+    }
+  };
+};
+
+const deleteJob = () => ({
   type: types.deleteJob,
 });

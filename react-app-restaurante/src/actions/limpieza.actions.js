@@ -1,6 +1,15 @@
 import { fetchWithToken } from "../helpers/fetch.helper";
 import { types } from "../types/types";
 
+export const setActiveLimpieza = (limpieza) => ({
+  type: types.setActiveLimpieza,
+  payload: limpieza,
+});
+
+export const removeActiveLimpieza = () => ({
+  type: types.removeActiveLimpieza,
+});
+
 export const startLoadingLimpieza = () => {
   return async (dispatch) => {
     const resp = await fetchWithToken("products/limpieza");

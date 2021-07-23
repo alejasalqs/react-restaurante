@@ -8,6 +8,18 @@ const initialState = {
 
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.setActiveUser:
+      return {
+        ...state,
+        activeUser: action.payload,
+      };
+
+    case types.removeActiveUser:
+      return {
+        ...state,
+        activeUser: null,
+      };
+
     case types.userLoaded:
       return {
         ...state,

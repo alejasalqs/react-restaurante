@@ -1,6 +1,15 @@
 import { fetchWithToken } from "../helpers/fetch.helper";
 import { types } from "../types/types";
 
+export const setActiveUnidadMedida = (unidad_medida) => ({
+  type: types.setActiveUnidadMedida,
+  payload: unidad_medida,
+});
+
+export const removeActiveUnidadMedida = () => ({
+  type: types.removeActiveUnidadMedida,
+});
+
 export const startLoadingUnidadesMedida = () => {
   return async (dispatch) => {
     const resp = await fetchWithToken("unidades-medida");

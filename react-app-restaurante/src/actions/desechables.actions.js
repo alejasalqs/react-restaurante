@@ -1,6 +1,15 @@
 import { fetchWithToken } from "../helpers/fetch.helper";
 import { types } from "../types/types";
 
+export const setActiveDesechable = (desechables) => ({
+  type: types.setActiveDesechables,
+  payload: desechables,
+});
+
+export const removeActiveDesechable = () => ({
+  type: types.removeActiveDesechables,
+});
+
 export const startLoadingDesechables = () => {
   return async (dispatch) => {
     const resp = await fetchWithToken("products/desechables");

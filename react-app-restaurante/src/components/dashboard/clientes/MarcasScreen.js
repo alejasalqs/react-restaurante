@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingBrands } from "../../../actions/marcas.actions";
+import {
+  setActiveBrand,
+  startLoadingBrands,
+} from "../../../actions/marcas.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { MarcasModal } from "../../ui/modals/MarcasModal";
 
 export const MarcasScreen = () => {
   const columns = React.useMemo(
@@ -42,7 +47,15 @@ export const MarcasScreen = () => {
 
   const { brands } = useSelector((state) => state.brands);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (brand) => {
+    //console.log(job);
+    dispatch(setActiveBrand(brand));
+    dispatch(openModal("brands"));
+  };
+
+  const handleAdd = () => {
+    dispatch(openModal("brands"));
+  };
 
   return (
     <div className="block animate__animated animate__fadeIn">
@@ -56,7 +69,7 @@ export const MarcasScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -66,6 +79,7 @@ export const MarcasScreen = () => {
           </div>
         </div>
       </div>
+      <MarcasModal />
     </div>
   );
 };

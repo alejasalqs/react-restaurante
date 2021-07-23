@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startDeletingJob,
-  removeActiveJob,
-  startJobsAddNew,
-  updateJob,
-} from "../../../actions/jobs.actions";
 import { closeModal } from "../../../actions/ui.actions";
+import { removeActiveUser } from "../../../actions/users.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
 // Agregar el modal al documento
@@ -19,22 +14,22 @@ const initValues = {
   rol: "",
 };
 
-export const PuestosModal = () => {
+export const UserModal = () => {
   const dispatch = useDispatch();
-  const { puestosModalOpen } = useSelector((state) => state.ui);
-  const { activeJob } = useSelector((state) => state.jobs);
+  const { userModalOpen } = useSelector((state) => state.ui);
+  const { activeUser } = useSelector((state) => state.users);
 
   const [formValues, setFormValues] = useState(initValues);
 
   const { codigo, nombre, rol } = formValues;
 
   useEffect(() => {
-    if (activeJob) {
-      setFormValues(activeJob);
+    if (activeUser) {
+      setFormValues(activeUser);
     } else {
       setFormValues(initValues);
     }
-  }, [activeJob, setFormValues]);
+  }, [activeUser, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -49,18 +44,18 @@ export const PuestosModal = () => {
 
   const handleCloseModal = () => {
     reset();
-    dispatch(closeModal("jobs"));
-    dispatch(removeActiveJob());
+    dispatch(closeModal("users"));
+    dispatch(removeActiveUser());
   };
 
   const editInformation = (e) => {
     e.preventDefault();
-    dispatch(updateJob(formValues));
+    //dispatch(updateJob(formValues));
     handleCloseModal();
   };
 
   const handleDelete = () => {
-    dispatch(startDeletingJob(activeJob.codigo));
+    //dispatch(startDeletingJob(activeUser.codigo));
     handleCloseModal();
   };
 
@@ -70,13 +65,13 @@ export const PuestosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    dispatch(startJobsAddNew(nombre, rol));
+    //dispatch(startJobsAddNew(nombre, rol));
     handleCloseModal();
   };
 
   return (
     <Modal
-      isOpen={puestosModalOpen}
+      isOpen={userModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -84,7 +79,7 @@ export const PuestosModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeJob ? (
+      {activeUser ? (
         <h1 className="title"> Editar puesto </h1>
       ) : (
         <h1 className="title"> Agregar puesto </h1>
@@ -134,7 +129,7 @@ export const PuestosModal = () => {
             />
           </div>
         </div>
-        {activeJob ? (
+        {activeUser ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

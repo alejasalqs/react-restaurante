@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingTecnologia } from "../../../actions/tecnologia.actions";
+import {
+  setActiveTecnologia,
+  startLoadingTecnologia,
+} from "../../../actions/tecnologia.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { TecnologiaModal } from "../modals/TecnologiaModal";
 
 export const ProductosTecnologiaScreen = () => {
   const columns = React.useMemo(
@@ -34,8 +39,15 @@ export const ProductosTecnologiaScreen = () => {
 
   const { tecnologia } = useSelector((state) => state.tecnologia);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (tecnologia) => {
+    //console.log(job);
+    dispatch(setActiveTecnologia(tecnologia));
+    dispatch(openModal("tecnologia"));
+  };
 
+  const handleAdd = () => {
+    dispatch(openModal("tecnologia"));
+  };
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -45,7 +57,7 @@ export const ProductosTecnologiaScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -59,6 +71,7 @@ export const ProductosTecnologiaScreen = () => {
           </div>
         </div>
       </div>
+      <TecnologiaModal />
     </div>
   );
 };

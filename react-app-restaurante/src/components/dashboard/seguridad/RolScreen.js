@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startLoadingRols } from "../../../actions/rol.actions";
+import { setActiveRol, startLoadingRols } from "../../../actions/rol.actions";
+import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { RolModal } from "../../ui/modals/RolModal";
 
 export const RolScreen = () => {
   const columns = React.useMemo(
@@ -26,8 +28,15 @@ export const RolScreen = () => {
 
   const { rols } = useSelector((state) => state.rols);
 
-  const handleOnclik = () => {};
+  const handleOnclik = (rol) => {
+    //console.log(job);
+    dispatch(setActiveRol(rol));
+    dispatch(openModal("rol"));
+  };
 
+  const handleAdd = () => {
+    dispatch(openModal("rol"));
+  };
   return (
     <div className="block animate__animated animate__fadeIn">
       <div className="column">
@@ -40,7 +49,7 @@ export const RolScreen = () => {
               <button
                 className="button is-success is-rounded mb-3"
                 type="button"
-                onClick={null}
+                onClick={handleAdd}
               >
                 <i className="fas fa-user-plus mr-2"></i>
                 Agregar
@@ -50,6 +59,7 @@ export const RolScreen = () => {
           </div>
         </div>
       </div>
+      <RolModal />
     </div>
   );
 };
