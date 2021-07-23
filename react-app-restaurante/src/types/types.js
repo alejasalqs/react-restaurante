@@ -32,6 +32,10 @@ export const types = {
   uiCloseLimpiezaModal: "[UI] Close Limpieza Modal",
   uiOpenDesechablesModal: "[UI] Open Desechables Modal",
   uiCloseDesechablesModal: "[UI] Close Desechables Modal",
+  uiOpenBuffetModal: "[UI] Open Buffet Modal",
+  uiCloseBuffetModal: "[UI] Close Buffet Modal",
+  uiOpenEspecialidadesModal: "[UI] Open Especialidades Modal",
+  uiCloseEspecialidadesModal: "[UI] Close Especialidades Modal",
   //////////////////
   setActiveEmployee: "[Employees] Set Active Employee",
   removeActiveEmployee: "[Employees] Remove Active Employee",
@@ -139,4 +143,18 @@ export const types = {
   editEquipos: "[Equipos] Edit Equipos",
   deleteEquipos: "[Equipos] Delete Equipos",
   equiposLoaded: "[Equipos] Loading Equipos",
+  /////////////////
+  setActiveBuffets: "[Buffets] Set Active Buffets",
+  removeActiveBuffets: "[Buffets] Remove Active Buffets",
+  addBuffets: "[Buffets] Add new Buffets",
+  editBuffets: "[Buffets] Edit Buffets",
+  deleteBuffets: "[Buffets] Delete Buffets",
+  buffetsLoaded: "[Buffets] Loading Buffets",
+  /////////////////
+  setActiveEspecialidad: "[Especialidad] Set Active Especialidad",
+  removeActiveEspecialidad: "[Especialidad] Remove Active Especialidad",
+  addEspecialidad: "[Especialidad] Add new Especialidad",
+  editEspecialidad: "[Especialidad] Edit Especialidad",
+  deleteEspecialidad: "[Especialidad] Delete Especialidad",
+  especialidadLoaded: "[Especialidad] Loading Especialidad",
 };

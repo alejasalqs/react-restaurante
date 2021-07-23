@@ -15,6 +15,8 @@ const initialState = {
   limpiezaModalOpen: false,
   equiposModalOpen: false,
   tecnologiaModalOpen: false,
+  buffetModalOpen: false,
+  especialidadesModalOpen: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -197,6 +199,30 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         tecnologiaModalOpen: false,
+      };
+
+    case types.uiOpenBuffetModal:
+      return {
+        ...state,
+        buffetModalOpen: true,
+      };
+
+    case types.uiCloseBuffetModal:
+      return {
+        ...state,
+        buffetModalOpen: false,
+      };
+
+    case types.uiOpenEspecialidadesModal:
+      return {
+        ...state,
+        especialidadesModalOpen: true,
+      };
+
+    case types.uiCloseEspecialidadesModal:
+      return {
+        ...state,
+        especialidadesModalOpen: false,
       };
 
     default:

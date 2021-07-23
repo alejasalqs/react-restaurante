@@ -47,6 +47,12 @@ export const openModal = (modalType) => {
     case "tecnologia":
       return { type: types.uiOpenTecnologiaModal };
 
+    case "buffets":
+      return { type: types.uiOpenBuffetModal };
+
+    case "especialidades":
+      return { type: types.uiOpenEspecialidadesModal };
+
     default:
       return {};
   }
@@ -98,6 +104,12 @@ export const closeModal = (modalType) => {
 
     case "tecnologia":
       return { type: types.uiCloseTecnologiaModal };
+
+    case "buffets":
+      return { type: types.uiCloseBuffetModal };
+
+    case "especialidades":
+      return { type: types.uiCloseEspecialidadesModal };
 
     default:
       return {};

@@ -17,6 +17,8 @@ import { tecnologiaReducer } from "./tecnologiaReducer";
 import { uiReducer } from "./uiReducer";
 import { unidadMedidaReducer } from "./UnidadMedidaReducer";
 import { usersReducer } from "./usersReducer";
+import { buffetReducer } from "./buffetReducer";
+import { especialidadesReducer } from "./especialidadesReducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -37,4 +39,6 @@ export const rootReducer = combineReducers({
   tecnologia: tecnologiaReducer,
   limpieza: limpiezaReducer,
   equipos: equiposReducer,
+  buffets: buffetReducer,
+  especialidades: especialidadesReducer,
 });
