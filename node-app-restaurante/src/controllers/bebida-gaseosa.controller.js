@@ -2,19 +2,19 @@ const RestaurantModel = require("../models/Restaurant.model");
 const {
   createNewBitacoraEntry,
 } = require("../controllers/bitacora.controller");
-const BuffetModel = require("../models/Buffet.model");
 const { generateNewConsecutivo } = require("./consecutivos.controller");
+const BebidaGaseosaModel = require("../models/BebidaGaseosa.model");
 
-const getAllBuffetsFromRestaurant = async (req, res, next) => {
+const getAllBebidaGaseosaFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
 
-  const buffets = await BuffetModel.find({ restaurante: restaurant }).populate(
-    "restaurante"
-  );
+  const bebida_gaseosa = await BebidaGaseosaModel.find({
+    restaurante: restaurant,
+  }).populate("restaurante");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
-    "BUFFETS GET",
+    "BEBIDAGASEOSA GET",
     req.body
   );
 
@@ -22,39 +22,40 @@ const getAllBuffetsFromRestaurant = async (req, res, next) => {
 
   return res.json({
     ok: true,
-    buffets,
+    bebida_gaseosa,
   });
 };
 
-const createBuffet = async (req, res, next) => {
+const createBebidaGaseosa = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
 
     const restaurantDB = await RestaurantModel.findById(restaurant);
 
-    const consecutivo = await generateNewConsecutivo("BUFFET", restaurant);
+    const consecutivo = await generateNewConsecutivo(
+      "BEBIDAGASEOSA",
+      restaurant
+    );
 
     req.body.codigo = consecutivo;
 
-    const buffet = new BuffetModel(req.body);
+    const bebida_gaseosa = new BebidaGaseosaModel(req.body);
 
-    await buffet.save();
+    await bebida_gaseosa.save();
 
-    //restaurantDB.buffets.push(buffet);
+    //restaurantDB.bebida_gaseosas.push(bebida_gaseosa);
 
     await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "BUFFET INSERT",
+      "BEBIDAGASEOSA INSERT",
       req.body
     );
 
-    console.log(bitacora);
-
     return res.json({
       ok: true,
-      buffet,
+      bebida_gaseosa,
       restaurantDB,
     });
   } catch (error) {
@@ -62,12 +63,12 @@ const createBuffet = async (req, res, next) => {
   }
 };
 
-const updateBuffet = async (req, res, next) => {
+const updateBebidaGaseosa = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { codigo } = req.params;
 
-    const buffet = await BuffetModel.findOneAndUpdate(
+    const bebida_gaseosa = await BebidaGaseosaModel.findOneAndUpdate(
       {
         restaurante: restaurant,
         codigo,
@@ -80,7 +81,7 @@ const updateBuffet = async (req, res, next) => {
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "BUFFET UPDATE",
+      "BEBIDAGASEOSA UPDATE",
       req.body
     );
 
@@ -88,26 +89,26 @@ const updateBuffet = async (req, res, next) => {
 
     return res.json({
       ok: true,
-      buffet,
+      bebida_gaseosa,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const deleteBuffet = async (req, res, next) => {
+const deleteBebidaGaseosa = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
     const { codigo } = req.params;
 
-    const buffet = await BuffetModel.findOneAndRemove({
+    const bebida_gaseosa = await BebidaGaseosaModel.findOneAndRemove({
       restaurante: restaurant,
       codigo,
     });
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
-      "BUFFET DELETE",
+      "BEBIDAGASEOSA DELETE",
       req.body
     );
 
@@ -115,7 +116,7 @@ const deleteBuffet = async (req, res, next) => {
 
     return res.json({
       ok: true,
-      buffet,
+      bebida_gaseosa,
     });
   } catch (error) {
     next(error);
@@ -123,8 +124,8 @@ const deleteBuffet = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllBuffetsFromRestaurant,
-  createBuffet,
-  updateBuffet,
-  deleteBuffet,
+  getAllBebidaGaseosaFromRestaurant,
+  createBebidaGaseosa,
+  updateBebidaGaseosa,
+  deleteBebidaGaseosa,
 };

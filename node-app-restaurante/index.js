@@ -39,6 +39,20 @@ app.use(
   "/api/specials/especialidades",
   require("./src/routes/especiales.route")
 );
+app.use(
+  "/api/specials/bebidas-calientes",
+  require("./src/routes/bebida-caliente.route")
+);
+app.use(
+  "/api/specials/bebidas-heladas",
+  require("./src/routes/bebida-healda.route")
+);
+app.use(
+  "/api/specials/bebidas-gaseosas",
+  require("./src/routes/bebida-gaseosa.route")
+);
+app.use("/api/specials/licores", require("./src/routes/licores.route"));
+app.use("/api/specials/vinos", require("./src/routes/vinos.route"));
 app.use("/api/products/comestibles", require("./src/routes/comestibles.route"));
 app.use("/api/products/desechables", require("./src/routes/desechables.route"));
 app.use("/api/products/limpieza", require("./src/routes/limpieza.route"));
