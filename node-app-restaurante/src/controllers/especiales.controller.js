@@ -3,6 +3,7 @@ const {
   createNewBitacoraEntry,
 } = require("../controllers/bitacora.controller");
 const EspecialesModel = require("../models/Especiales.model");
+const { generateNewConsecutivo } = require("./consecutivos.controller");
 
 const getAllEspecialesFromRestaurant = async (req, res, next) => {
   const especiales = await EspecialesModel.find();

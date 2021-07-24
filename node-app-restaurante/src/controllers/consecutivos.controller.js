@@ -28,11 +28,11 @@ const createConsecuivo = async (req, res, next) => {
 
     //await restaurantDB.save();
 
-    const bitacora = await createNewBitacoraEntry(
+    /*const bitacora = await createNewBitacoraEntry(
       req.user,
       "CONSECUTIVOS INSERT",
       req.body
-    );
+    );*/
 
     return res.json({
       ok: true,

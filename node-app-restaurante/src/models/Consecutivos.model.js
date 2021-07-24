@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 const encrypt = require("mongoose-encryption");
 
 const ConsecutivoSchema = Schema({
+  codigo: {
+    required: true,
+    type: String,
+  },
   tipo: {
     required: true,
     type: String,

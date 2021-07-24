@@ -9,10 +9,6 @@ const BebidaGaseosaSchema = Schema({
     required: true,
     type: String,
   },
-  ingredientes: {
-    required: true,
-    type: String,
-  },
   descripcion: {
     required: true,
     type: String,

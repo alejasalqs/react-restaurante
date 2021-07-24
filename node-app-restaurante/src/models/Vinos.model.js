@@ -55,8 +55,6 @@ VinosSchema.plugin(encrypt, {
     "nombre",
     "cantidad",
     "descripcion",
-    "marca",
-    "nacionalidad",
     "anio_cosecha",
   ],
 });

@@ -10,7 +10,7 @@ const getAllVinosFromRestaurant = async (req, res, next) => {
 
   const vinos = await VinosModel.find({
     restaurante: restaurant,
-  }).populate("restaurante");
+  }).populate("restaurante nacionalidad");
 
   const bitacora = await createNewBitacoraEntry(
     req.user,
@@ -35,6 +35,7 @@ const createVinos = async (req, res, next) => {
     const consecutivo = await generateNewConsecutivo("VINOS", restaurant);
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
     const vinos = new VinosModel(req.body);
 
@@ -42,7 +43,7 @@ const createVinos = async (req, res, next) => {
 
     //restaurantDB.vinoss.push(vinos);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

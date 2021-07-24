@@ -9,7 +9,7 @@ const getAllBuffetsFromRestaurant = async (req, res, next) => {
   const { restaurant } = req.user;
 
   const buffets = await BuffetModel.find({ restaurante: restaurant }).populate(
-    "restaurante"
+    "restaurante unidad_medida"
   );
 
   const bitacora = await createNewBitacoraEntry(
@@ -35,6 +35,7 @@ const createBuffet = async (req, res, next) => {
     const consecutivo = await generateNewConsecutivo("BUFFET", restaurant);
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
     const buffet = new BuffetModel(req.body);
 
@@ -42,7 +43,7 @@ const createBuffet = async (req, res, next) => {
 
     //restaurantDB.buffets.push(buffet);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

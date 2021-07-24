@@ -38,6 +38,7 @@ const createBebidaCaliente = async (req, res, next) => {
     );
 
     req.body.codigo = consecutivo;
+    req.body.restaurante = restaurant;
 
     const bebida_caliente = new BebidaCalienteModel(req.body);
 
@@ -45,7 +46,7 @@ const createBebidaCaliente = async (req, res, next) => {
 
     //restaurantDB.bebida_calientes.push(bebida_caliente);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,
