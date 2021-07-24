@@ -17,6 +17,11 @@ const initialState = {
   tecnologiaModalOpen: false,
   buffetModalOpen: false,
   especialidadesModalOpen: false,
+  bebidasCalientesModalOpen: false,
+  bebidasHeladasModalOpen: false,
+  bebidasGaseosasModalOpen: false,
+  licoresModalOpen: false,
+  vinosModalOpen: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -225,6 +230,65 @@ export const uiReducer = (state = initialState, action) => {
         especialidadesModalOpen: false,
       };
 
+    case types.uiOpenBebidasCalientesModal:
+      return {
+        ...state,
+        bebidasCalientesModalOpen: true,
+      };
+
+    case types.uiCloseBebidasCalientesModal:
+      return {
+        ...state,
+        bebidasCalientesModalOpen: false,
+      };
+
+    case types.uiOpenBebidasHeladasModal:
+      return {
+        ...state,
+        bebidasHeladasModalOpen: true,
+      };
+
+    case types.uiCloseBebidasHeladasModal:
+      return {
+        ...state,
+        bebidasHeladasModalOpen: false,
+      };
+
+    case types.uiOpenBebidasGaseosasModal:
+      return {
+        ...state,
+        bebidasGaseosasModalOpen: true,
+      };
+
+    case types.uiCloseBebidasGaseosasModal:
+      return {
+        ...state,
+        bebidasGaseosasModalOpen: false,
+      };
+
+    case types.uiOpenLicoresModal:
+      return {
+        ...state,
+        licoresModalOpen: true,
+      };
+
+    case types.uiCloseLicoresModal:
+      return {
+        ...state,
+        licoresModalOpen: false,
+      };
+
+    case types.uiOpenVinosModal:
+      return {
+        ...state,
+        vinosModalOpen: true,
+      };
+
+    case types.uiCloseVinosModal:
+      return {
+        ...state,
+        vinosModalOpen: false,
+      };
     default:
       return state;
   }

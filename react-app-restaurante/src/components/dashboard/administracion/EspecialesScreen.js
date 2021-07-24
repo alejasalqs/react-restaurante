@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { BebidasCalienteScreen } from "../../ui/sections/BebidasCalienteScreen";
+import { BebidasGaseosasScreen } from "../../ui/sections/BebidasGaseosasScreen";
+import { BebidasHeladasScreen } from "../../ui/sections/BebidasHeladasScreen";
 import { BuffetScreen } from "../../ui/sections/BuffetScreen";
 import { EspecialidadesScreen } from "../../ui/sections/EspecialidadesScreen";
+import { LicoresScreen } from "../../ui/sections/LicoresScreen";
+import { VinosScreen } from "../../ui/sections/VinosScreen";
 
 export const EspecialesScreen = () => {
   const [showProducto, setShowProducto] = useState("BUFFET");
@@ -34,6 +39,21 @@ export const EspecialesScreen = () => {
 
           case "ESPECIALIDADES":
             return <EspecialidadesScreen />;
+
+          case "BCALIENTES":
+            return <BebidasCalienteScreen />;
+
+          case "BHELADAS":
+            return <BebidasHeladasScreen />;
+
+          case "BGASEOSAS":
+            return <BebidasGaseosasScreen />;
+
+          case "LICORES":
+            return <LicoresScreen />;
+
+          case "VINOS":
+            return <VinosScreen />;
 
           default:
             return <BuffetScreen />;

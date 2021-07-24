@@ -53,6 +53,21 @@ export const openModal = (modalType) => {
     case "especialidades":
       return { type: types.uiOpenEspecialidadesModal };
 
+    case "bebidascalientes":
+      return { type: types.uiOpenBebidasCalientesModal };
+
+    case "bebidasheladas":
+      return { type: types.uiOpenBebidasHeladasModal };
+
+    case "bebidasgaseosas":
+      return { type: types.uiOpenBebidasGaseosasModal };
+
+    case "licores":
+      return { type: types.uiOpenBebidasGaseosasModal };
+
+    case "vinos":
+      return { type: types.uiOpenBebidasGaseosasModal };
+
     default:
       return {};
   }
@@ -110,6 +125,15 @@ export const closeModal = (modalType) => {
 
     case "especialidades":
       return { type: types.uiCloseEspecialidadesModal };
+
+    case "bebidascalientes":
+      return { type: types.uiCloseBebidasCalientesModal };
+
+    case "bebidasheladas":
+      return { type: types.uiCloseBebidasHeladasModal };
+
+    case "bebidasgaseosas":
+      return { type: types.uiCloseBebidasGaseosasModal };
 
     default:
       return {};

@@ -19,6 +19,11 @@ import { unidadMedidaReducer } from "./UnidadMedidaReducer";
 import { usersReducer } from "./usersReducer";
 import { buffetReducer } from "./buffetReducer";
 import { especialidadesReducer } from "./especialidadesReducer";
+import { bebidaCalienteReducer } from "./bebidaCalienteReducer";
+import { bebidaHeladaReducer } from "./bebidaHeladaReducer";
+import { bebidaGaseosaReducer } from "./bebidaGaseosaReducer";
+import { licoresReducer } from "./licoresReducer";
+import { vinosReducer } from "./vinosReducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -41,4 +46,9 @@ export const rootReducer = combineReducers({
   equipos: equiposReducer,
   buffets: buffetReducer,
   especialidades: especialidadesReducer,
+  bebidas_calientes: bebidaCalienteReducer,
+  bebidas_heladas: bebidaHeladaReducer,
+  bebidas_gaseosa: bebidaGaseosaReducer,
+  licores: licoresReducer,
+  vinos: vinosReducer,
 });

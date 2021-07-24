@@ -36,6 +36,18 @@ export const types = {
   uiCloseBuffetModal: "[UI] Close Buffet Modal",
   uiOpenEspecialidadesModal: "[UI] Open Especialidades Modal",
   uiCloseEspecialidadesModal: "[UI] Close Especialidades Modal",
+  uiOpenBebidasCalientesModal: "[UI] Open Bebidas Calientes Modal",
+  uiCloseBebidasCalientesModal: "[UI] Close Bebidas Calientes Modal",
+  uiOpenBebidasHeladasModal: "[UI] Open Bebidas Heladas Modal",
+  uiCloseBebidasHeladasModal: "[UI] Close Bebidas Heladas Modal",
+  uiOpenBebidasGaseosasModal: "[UI] Open Bebidas Gaseosas Modal",
+  uiCloseBebidasGaseosasModal: "[UI] Close Bebidas Gaseosas Modal",
+
+  uiOpenLicoresModal: "[UI] Open Licores Modal",
+  uiCloseLicoresModal: "[UI] Close Licores Modal",
+
+  uiOpenVinosModal: "[UI] Open Vinos Modal",
+  uiCloseVinosModal: "[UI] Close Vinos Modal",
   //////////////////
   setActiveEmployee: "[Employees] Set Active Employee",
   removeActiveEmployee: "[Employees] Remove Active Employee",
@@ -157,4 +169,39 @@ export const types = {
   editEspecialidad: "[Especialidad] Edit Especialidad",
   deleteEspecialidad: "[Especialidad] Delete Especialidad",
   especialidadLoaded: "[Especialidad] Loading Especialidad",
+  /////////////////
+  setActiveBebidaCaliente: "[BebidaCaliente] Set Active BebidaCaliente",
+  removeActiveBebidaCaliente: "[BebidaCaliente] Remove Active BebidaCaliente",
+  addBebidaCaliente: "[BebidaCaliente] Add new BebidaCaliente",
+  editBebidaCaliente: "[BebidaCaliente] Edit BebidaCaliente",
+  deleteBebidaCaliente: "[BebidaCaliente] Delete BebidaCaliente",
+  bebidaCalienteLoaded: "[BebidaCaliente] Loading BebidaCaliente",
+  /////////////////
+  setActiveBebidaHelada: "[BebidaHelada] Set Active BebidaHelada",
+  removeActiveBebidaHelada: "[BebidaHelada] Remove Active BebidaHelada",
+  addBebidaHelada: "[BebidaHelada] Add new BebidaHelada",
+  editBebidaHelada: "[BebidaHelada] Edit BebidaHelada",
+  deleteBebidaHelada: "[BebidaHelada] Delete BebidaHelada",
+  bebidaHeladaLoaded: "[BebidaHelada] Loading BebidaHelada",
+  /////////////////
+  setActiveBebidaGaseosa: "[BebidaGaseosa] Set Active BebidaGaseosa",
+  removeActiveBebidaGaseosa: "[BebidaGaseosa] Remove Active BebidaGaseosa",
+  addBebidaGaseosa: "[BebidaGaseosa] Add new BebidaGaseosa",
+  editBebidaGaseosa: "[BebidaGaseosa] Edit BebidaGaseosa",
+  deleteBebidaGaseosa: "[BebidaGaseosa] Delete BebidaGaseosa",
+  bebidaGaseosaLoaded: "[BebidaGaseosa] Loading BebidaGaseosa",
+  /////////////////
+  setActiveLicores: "[Licores] Set Active Licores",
+  removeActiveLicores: "[Licores] Remove Active Licores",
+  addLicores: "[Licores] Add new Licores",
+  editLicores: "[Licores] Edit Licores",
+  deleteLicores: "[Licores] Delete Licores",
+  licoresLoaded: "[Licores] Loading Licores",
+  /////////////////
+  setActiveVinos: "[Vinos] Set Active Vinos",
+  removeActiveVinos: "[Vinos] Remove Active Vinos",
+  addVinos: "[Vinos] Add new Vinos",
+  editVinos: "[Vinos] Edit Vinos",
+  deleteVinos: "[Vinos] Delete Vinos",
+  vinosLoaded: "[Vinos] Loading Vinos",
 };
