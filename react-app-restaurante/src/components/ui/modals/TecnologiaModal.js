@@ -12,8 +12,10 @@ const initialValues = {
   codigo: "",
   nombre: "",
   cantidad: "",
-  restaurante: "",
+  descripcion: "",
+  marca: "",
 };
+
 export const TecnologiaModal = () => {
   const dispatch = useDispatch();
   const { tecnologiaModalOpen } = useSelector((state) => state.ui);
@@ -21,7 +23,7 @@ export const TecnologiaModal = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, cantidad } = formValues;
+  const { codigo, nombre, cantidad, descripcion, marca } = formValues;
 
   useEffect(() => {
     if (activeTecnologia) {
@@ -96,7 +98,7 @@ export const TecnologiaModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly={true}
+              readOnly="true"
             />
           </div>
         </div>
@@ -111,6 +113,20 @@ export const TecnologiaModal = () => {
               onChange={handleInputChange}
               value={nombre}
               placeholder="Nombre"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Descripcion</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="descripcion"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Descripcion"
             />
           </div>
         </div>

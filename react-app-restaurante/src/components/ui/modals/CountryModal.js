@@ -10,8 +10,7 @@ Modal.setAppElement("#root");
 
 const initValues = {
   codigo: "",
-  nombre: "",
-  rol: "",
+  pais: "",
 };
 export const CountryModal = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export const CountryModal = () => {
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, pais } = formValues;
 
   useEffect(() => {
     if (activeCountry) {
@@ -95,7 +94,7 @@ export const CountryModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly={true}
+              readOnly="true"
             />
           </div>
         </div>
@@ -106,28 +105,14 @@ export const CountryModal = () => {
               className="input"
               type="text"
               autoComplete="off"
-              name="nombre"
+              name="pais"
               onChange={handleInputChange}
-              value={nombre}
+              value={pais}
               placeholder="Nombre"
             />
           </div>
         </div>
-        <div className="field">
-          <label className="label">Rol</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              name="rol"
-              id="rol"
-              onChange={handleInputChange}
-              value={rol}
-              placeholder="Rol Externo o Interno"
-            />
-          </div>
-        </div>
+
         {activeCountry ? (
           <div className="field is-grouped">
             <div className="control mr-2">

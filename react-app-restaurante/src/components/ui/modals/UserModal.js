@@ -11,7 +11,11 @@ Modal.setAppElement("#root");
 const initValues = {
   codigo: "",
   nombre: "",
-  rol: "",
+  apellido1: "",
+  apellido2: "",
+  telefono: "",
+  celular: "",
+  login: "",
 };
 
 export const UserModal = () => {
@@ -21,7 +25,8 @@ export const UserModal = () => {
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, nombre, apellido1, apellido2, telefono, celular, login } =
+    formValues;
 
   useEffect(() => {
     if (activeUser) {
@@ -80,9 +85,9 @@ export const UserModal = () => {
       overlayClassName="modal-fondo"
     >
       {activeUser ? (
-        <h1 className="title"> Editar puesto </h1>
+        <h1 className="title"> Editar Usuario </h1>
       ) : (
-        <h1 className="title"> Agregar puesto </h1>
+        <h1 className="title"> Agregar Usuario </h1>
       )}
       <hr />
       <form>
@@ -96,36 +101,105 @@ export const UserModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly={true}
+              readOnly="true"
             />
           </div>
         </div>
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Nombre</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="nombre"
+                  onChange={handleInputChange}
+                  value={nombre}
+                  placeholder="Nombre"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Primer Apellido</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="apellido1"
+                  onChange={handleInputChange}
+                  value={apellido1}
+                  placeholder="Primer Apellido"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Segundo Apellido</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="apellido2"
+                  onChange={handleInputChange}
+                  value={apellido2}
+                  placeholder="Segundo Apellido"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Teléfono</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="telefono"
+                  onChange={handleInputChange}
+                  value={telefono}
+                  placeholder="Teléfono"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Celuar</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="celular"
+                  onChange={handleInputChange}
+                  value={celular}
+                  placeholder="Celular"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="field">
-          <label className="label">Nombre</label>
+          <label className="label">Login</label>
           <div className="control">
             <input
               className="input"
               type="text"
-              autoComplete="off"
-              name="nombre"
+              name="codigo"
               onChange={handleInputChange}
-              value={nombre}
-              placeholder="Nombre"
-            />
-          </div>
-        </div>
-        <div className="field">
-          <label className="label">Rol</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              name="rol"
-              id="rol"
-              onChange={handleInputChange}
-              value={rol}
-              placeholder="Rol Externo o Interno"
+              value={login}
+              placeholder="Login"
+              readOnly="true"
             />
           </div>
         </div>

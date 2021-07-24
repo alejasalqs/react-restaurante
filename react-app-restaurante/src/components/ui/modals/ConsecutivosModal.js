@@ -10,11 +10,11 @@ Modal.setAppElement("#root");
 
 const initialValues = {
   codigo: "",
-  nombre: "",
+  tipo: "",
   descripcion: "",
-  nacionalidad: "",
-  empresa: "",
-  telefono_empresa: "",
+  valor_consecutivo: "",
+  contiene_prefijo: "",
+  prefijo: "",
 };
 
 export const ConsecutivosModal = () => {
@@ -24,7 +24,14 @@ export const ConsecutivosModal = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const {
+    codigo,
+    tipo,
+    descripcion,
+    valor_consecutivo,
+    contiene_prefijo,
+    prefijo,
+  } = formValues;
 
   useEffect(() => {
     if (activeConsecutivo) {
@@ -104,17 +111,65 @@ export const ConsecutivosModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Nombre</label>
+          <label className="label">Tipo</label>
           <div className="control">
             <input
               className="input"
               type="text"
               autoComplete="off"
-              name="nombre"
+              name="tipo"
               onChange={handleInputChange}
-              value={nombre}
-              placeholder="Nombre"
+              value={tipo}
+              placeholder="Tipo"
             />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Descripción</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="descripcion"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Descripción"
+            />
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Valor</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="valor_consecutivo"
+                  onChange={handleInputChange}
+                  value={valor_consecutivo}
+                  placeholder="Valor"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Prefijo</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="prefijo"
+                  onChange={handleInputChange}
+                  value={prefijo}
+                  placeholder="Prefijo"
+                />
+              </div>
+            </div>
           </div>
         </div>
 

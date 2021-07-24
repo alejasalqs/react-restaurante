@@ -25,11 +25,11 @@ export const VinosScreen = () => {
       },
       {
         Header: "Precio",
-        accessor: "precio",
+        accessor: "precio_unitario",
       },
       {
         Header: "Nacionalidad",
-        accessor: "nacionalidad",
+        accessor: "nacionalidad.pais",
       },
       {
         Header: "Año",

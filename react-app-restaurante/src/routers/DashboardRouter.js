@@ -12,6 +12,7 @@ import { HomeScreen } from "../components/dashboard/HomeScreen";
 import { BitacoraScreen } from "../components/dashboard/reportes/BitacoraScreen";
 import { ReporteClientesScreen } from "../components/dashboard/reportes/ReporteClientesScreen";
 import { ReporteFacturacionScreen } from "../components/dashboard/reportes/ReporteFacturacionScreen";
+import { CajasScreen } from "../components/dashboard/seguridad/CajasScreen";
 import { ConsecutivosScreen } from "../components/dashboard/seguridad/ConsecutivosScreen";
 import { CountryScreen } from "../components/dashboard/seguridad/CountryScreen";
 import { RolScreen } from "../components/dashboard/seguridad/RolScreen";
@@ -102,6 +103,8 @@ export const DashboardRouter = () => {
                 path="/dashboard/unidades"
                 component={UnidadMedidaScreen}
               />
+
+              <Route exact path="/dashboard/cajas" component={CajasScreen} />
 
               <Route path="/dashboard" component={HomeScreen} />
 

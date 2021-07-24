@@ -103,48 +103,54 @@ export const ProveedoresModal = () => {
             />
           </div>
         </div>
-        <div className="field">
-          <label className="label">Nombre</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              name="nombre"
-              onChange={handleInputChange}
-              value={nombre}
-              placeholder="Nombre"
-            />
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Nombre</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="nombre"
+                  onChange={handleInputChange}
+                  value={nombre}
+                  placeholder="Nombre"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="field">
-          <label className="label">Primer Apellido</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              name="apellido1"
-              id="apellido1"
-              onChange={handleInputChange}
-              value={apellido1}
-              placeholder="Primer Apellido"
-            />
+          <div className="column">
+            <div className="field">
+              <label className="label">Primer Apellido</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="apellido1"
+                  onChange={handleInputChange}
+                  value={apellido1}
+                  placeholder="Primer Apellido"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="field">
-          <label className="label">Segundo Apellido</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text"
-              autoComplete="off"
-              name="apellido2"
-              id="apellido2"
-              onChange={handleInputChange}
-              value={apellido2}
-              placeholder="Segundo Apellido"
-            />
+          <div className="column">
+            <div className="field">
+              <label className="label">Segundo Apellido</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="apellido2"
+                  onChange={handleInputChange}
+                  value={apellido2}
+                  placeholder="Segundo Apellido"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div className="field">

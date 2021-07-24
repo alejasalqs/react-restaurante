@@ -31,6 +31,11 @@ export const UnidadMedidaScreen = () => {
         Header: "Simbología",
         accessor: "simbologia",
       },
+      {
+        Header: "Simbolo",
+        accessor: "simbolo",
+        show: false,
+      },
     ],
     []
   );

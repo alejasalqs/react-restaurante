@@ -27,6 +27,11 @@ export const ProductosComestiblesScreen = () => {
         Header: "Restaurante",
         accessor: "restaurante.nombre",
       },
+      {
+        Header: "Descripcion",
+        accessor: "descripcion",
+        show: false,
+      },
     ],
     []
   );

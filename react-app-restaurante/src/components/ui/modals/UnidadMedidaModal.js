@@ -10,8 +10,11 @@ Modal.setAppElement("#root");
 
 const initValues = {
   codigo: "",
-  nombre: "",
-  rol: "",
+  unidad: "",
+  detalle: "",
+  escala: "",
+  simbolo: "",
+  simbologia: "",
 };
 
 export const UnidadMedidaModal = () => {
@@ -21,7 +24,7 @@ export const UnidadMedidaModal = () => {
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, unidad, detalle, escala, simbolo, simbologia } = formValues;
 
   useEffect(() => {
     if (activeUnidadMedida) {
@@ -101,32 +104,81 @@ export const UnidadMedidaModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Nombre</label>
+          <label className="label">Unidad Medida</label>
           <div className="control">
             <input
               className="input"
               type="text"
               autoComplete="off"
-              name="nombre"
+              name="unidad"
               onChange={handleInputChange}
-              value={nombre}
-              placeholder="Nombre"
+              value={unidad}
+              placeholder="Unidad Medida"
             />
           </div>
         </div>
         <div className="field">
-          <label className="label">Rol</label>
+          <label className="label">Escala</label>
           <div className="control">
             <input
               className="input"
               type="text"
               autoComplete="off"
-              name="rol"
-              id="rol"
+              name="escala"
+              id="escala"
               onChange={handleInputChange}
-              value={rol}
-              placeholder="Rol Externo o Interno"
+              value={escala}
+              placeholder="Escala"
             />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Detalle</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="detalle"
+              id="detalle"
+              onChange={handleInputChange}
+              value={detalle}
+              placeholder="Detalle"
+            />
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Simbolo</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="simbolo"
+                  onChange={handleInputChange}
+                  value={simbolo}
+                  placeholder="Simbolo"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Simbología</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  autoComplete="off"
+                  name="simbologia"
+                  onChange={handleInputChange}
+                  value={simbologia}
+                  placeholder="Simbología"
+                />
+              </div>
+            </div>
           </div>
         </div>
         {activeUnidadMedida ? (

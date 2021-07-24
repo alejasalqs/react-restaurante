@@ -11,8 +11,9 @@ Modal.setAppElement("#root");
 const initialValues = {
   codigo: "",
   nombre: "",
-  cantidad: "",
-  restaurante: "",
+  tipo: "",
+  precio: "",
+  unidad_medida: "",
 };
 export const BuffetModal = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const BuffetModal = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, cantidad } = formValues;
+  const { codigo, nombre, tipo, precio, unidad_medida } = formValues;
 
   useEffect(() => {
     if (activeBuffet) {
@@ -115,16 +116,30 @@ export const BuffetModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Cantidad</label>
+          <label className="label">Tipo</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="tipo"
+              onChange={handleInputChange}
+              value={tipo}
+              placeholder="Tipo"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Precio</label>
           <div className="control">
             <input
               className="input"
               type="number"
               autoComplete="off"
-              name="cantidad"
+              name="precio"
               onChange={handleInputChange}
-              value={cantidad}
-              placeholder="cantidad"
+              value={precio}
+              placeholder="Precio"
             />
           </div>
         </div>
