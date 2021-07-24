@@ -29,7 +29,7 @@ export const BuffetScreen = () => {
       },
       {
         Header: "Unidad Medida",
-        accessor: "unidad_medida",
+        accessor: "unidad_medida.unidad",
       },
     ],
     []
