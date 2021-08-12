@@ -22,7 +22,10 @@ const getAllUsersFromRestaurant = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   try {
-    const consecutivo = await generateNewConsecutivo("USUARIOS", restaurant);
+    const consecutivo = await generateNewConsecutivo(
+      "USUARIOS",
+      req.body.restaurante
+    );
     req.body.codigo = consecutivo;
 
     const user = new UsersModel(req.body);
@@ -94,7 +97,9 @@ const deleteUser = async (req, res, next) => {
       });
     }
 
-    const deletedUser = await UsersModel.findByIdAndDelete(id, {});
+    const deletedUser = await UsersModel.findOneAndRemove({
+      codigo,
+    });
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

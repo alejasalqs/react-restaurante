@@ -39,9 +39,9 @@ const createBrand = async (req, res, next) => {
 
     await brand.save();
 
-    restaurantDB.marcas.push(brand);
+    //restaurantDB.marcas.push(brand);
 
-    await restaurantDB.save();
+    //await restaurantDB.save();
 
     const bitacora = await createNewBitacoraEntry(
       req.user,

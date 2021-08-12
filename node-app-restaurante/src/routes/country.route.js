@@ -9,6 +9,7 @@ const {
   createCountry,
   updateCountry,
   deleteCountry,
+  selectCountries,
 } = require("../controllers/country.controller");
 const { checkJWT } = require("../middlewares/jwt-validator");
 
@@ -17,6 +18,8 @@ const router = express.Router();
 router.use(checkJWT);
 
 router.get("/", getAllCountries);
+
+router.get("/select", selectCountries);
 
 router.post("/", createCountry);
 

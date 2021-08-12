@@ -46,7 +46,13 @@ const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 LimpiezaSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre", "cantidad", "descripcion", "tipo"],
+  encryptedFields: [
+    "nombre",
+    "cantidad",
+    "descripcion",
+    "tipo",
+    "cantidad_medida",
+  ],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods

@@ -18,8 +18,19 @@ const getAllCountries = async (req, res, next) => {
   });
 };
 
+const selectCountries = async (req, res, next) => {
+  const data = await CountryModel.find({}).select("pais");
+
+  return res.json({
+    ok: true,
+    data,
+  });
+};
+
 const createCountry = async (req, res, next) => {
   try {
+    const { restaurant } = req.user;
+
     const consecutivo = await generateNewConsecutivo("PAIS", restaurant);
 
     req.body.codigo = consecutivo;
@@ -96,6 +107,7 @@ const deleteCountry = async (req, res, next) => {
 };
 module.exports = {
   getAllCountries,
+  selectCountries,
   createCountry,
   updateCountry,
   deleteCountry,

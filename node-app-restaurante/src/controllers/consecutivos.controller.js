@@ -24,7 +24,7 @@ const createConsecuivo = async (req, res, next) => {
 
     await consecutivo.save();
 
-    restaurantDB.consecutivos.push(consecutivo);
+    //restaurantDB.consecutivos.push(consecutivo);
 
     //await restaurantDB.save();
 
@@ -93,8 +93,6 @@ const generateNewConsecutivo = async (tipo, restaurant) => {
     restaurante: restaurant,
     tipo,
   });
-
-  console.log(consecutivo);
 
   if (!consecutivo)
     throw new Error(

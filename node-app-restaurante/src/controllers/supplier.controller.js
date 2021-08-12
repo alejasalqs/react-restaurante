@@ -24,7 +24,7 @@ const getAllSuppliersFromRestaurant = async (req, res, next) => {
 
 const createSupplier = async (req, res, next) => {
   try {
-    //const { restaurant } = req.user;
+    const { restaurant } = req.user;
 
     const restaurantDB = await RestaurantModel.findById(req.body.restaurante);
 
@@ -36,7 +36,7 @@ const createSupplier = async (req, res, next) => {
 
     await supplier.save();
 
-    restaurantDB.proveedores.push(supplier);
+    //restaurantDB.proveedores.push(supplier);
 
     //await restaurantDB.save();
 
