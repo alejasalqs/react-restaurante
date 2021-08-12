@@ -26,6 +26,21 @@ export const vinosReducer = (state = initialState, action) => {
         vinos: action.payload,
       };
 
+    case types.addVinos:
+      return {
+        ...state,
+        vinos: [...state.vinos, action.payload],
+      };
+
+    case types.deleteVinos:
+      return {
+        ...state,
+        vinos: state.vinos.filter(
+          (vino) => vino.codigo !== action.payload.codigo
+        ),
+        activeBebidaCaliente: null,
+      };
+
     default:
       return state;
   }

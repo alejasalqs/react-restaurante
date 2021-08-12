@@ -26,6 +26,21 @@ export const especialidadesReducer = (state = initialState, action) => {
         especialidades: action.payload,
       };
 
+    case types.addEspecialidad:
+      return {
+        ...state,
+        especialidades: [...state.especialidades, action.payload],
+      };
+
+    case types.deleteEspecialidad:
+      return {
+        ...state,
+        especialidades: state.especialidades.filter(
+          (especialidad) => especialidad.codigo !== action.payload.codigo
+        ),
+        activeConsecutivo: null,
+      };
+
     default:
       return state;
   }

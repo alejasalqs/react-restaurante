@@ -1,55 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeActiveBebidaCaliente,
+  startBebidaCalienteAddNew,
+  startDeletingBebidaCaliente,
+} from "../../../actions/bebidas-calientes.action";
+
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import {
-  removeActiveBuffet,
-  startBuffetAddNew,
-  startDeletingBuffet,
-} from "../../../actions/buffet.actions";
-import { fetchWithToken } from "../../../helpers/fetch.helper";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
 
-const initialValues = {
+const initValues = {
   codigo: "",
   nombre: "",
-  tipo: "",
+  ingredientes: "",
+  descripcion: "",
   precio: "",
-  unidad_medida: "",
 };
-export const BuffetModal = () => {
+export const BebidaCalienteModal = () => {
   const dispatch = useDispatch();
-  const { buffetModalOpen } = useSelector((state) => state.ui);
-  const { activeBuffet } = useSelector((state) => state.buffets);
+  const { bebidasCalientesModalOpen } = useSelector((state) => state.ui);
+  const { activeBebidaCaliente } = useSelector(
+    (state) => state.bebidas_calientes
+  );
 
-  const [formValues, setFormValues] = useState(initialValues);
+  const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, tipo_comida, precio } = formValues;
+  const { codigo, nombre, ingredientes, descripcion, precio } = formValues;
 
   useEffect(() => {
-    if (activeBuffet) {
-      setFormValues(activeBuffet);
+    if (activeBebidaCaliente) {
+      setFormValues(activeBebidaCaliente);
     } else {
-      setFormValues(initialValues);
+      setFormValues(initValues);
     }
-  }, [activeBuffet, setFormValues]);
-
-  const [unidades, setUnidades] = useState([]);
-
-  useEffect(() => {
-    obtenerDatosSelect();
-  }, []);
-
-  const obtenerDatosSelect = () => {
-    fetchWithToken("unidades-medida").then((resp) => {
-      resp.json().then((data) => {
-        setUnidades(data.unidad_medida);
-      });
-    });
-  };
+  }, [activeBebidaCaliente, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -59,13 +47,13 @@ export const BuffetModal = () => {
   };
 
   const reset = () => {
-    setFormValues(initialValues);
+    setFormValues(initValues);
   };
 
   const handleCloseModal = () => {
     reset();
-    dispatch(closeModal("buffets"));
-    dispatch(removeActiveBuffet());
+    dispatch(closeModal("bebidascalientes"));
+    dispatch(removeActiveBebidaCaliente());
   };
 
   const editInformation = (e) => {
@@ -75,7 +63,7 @@ export const BuffetModal = () => {
   };
 
   const handleDelete = () => {
-    dispatch(startDeletingBuffet(activeBuffet.codigo));
+    dispatch(startDeletingBebidaCaliente(activeBebidaCaliente.codigo));
     handleCloseModal();
   };
 
@@ -85,16 +73,20 @@ export const BuffetModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-
-    const select2 = document.getElementById("unidad");
-    const unidad_medida = select2.value;
-    dispatch(startBuffetAddNew({ unidad_medida, precio, nombre, tipo_comida }));
+    dispatch(
+      startBebidaCalienteAddNew({
+        nombre,
+        ingredientes,
+        descripcion,
+        precio,
+      })
+    );
     handleCloseModal();
   };
 
   return (
     <Modal
-      isOpen={buffetModalOpen}
+      isOpen={bebidasCalientesModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       closeTimeoutMS={200}
@@ -102,10 +94,10 @@ export const BuffetModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeBuffet ? (
-        <h1 className="title"> Editar Buffets </h1>
+      {activeBebidaCaliente ? (
+        <h1 className="title"> Editar bebida </h1>
       ) : (
-        <h1 className="title"> Agregar Buffets </h1>
+        <h1 className="title"> Agregar bebida </h1>
       )}
       <hr />
       <form>
@@ -119,7 +111,7 @@ export const BuffetModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly={true}
+              readOnly="true"
             />
           </div>
         </div>
@@ -138,16 +130,30 @@ export const BuffetModal = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">Tipo</label>
+          <label className="label">Ingredientes</label>
           <div className="control">
             <input
               className="input"
               type="text"
               autoComplete="off"
-              name="tipo_comida"
+              name="ingredientes"
               onChange={handleInputChange}
-              value={tipo_comida}
-              placeholder="Tipo"
+              value={ingredientes}
+              placeholder="Ingredientes"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Descripción</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="descripcion"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Descripción"
             />
           </div>
         </div>
@@ -165,24 +171,8 @@ export const BuffetModal = () => {
             />
           </div>
         </div>
-        <div className="field">
-          <label className="label">Unidad Medida</label>
-          <p className="control has-icons-left">
-            <span className="select">
-              <select id="unidad">
-                {unidades.map((u) => (
-                  <option value={u._id} key={u._id}>
-                    {u.unidad}
-                  </option>
-                ))}
-              </select>
-            </span>
-            <span className="icon is-small is-left">
-              <i className="fas fa-globe"></i>
-            </span>
-          </p>
-        </div>
-        {activeBuffet ? (
+
+        {activeBebidaCaliente ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

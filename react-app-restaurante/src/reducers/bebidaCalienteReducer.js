@@ -26,6 +26,21 @@ export const bebidaCalienteReducer = (state = initialState, action) => {
         bebidas_caliente: action.payload,
       };
 
+    case types.addBebidaCaliente:
+      return {
+        ...state,
+        bebidas_caliente: [...state.bebidas_caliente, action.payload],
+      };
+
+    case types.deleteBebidaCaliente:
+      return {
+        ...state,
+        bebidas_caliente: state.bebidas_caliente.filter(
+          (bebidas) => bebidas.codigo !== action.payload.codigo
+        ),
+        activeBebidaCaliente: null,
+      };
+
     default:
       return state;
   }

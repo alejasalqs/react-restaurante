@@ -6,6 +6,7 @@ import {
 } from "../../../actions/bebidas-heladas.action";
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { BebidaHeladaModal } from "../modals/BebidaHeladaModal";
 import { BuffetModal } from "../modals/BuffetModal";
 
 export const BebidasHeladasScreen = () => {
@@ -67,7 +68,7 @@ export const BebidasHeladasScreen = () => {
           </div>
         </div>
       </div>
-      <BuffetModal />
+      <BebidaHeladaModal />
     </div>
   );
 };

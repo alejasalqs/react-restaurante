@@ -26,6 +26,21 @@ export const bebidaHeladaReducer = (state = initialState, action) => {
         bebidas_helada: action.payload,
       };
 
+    case types.addBebidaHelada:
+      return {
+        ...state,
+        bebidas_helada: [...state.bebidas_helada, action.payload],
+      };
+
+    case types.deleteBebidaHelada:
+      return {
+        ...state,
+        bebidas_helada: state.bebidas_helada.filter(
+          (bebidas) => bebidas.codigo !== action.payload.codigo
+        ),
+        activeBebidaCaliente: null,
+      };
+
     default:
       return state;
   }

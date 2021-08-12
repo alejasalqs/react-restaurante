@@ -6,7 +6,7 @@ import {
 } from "../../../actions/bebidas-gaseosa.action";
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
-import { BuffetModal } from "../modals/BuffetModal";
+import { BebidaGaseosaModal } from "../modals/BebidaGaseosaModal";
 
 export const BebidasGaseosasScreen = () => {
   const columns = React.useMemo(
@@ -67,7 +67,7 @@ export const BebidasGaseosasScreen = () => {
           </div>
         </div>
       </div>
-      <BuffetModal />
+      <BebidaGaseosaModal />
     </div>
   );
 };

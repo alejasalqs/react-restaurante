@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 export const HomeScreen = () => {
   return (
@@ -19,7 +20,9 @@ export const HomeScreen = () => {
                           <i className="fas fa-city fa-5x"></i>
                         </p>
                         <p className="subtitle">
-                          <a>Resturantes</a>
+                          <NavLink to="/dashboard/admin-mesas">
+                            Resturantes
+                          </NavLink>
                         </p>
                       </div>
                     </div>

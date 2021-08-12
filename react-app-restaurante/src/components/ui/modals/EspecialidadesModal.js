@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveEspecialidad } from "../../../actions/especialidades.actions";
+import {
+  removeActiveEspecialidad,
+  startDeletingEspecialidad,
+  startEspecialidadAddNew,
+} from "../../../actions/especialidades.actions";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -11,25 +15,26 @@ Modal.setAppElement("#root");
 const initialValues = {
   codigo: "",
   nombre: "",
-  cantidad: "",
-  restaurante: "",
+  ingredientes: "",
+  detalle: "",
+  precio: "",
 };
 export const EspecialidadesModal = () => {
   const dispatch = useDispatch();
   const { especialidadesModalOpen } = useSelector((state) => state.ui);
-  const { activeEspecilidad } = useSelector((state) => state.especialidades);
+  const { activeEspecialidad } = useSelector((state) => state.especialidades);
 
   const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, cantidad } = formValues;
+  const { codigo, nombre, ingredientes, detalle, precio } = formValues;
 
   useEffect(() => {
-    if (activeEspecilidad) {
-      setFormValues(activeEspecilidad);
+    if (activeEspecialidad) {
+      setFormValues(activeEspecialidad);
     } else {
       setFormValues(initialValues);
     }
-  }, [activeEspecilidad, setFormValues]);
+  }, [activeEspecialidad, setFormValues]);
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -55,7 +60,7 @@ export const EspecialidadesModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeEspecilidad.codigo));
+    dispatch(startDeletingEspecialidad(activeEspecialidad.codigo));
     handleCloseModal();
   };
 
@@ -65,7 +70,9 @@ export const EspecialidadesModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    dispatch(
+      startEspecialidadAddNew({ nombre, ingredientes, detalle, precio })
+    );
     handleCloseModal();
   };
 
@@ -79,7 +86,7 @@ export const EspecialidadesModal = () => {
       className="modal"
       overlayClassName="modal-fondo"
     >
-      {activeEspecilidad ? (
+      {activeEspecialidad ? (
         <h1 className="title"> Editar especialidades </h1>
       ) : (
         <h1 className="title"> Agregar especialidades </h1>
@@ -96,7 +103,7 @@ export const EspecialidadesModal = () => {
               onChange={handleInputChange}
               value={codigo}
               placeholder="Código"
-              readOnly={true}
+              readOnly="true"
             />
           </div>
         </div>
@@ -115,20 +122,48 @@ export const EspecialidadesModal = () => {
           </div>
         </div>
         <div className="field">
+          <label className="label">Ingredientes</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="ingredientes"
+              onChange={handleInputChange}
+              value={ingredientes}
+              placeholder="ingredientes"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Detalle</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="detalle"
+              onChange={handleInputChange}
+              value={detalle}
+              placeholder="detalle"
+            />
+          </div>
+        </div>
+        <div className="field">
           <label className="label">Cantidad</label>
           <div className="control">
             <input
               className="input"
               type="number"
               autoComplete="off"
-              name="cantidad"
+              name="precio"
               onChange={handleInputChange}
-              value={cantidad}
+              value={precio}
               placeholder="cantidad"
             />
           </div>
         </div>
-        {activeEspecilidad ? (
+        {activeEspecialidad ? (
           <div className="field is-grouped">
             <div className="control mr-2">
               <button

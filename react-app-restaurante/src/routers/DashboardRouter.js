@@ -22,6 +22,7 @@ import { UnidadMedidaScreen } from "../components/dashboard/seguridad/UnidadMedi
 import { UsuariosScreen } from "../components/dashboard/seguridad/UsuariosScreen";
 //import { Footer } from "../components/ui/Footer";
 import { Navbar } from "../components/ui/Navbar";
+import { AdministracionMesasScreen } from "../components/ui/sections/AdministracionMesasScreen";
 import { Sidebar } from "../components/ui/Sidebar";
 
 export const DashboardRouter = () => {
@@ -115,6 +116,11 @@ export const DashboardRouter = () => {
               />
 
               <Route exact path="/dashboard/cierre-caja" component={Cierre} />
+
+              <Route
+                path="/dashboard/admin-mesas"
+                component={AdministracionMesasScreen}
+              />
 
               <Route path="/dashboard" component={HomeScreen} />
 

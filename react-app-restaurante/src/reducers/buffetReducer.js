@@ -26,6 +26,21 @@ export const buffetReducer = (state = initialState, action) => {
         buffets: action.payload,
       };
 
+    case types.addBuffets:
+      return {
+        ...state,
+        buffets: [...state.buffets, action.payload],
+      };
+
+    case types.deleteBuffets:
+      return {
+        ...state,
+        buffets: state.buffets.filter(
+          (buffet) => buffet.codigo !== action.payload.codigo
+        ),
+        activeConsecutivo: null,
+      };
+
     default:
       return state;
   }

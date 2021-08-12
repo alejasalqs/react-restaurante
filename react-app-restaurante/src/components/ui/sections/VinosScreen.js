@@ -7,6 +7,7 @@ import {
 } from "../../../actions/vinos.actions";
 import { Table } from "../../../helpers/Table.helper";
 import { BuffetModal } from "../modals/BuffetModal";
+import { VinosModal } from "../modals/VinosModal";
 
 export const VinosScreen = () => {
   const columns = React.useMemo(
@@ -75,7 +76,7 @@ export const VinosScreen = () => {
           </div>
         </div>
       </div>
-      <BuffetModal />
+      <VinosModal />
     </div>
   );
 };

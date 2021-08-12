@@ -7,6 +7,7 @@ import {
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
 import { BuffetModal } from "../modals/BuffetModal";
+import { LicoresModal } from "../modals/LicoresModal";
 
 export const LicoresScreen = () => {
   const columns = React.useMemo(
@@ -71,7 +72,7 @@ export const LicoresScreen = () => {
           </div>
         </div>
       </div>
-      <BuffetModal />
+      <LicoresModal />
     </div>
   );
 };

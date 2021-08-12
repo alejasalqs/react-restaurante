@@ -26,6 +26,21 @@ export const licoresReducer = (state = initialState, action) => {
         licores: action.payload,
       };
 
+    case types.addLicores:
+      return {
+        ...state,
+        licores: [...state.licores, action.payload],
+      };
+
+    case types.deleteLicores:
+      return {
+        ...state,
+        licores: state.licores.filter(
+          (licor) => licor.codigo !== action.payload.codigo
+        ),
+        activeBebidaCaliente: null,
+      };
+
     default:
       return state;
   }

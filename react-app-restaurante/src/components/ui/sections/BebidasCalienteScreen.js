@@ -7,6 +7,7 @@ import {
 
 import { openModal } from "../../../actions/ui.actions";
 import { Table } from "../../../helpers/Table.helper";
+import { BebidaCalienteModal } from "../modals/BebidaCalienteModal";
 import { BuffetModal } from "../modals/BuffetModal";
 
 export const BebidasCalienteScreen = () => {
@@ -68,7 +69,7 @@ export const BebidasCalienteScreen = () => {
           </div>
         </div>
       </div>
-      <BuffetModal />
+      <BebidaCalienteModal />
     </div>
   );
 };

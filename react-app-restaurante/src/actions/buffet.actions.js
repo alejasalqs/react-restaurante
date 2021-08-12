@@ -48,7 +48,7 @@ export const startBuffetAddNew = ({
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(addNewBuffet(body.position));
+        dispatch(addNewBuffet(body.buffet));
       } else {
         console.log("");
       }
@@ -61,4 +61,27 @@ export const startBuffetAddNew = ({
 const addNewBuffet = (buffet) => ({
   type: types.addBuffets,
   payload: buffet,
+});
+
+export const startDeletingBuffet = (codigo) => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken(
+      `specials/buffet/${codigo}`,
+      {},
+      "DELETE"
+    );
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(deleteBuffet(codigo));
+    } else {
+      console.log("");
+    }
+  };
+};
+
+const deleteBuffet = (codigo) => ({
+  type: types.deleteBuffets,
+  payload: { codigo },
 });

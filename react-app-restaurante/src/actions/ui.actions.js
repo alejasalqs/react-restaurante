@@ -63,10 +63,10 @@ export const openModal = (modalType) => {
       return { type: types.uiOpenBebidasGaseosasModal };
 
     case "licores":
-      return { type: types.uiOpenBebidasGaseosasModal };
+      return { type: types.uiOpenLicoresModal };
 
     case "vinos":
-      return { type: types.uiOpenBebidasGaseosasModal };
+      return { type: types.uiOpenVinosModal };
 
     default:
       return {};
@@ -134,6 +134,12 @@ export const closeModal = (modalType) => {
 
     case "bebidasgaseosas":
       return { type: types.uiCloseBebidasGaseosasModal };
+
+    case "licores":
+      return { type: types.uiCloseLicoresModal };
+
+    case "vinos":
+      return { type: types.uiCloseVinosModal };
 
     default:
       return {};
