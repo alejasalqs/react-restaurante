@@ -26,6 +26,21 @@ export const marcasReducer = (state = initialState, action) => {
         brands: action.payload,
       };
 
+    case types.addBrand:
+      return {
+        ...state,
+        brands: [...state.brands, action.payload],
+      };
+
+    case types.deleteBrand:
+      return {
+        ...state,
+        brands: state.brands.filter(
+          (brand) => brand.codigo !== action.payload.codigo
+        ),
+        activeBrand: null,
+      };
+
     default:
       return state;
   }

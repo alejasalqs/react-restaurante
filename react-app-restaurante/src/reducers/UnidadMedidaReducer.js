@@ -26,6 +26,21 @@ export const unidadMedidaReducer = (state = initialState, action) => {
         unidades_medida: action.payload,
       };
 
+    case types.addUnidadMedida:
+      return {
+        ...state,
+        unidades_medida: [...state.unidades_medida, action.payload],
+      };
+
+    case types.deleteUnidadMedida:
+      return {
+        ...state,
+        unidades_medida: state.unidades_medida.filter(
+          (unidad) => unidad.codigo !== action.payload.codigo
+        ),
+        activeBrand: null,
+      };
+
     default:
       return state;
   }

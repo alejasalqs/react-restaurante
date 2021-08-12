@@ -3,17 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveConsecutivo } from "../../../actions/consecutivos.actions";
+import {
+  removeActiveConsecutivo,
+  startConsecutivosAddNew,
+  startDeletingConsecutivo,
+} from "../../../actions/consecutivos.actions";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
 
 const initialValues = {
-  codigo: "",
+  codigo: "31",
   tipo: "",
   descripcion: "",
   valor_consecutivo: "",
-  contiene_prefijo: "",
+  contiene_prefijo: true,
   prefijo: "",
 };
 
@@ -65,7 +69,7 @@ export const ConsecutivosModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeConsecutivo.codigo));
+    dispatch(startDeletingConsecutivo(activeConsecutivo.codigo));
     handleCloseModal();
   };
 
@@ -75,7 +79,16 @@ export const ConsecutivosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    dispatch(
+      startConsecutivosAddNew({
+        codigo,
+        tipo,
+        descripcion,
+        valor_consecutivo,
+        contiene_prefijo,
+        prefijo,
+      })
+    );
     handleCloseModal();
   };
 

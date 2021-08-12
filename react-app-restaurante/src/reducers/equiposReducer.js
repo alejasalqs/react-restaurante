@@ -26,6 +26,21 @@ export const equiposReducer = (state = initialState, action) => {
         equipos: action.payload,
       };
 
+    case types.addEquipos:
+      return {
+        ...state,
+        equipos: [...state.equipos, action.payload],
+      };
+
+    case types.deleteEquipos:
+      return {
+        ...state,
+        equipos: state.equipos.filter(
+          (equipo) => equipo.codigo !== action.payload.codigo
+        ),
+        activeDesechable: null,
+      };
+
     default:
       return state;
   }

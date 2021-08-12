@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../actions/ui.actions";
-import { removeActiveUser } from "../../../actions/users.actions";
+import {
+  removeActiveUser,
+  startDeletingUser,
+  startUserAddNew,
+} from "../../../actions/users.actions";
+import { fetchWithToken } from "../../../helpers/fetch.helper";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
 // Agregar el modal al documento
@@ -16,6 +21,7 @@ const initValues = {
   telefono: "",
   celular: "",
   login: "",
+  password: "",
 };
 
 export const UserModal = () => {
@@ -25,8 +31,16 @@ export const UserModal = () => {
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, apellido1, apellido2, telefono, celular, login } =
-    formValues;
+  const {
+    codigo,
+    nombre,
+    apellido1,
+    apellido2,
+    telefono,
+    celular,
+    login,
+    password,
+  } = formValues;
 
   useEffect(() => {
     if (activeUser) {
@@ -40,6 +54,20 @@ export const UserModal = () => {
     setFormValues({
       ...formValues,
       [target.name]: target.value,
+    });
+  };
+
+  const [restaurantes, setRestaurantes] = useState([]);
+
+  useEffect(() => {
+    obtenerDatosSelect();
+  }, []);
+
+  const obtenerDatosSelect = () => {
+    fetchWithToken("restaurant").then((resp) => {
+      resp.json().then((data) => {
+        setRestaurantes(data.restaurants);
+      });
     });
   };
 
@@ -60,7 +88,7 @@ export const UserModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeUser.codigo));
+    dispatch(startDeletingUser(activeUser.codigo));
     handleCloseModal();
   };
 
@@ -70,7 +98,25 @@ export const UserModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+
+    const select = document.getElementById("restaurante");
+    const restaurante = select.value;
+
+    const select2 = document.getElementById("tipo_usuario");
+    const tipo_usuario = select2.value;
+    dispatch(
+      startUserAddNew({
+        nombre,
+        apellido1,
+        apellido2,
+        telefono,
+        celular,
+        login,
+        password,
+        restaurante,
+        tipo_usuario,
+      })
+    );
     handleCloseModal();
   };
 
@@ -189,18 +235,73 @@ export const UserModal = () => {
             </div>
           </div>
         </div>
-        <div className="field">
-          <label className="label">Login</label>
-          <div className="control">
-            <input
-              className="input"
-              type="text"
-              name="codigo"
-              onChange={handleInputChange}
-              value={login}
-              placeholder="Login"
-              readOnly="true"
-            />
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Login</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  name="login"
+                  onChange={handleInputChange}
+                  value={login}
+                  placeholder="Login"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Contraseña</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  name="password"
+                  onChange={handleInputChange}
+                  value={password}
+                  placeholder="Password"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <p className="control has-icons-left">
+                <span className="select">
+                  <select id="restaurante">
+                    {restaurantes.map((r) => (
+                      <option value={r._id} key={r._id}>
+                        {r.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </span>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-globe"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className="column">
+            <div className="field">
+              <p className="control has-icons-left">
+                <span className="select">
+                  <select id="tipo_usuario">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                </span>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-globe"></i>
+                </span>
+              </p>
+            </div>
           </div>
         </div>
         {activeUser ? (

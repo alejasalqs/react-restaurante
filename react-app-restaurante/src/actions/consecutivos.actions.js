@@ -28,3 +28,63 @@ const loaded = (consecutivos) => ({
   type: types.consecutivosLoaded,
   payload: consecutivos,
 });
+
+export const startConsecutivosAddNew = ({
+  codigo,
+  tipo,
+  descripcion,
+  valor_consecutivo,
+  contiene_prefijo,
+  prefijo,
+}) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchWithToken(
+        "consecutivos",
+        {
+          codigo,
+          tipo,
+          descripcion,
+          valor_consecutivo,
+          contiene_prefijo,
+          prefijo,
+        },
+        "POST"
+      );
+
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(addNewConsecutivos(body.consecutivo));
+      } else {
+        console.log("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const addNewConsecutivos = (consecutivo) => ({
+  type: types.addConsecutivos,
+  payload: consecutivo,
+});
+
+export const startDeletingConsecutivo = (codigo) => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken(`consecutivos/${codigo}`, {}, "DELETE");
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(deleteConsecutivo(codigo));
+    } else {
+      console.log("");
+    }
+  };
+};
+
+const deleteConsecutivo = (codigo) => ({
+  type: types.deleteConsecutivos,
+  payload: { codigo },
+});

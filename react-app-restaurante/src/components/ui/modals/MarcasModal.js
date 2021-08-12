@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveBrand } from "../../../actions/marcas.actions";
+import {
+  removeActiveBrand,
+  startDeletingBrand,
+  startMarcaAddNew,
+} from "../../../actions/marcas.actions";
+import { fetchWithToken } from "../../../helpers/fetch.helper";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -34,6 +39,20 @@ export const MarcasModal = () => {
     }
   }, [activeBrand, setFormValues]);
 
+  const [paises, setPaises] = useState([]);
+
+  useEffect(() => {
+    obtenerDatosSelect();
+  }, []);
+
+  const obtenerDatosSelect = () => {
+    fetchWithToken("countries").then((resp) => {
+      resp.json().then((data) => {
+        setPaises(data.countries);
+      });
+    });
+  };
+
   const handleInputChange = ({ target }) => {
     setFormValues({
       ...formValues,
@@ -56,6 +75,7 @@ export const MarcasModal = () => {
   };
 
   const handleDelete = () => {
+    dispatch(startDeletingBrand(activeBrand.codigo));
     handleCloseModal();
   };
 
@@ -65,6 +85,18 @@ export const MarcasModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
+    const select = document.getElementById("nacionalidad");
+    const nacionalidad = select.value;
+    //console.log(nombre, descripcion, nacionalidad, empresa, telefono_empresa);
+    dispatch(
+      startMarcaAddNew({
+        nombre,
+        descripcion,
+        nacionalidad,
+        empresa,
+        telefono_empresa,
+      })
+    );
     handleCloseModal();
   };
 
@@ -120,7 +152,7 @@ export const MarcasModal = () => {
               className="input"
               type="text"
               autoComplete="off"
-              name="rol"
+              name="descripcion"
               id="rol"
               onChange={handleInputChange}
               value={descripcion}
@@ -131,10 +163,12 @@ export const MarcasModal = () => {
         <div className="field">
           <p className="control has-icons-left">
             <span className="select">
-              <select>
-                <option selected>Nacionalidad</option>
-                <option>Select dropdown</option>
-                <option>With options</option>
+              <select id="nacionalidad">
+                {paises.map((p) => (
+                  <option value={p._id} key={p._id}>
+                    {p.pais}
+                  </option>
+                ))}
               </select>
             </span>
             <span className="icon is-small is-left">
@@ -151,7 +185,7 @@ export const MarcasModal = () => {
                   className="input"
                   type="text"
                   autoComplete="off"
-                  name="nombre"
+                  name="empresa"
                   onChange={handleInputChange}
                   value={empresa}
                   placeholder="Empresa"
@@ -167,7 +201,7 @@ export const MarcasModal = () => {
                   className="input"
                   type="text"
                   autoComplete="off"
-                  name="apellido1"
+                  name="telefono_empresa"
                   onChange={handleInputChange}
                   value={telefono_empresa}
                   placeholder="Teléfono Empresa"

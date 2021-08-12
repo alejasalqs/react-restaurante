@@ -26,6 +26,21 @@ export const countryReducer = (state = initialState, action) => {
         countries: action.payload,
       };
 
+    case types.addCountry:
+      return {
+        ...state,
+        countries: [...state.countries, action.payload],
+      };
+
+    case types.deleteCountry:
+      return {
+        ...state,
+        countries: state.countries.filter(
+          (country) => country.codigo !== action.payload.codigo
+        ),
+        activeCountry: null,
+      };
+
     default:
       return state;
   }

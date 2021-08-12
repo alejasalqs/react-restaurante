@@ -8,6 +8,8 @@ import { PuestosScreen } from "../components/dashboard/administracion/PuestosScr
 import { MarcasScreen } from "../components/dashboard/clientes/MarcasScreen";
 import { ProductosScreen } from "../components/dashboard/clientes/ProductosScreen";
 import { ProveedoresScreen } from "../components/dashboard/clientes/ProveedoresScreen";
+import { Apertura } from "../components/dashboard/contabilidad/Apertura";
+import { Cierre } from "../components/dashboard/contabilidad/Cierre";
 import { HomeScreen } from "../components/dashboard/HomeScreen";
 import { BitacoraScreen } from "../components/dashboard/reportes/BitacoraScreen";
 import { ReporteClientesScreen } from "../components/dashboard/reportes/ReporteClientesScreen";
@@ -105,6 +107,14 @@ export const DashboardRouter = () => {
               />
 
               <Route exact path="/dashboard/cajas" component={CajasScreen} />
+
+              <Route
+                exact
+                path="/dashboard/apertura-caja"
+                component={Apertura}
+              />
+
+              <Route exact path="/dashboard/cierre-caja" component={Cierre} />
 
               <Route path="/dashboard" component={HomeScreen} />
 

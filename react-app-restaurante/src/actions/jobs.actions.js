@@ -71,6 +71,7 @@ export const startDeletingJob = (codigo) => {
   };
 };
 
-const deleteJob = () => ({
+const deleteJob = (codigo) => ({
   type: types.deleteJob,
+  payload: { codigo },
 });

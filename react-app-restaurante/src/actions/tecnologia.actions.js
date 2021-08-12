@@ -30,3 +30,60 @@ const loaded = (tecnologia) => ({
   type: types.tecnologiaLoaded,
   payload: tecnologia,
 });
+
+export const startTecnologiaAddNew = ({
+  codigo,
+  nombre,
+  cantidad,
+  descripcion,
+  precio,
+  marca,
+}) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchWithToken(
+        "products/tecnologia",
+        { codigo, nombre, cantidad, descripcion, precio, marca },
+        "POST"
+      );
+
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(addNewTecnologia(body.producto_tecnologia));
+      } else {
+        console.log("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const addNewTecnologia = (tecnologia) => ({
+  type: types.addTecnologia,
+  payload: tecnologia,
+});
+
+export const startDeletingTecnologia = (codigo) => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken(
+      `products/tecnologia/${codigo}`,
+      {},
+      "DELETE"
+    );
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(deleteTecnologia(codigo));
+    } else {
+      console.log("");
+    }
+  };
+};
+
+const deleteTecnologia = (codigo) => ({
+  type: types.deleteTecnologia,
+  payload: { codigo },
+});

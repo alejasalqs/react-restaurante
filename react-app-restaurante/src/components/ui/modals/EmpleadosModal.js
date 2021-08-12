@@ -6,8 +6,10 @@ import {
   deleteEmployee,
   removeActiveEmployee,
   startDeletingEmployee,
+  startEmployeeAddNew,
 } from "../../../actions/employees.actions";
 import { closeModal } from "../../../actions/ui.actions";
+import { fetchWithToken } from "../../../helpers/fetch.helper";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
 // Agregar el modal al documento
@@ -25,6 +27,12 @@ const initialValues = {
   restaurant: "Patitos SA",
 };
 
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
+
 export const EmpleadosModal = () => {
   const dispatch = useDispatch();
   const { empleadosModalOpen } = useSelector((state) => state.ui);
@@ -40,21 +48,29 @@ export const EmpleadosModal = () => {
     }
   }, [activeEmployee, setFormValues]);
 
-  /*const [formValues, handleInputChange, reset] = useForm(
-    activeEmployee || initialValues
-  );*/
+  const { codigo, cedula, nombre, apellido1, apellido2, telefono1, telefono2 } =
+    formValues;
 
-  const {
-    codigo,
-    cedula,
-    nombre,
-    apellido1,
-    apellido2,
-    telefono1,
-    telefono2,
-    puesto,
-    restaurant,
-  } = formValues;
+  const [puestos, setPuestos] = useState([]);
+  const [restaurantes, setRestaurantes] = useState([]);
+
+  useEffect(() => {
+    obtenerDatosSelect();
+  }, []);
+
+  const obtenerDatosSelect = () => {
+    fetchWithToken("positions").then((resp) => {
+      resp.json().then((data) => {
+        setPuestos(data.position);
+      });
+    });
+
+    fetchWithToken("restaurant").then((resp) => {
+      resp.json().then((data) => {
+        setRestaurantes(data.restaurants);
+      });
+    });
+  };
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -80,8 +96,25 @@ export const EmpleadosModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //console.log(formValues);
-    dispatch(addNewEmployee(formValues));
+
+    const select = document.getElementById("restaurante");
+    const restaurante = select.value;
+
+    const select2 = document.getElementById("puesto");
+    const puesto = select2.value;
+    dispatch(
+      startEmployeeAddNew({
+        codigo,
+        cedula,
+        nombre,
+        apellido1,
+        apellido2,
+        telefono1,
+        telefono2,
+        restaurante,
+        puesto,
+      })
+    );
     handleCloseModal();
   };
 
@@ -228,10 +261,12 @@ export const EmpleadosModal = () => {
             <div className="field">
               <p className="control has-icons-left">
                 <span className="select">
-                  <select onChange={handleInputChange}>
-                    <option selected>Puesto</option>
-                    <option>Select dropdown</option>
-                    <option>With options</option>
+                  <select id="restaurante">
+                    {restaurantes.map((r) => (
+                      <option value={r._id} key={r._id}>
+                        {r.nombre}
+                      </option>
+                    ))}
                   </select>
                 </span>
                 <span className="icon is-small is-left">
@@ -244,10 +279,12 @@ export const EmpleadosModal = () => {
             <div className="field">
               <p className="control has-icons-left">
                 <span className="select">
-                  <select>
-                    <option selected>Restaurante</option>
-                    <option>Select dropdown</option>
-                    <option>With options</option>
+                  <select id="puesto">
+                    {puestos.map((p) => (
+                      <option value={p._id} key={p._id}>
+                        {p.nombre}
+                      </option>
+                    ))}
                   </select>
                 </span>
                 <span className="icon is-small is-left">

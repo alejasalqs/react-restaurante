@@ -26,6 +26,21 @@ export const usersReducer = (state = initialState, action) => {
         users: action.payload,
       };
 
+    case types.addUser:
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+      };
+
+    case types.deleteUser:
+      return {
+        ...state,
+        users: state.users.filter(
+          (user) => user.codigo !== action.payload.codigo
+        ),
+        activeUser: null,
+      };
+
     default:
       return state;
   }

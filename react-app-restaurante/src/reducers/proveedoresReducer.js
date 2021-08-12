@@ -26,6 +26,21 @@ export const proveedoresReducer = (state = initialState, action) => {
         suppliers: action.payload,
       };
 
+    case types.addSupplier:
+      return {
+        ...state,
+        suppliers: [...state.suppliers, action.payload],
+      };
+
+    case types.deleteSupplier:
+      return {
+        ...state,
+        suppliers: state.suppliers.filter(
+          (supplier) => supplier.codigo !== action.payload.codigo
+        ),
+        activeSupplier: null,
+      };
+
     default:
       return state;
   }

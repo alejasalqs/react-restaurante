@@ -26,6 +26,20 @@ export const limpiezaReducer = (state = initialState, action) => {
         limpieza: action.payload,
       };
 
+    case types.addLimpieza:
+      return {
+        ...state,
+        limpieza: [...state.limpieza, action.payload],
+      };
+
+    case types.deleteLimpieza:
+      return {
+        ...state,
+        limpieza: state.limpieza.filter(
+          (limp) => limp.codigo !== action.payload.codigo
+        ),
+        activeLimpieza: null,
+      };
     default:
       return state;
   }

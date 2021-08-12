@@ -28,3 +28,59 @@ const loaded = (unidad_medida) => ({
   type: types.unidadMedidaLoaded,
   payload: unidad_medida,
 });
+
+export const startUnidadMedidaAddNew = ({
+  unidad,
+  detalle,
+  escala,
+  simbolo,
+  simbologia,
+}) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchWithToken(
+        "unidades-medida",
+        { unidad, detalle, escala, simbolo, simbologia },
+        "POST"
+      );
+
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(addNewUnidadMedida(body.unidad_medida));
+      } else {
+        console.log("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const addNewUnidadMedida = (unidad_medida) => ({
+  type: types.addUnidadMedida,
+  payload: unidad_medida,
+});
+
+export const startDeletingUnidadMedida = (codigo) => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken(
+      `unidades-medida/${codigo}`,
+      {},
+      "DELETE"
+    );
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(deleteUnidadMedida(codigo));
+    } else {
+      console.log("");
+    }
+  };
+};
+
+const deleteUnidadMedida = (codigo) => ({
+  type: types.deleteUnidadMedida,
+  payload: { codigo },
+});

@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveTecnologia } from "../../../actions/tecnologia.actions";
+import {
+  removeActiveTecnologia,
+  startDeletingTecnologia,
+  startTecnologiaAddNew,
+} from "../../../actions/tecnologia.actions";
+import { fetchWithToken } from "../../../helpers/fetch.helper";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -13,6 +18,7 @@ const initialValues = {
   nombre: "",
   cantidad: "",
   descripcion: "",
+  precio: "",
   marca: "",
 };
 
@@ -23,7 +29,7 @@ export const TecnologiaModal = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, cantidad, descripcion, marca } = formValues;
+  const { codigo, nombre, cantidad, descripcion, precio } = formValues;
 
   useEffect(() => {
     if (activeTecnologia) {
@@ -32,6 +38,20 @@ export const TecnologiaModal = () => {
       setFormValues(initialValues);
     }
   }, [activeTecnologia, setFormValues]);
+
+  const [marcas, setMarcas] = useState([]);
+
+  useEffect(() => {
+    obtenerDatosSelect();
+  }, []);
+
+  const obtenerDatosSelect = () => {
+    fetchWithToken("brands").then((resp) => {
+      resp.json().then((data) => {
+        setMarcas(data.brands);
+      });
+    });
+  };
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -57,7 +77,7 @@ export const TecnologiaModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeTecnologia.codigo));
+    dispatch(startDeletingTecnologia(activeTecnologia.codigo));
     handleCloseModal();
   };
 
@@ -67,7 +87,19 @@ export const TecnologiaModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    const select = document.getElementById("marca");
+    const marca = select.value;
+
+    dispatch(
+      startTecnologiaAddNew({
+        codigo,
+        nombre,
+        cantidad,
+        descripcion,
+        precio,
+        marca,
+      })
+    );
     handleCloseModal();
   };
 
@@ -130,19 +162,57 @@ export const TecnologiaModal = () => {
             />
           </div>
         </div>
-        <div className="field">
-          <label className="label">Cantidad</label>
-          <div className="control">
-            <input
-              className="input"
-              type="number"
-              autoComplete="off"
-              name="cantidad"
-              onChange={handleInputChange}
-              value={cantidad}
-              placeholder="cantidad"
-            />
+        <div className="columns">
+          <div className="column">
+            <div className="field">
+              <label className="label">Cantidad</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="number"
+                  autoComplete="off"
+                  name="cantidad"
+                  onChange={handleInputChange}
+                  value={cantidad}
+                  placeholder="cantidad"
+                />
+              </div>
+            </div>
           </div>
+          <div className="column">
+            <div className="field">
+              <label className="label">Precio</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="number"
+                  autoComplete="off"
+                  name="precio"
+                  onChange={handleInputChange}
+                  value={precio}
+                  placeholder="precio"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label">Marca</label>
+          <p className="control has-icons-left">
+            <span className="select">
+              <select id="marca">
+                {marcas.map((m) => (
+                  <option value={m._id} key={m._id}>
+                    {m.nombre}
+                  </option>
+                ))}
+              </select>
+            </span>
+            <span className="icon is-small is-left">
+              <i className="fas fa-globe"></i>
+            </span>
+          </p>
         </div>
         {activeTecnologia ? (
           <div className="field is-grouped">

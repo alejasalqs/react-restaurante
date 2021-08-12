@@ -41,7 +41,7 @@ export const employeesReducer = (state = initialState, action) => {
       return {
         ...state,
         employees: state.employees.filter(
-          (e) => e.codigo !== state.activeEmployee.codigo
+          (e) => e.codigo !== action.payload.codigo
         ),
         activeEmployee: null,
       };

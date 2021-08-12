@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveComestible } from "../../../actions/comestibles.actions";
+import {
+  removeActiveComestible,
+  startComestibleAddNew,
+  startDeletingComestible,
+} from "../../../actions/comestibles.actions";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -55,7 +59,7 @@ export const ComestiblesModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeComestible.codigo));
+    dispatch(startDeletingComestible(activeComestible.codigo));
     handleCloseModal();
   };
 
@@ -65,7 +69,7 @@ export const ComestiblesModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    dispatch(startComestibleAddNew({ nombre, cantidad }));
     handleCloseModal();
   };
 

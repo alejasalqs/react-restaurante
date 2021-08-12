@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { removeActiveRol } from "../../../actions/rol.actions";
+import {
+  removeActiveRol,
+  startDeletingRol,
+  startRolAddNew,
+} from "../../../actions/rol.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
@@ -11,7 +15,7 @@ Modal.setAppElement("#root");
 const initValues = {
   codigo: "",
   nombre: "",
-  rol: "",
+  descripcion: "",
 };
 
 export const RolModal = () => {
@@ -21,7 +25,7 @@ export const RolModal = () => {
 
   const [formValues, setFormValues] = useState(initValues);
 
-  const { codigo, nombre, rol } = formValues;
+  const { codigo, nombre, descripcion } = formValues;
 
   useEffect(() => {
     if (activeRol) {
@@ -55,7 +59,7 @@ export const RolModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeRol.codigo));
+    dispatch(startDeletingRol(activeRol.codigo));
     handleCloseModal();
   };
 
@@ -65,7 +69,7 @@ export const RolModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    dispatch(startRolAddNew({ nombre, descripcion }));
     handleCloseModal();
   };
 
@@ -111,6 +115,20 @@ export const RolModal = () => {
               onChange={handleInputChange}
               value={nombre}
               placeholder="Nombre"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Descripción</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              autoComplete="off"
+              name="descripcion"
+              onChange={handleInputChange}
+              value={descripcion}
+              placeholder="Descripcion"
             />
           </div>
         </div>

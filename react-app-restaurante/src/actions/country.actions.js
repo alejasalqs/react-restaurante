@@ -28,3 +28,45 @@ const loaded = (countries) => ({
   type: types.countryLoaded,
   payload: countries,
 });
+
+export const startCountryAddNew = ({ pais }) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchWithToken("countries", { pais }, "POST");
+
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(addNewCountry(body.country));
+      } else {
+        console.log("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const addNewCountry = (country) => ({
+  type: types.addCountry,
+  payload: country,
+});
+
+export const startDeletingCountry = (codigo) => {
+  return async (dispatch) => {
+    const resp = await fetchWithToken(`countries/${codigo}`, {}, "DELETE");
+
+    const body = await resp.json();
+
+    if (body.ok) {
+      dispatch(deleteCountry(codigo));
+    } else {
+      console.log("");
+    }
+  };
+};
+
+const deleteCountry = (codigo) => ({
+  type: types.deleteCountry,
+  payload: { codigo },
+});

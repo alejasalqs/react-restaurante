@@ -37,7 +37,7 @@ export const jobsReducer = (state = initialState, action) => {
     case types.deleteJob:
       return {
         ...state,
-        jobs: state.jobs.filter((j) => j.codigo !== state.activeJob.codigo),
+        jobs: state.jobs.filter((j) => j.codigo !== action.payload.codigo),
         activeJob: null,
       };
 

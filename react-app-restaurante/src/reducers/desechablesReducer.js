@@ -26,6 +26,21 @@ export const desechablesReducer = (state = initialState, action) => {
         desechables: action.payload,
       };
 
+    case types.addDesechables:
+      return {
+        ...state,
+        desechables: [...state.desechables, action.payload],
+      };
+
+    case types.deleteDesechables:
+      return {
+        ...state,
+        desechables: state.desechables.filter(
+          (desechable) => desechable.codigo !== action.payload.codigo
+        ),
+        activeDesechable: null,
+      };
+
     default:
       return state;
   }

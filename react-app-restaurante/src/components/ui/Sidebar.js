@@ -74,12 +74,12 @@ export const Sidebar = () => {
         <p className="menu-label">Contabilidad</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/apertura-caja">
               <i className="fas fa-box-open"></i> Apertura de caja
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/especiales">
+            <NavLink to="/dashboard/cierre-caja">
               <i className="fas fa-box"></i> Ciere de caja
             </NavLink>
           </li>

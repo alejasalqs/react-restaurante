@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveSupplier } from "../../../actions/proveedores.actions";
+import {
+  removeActiveSupplier,
+  startDeletingSupplier,
+  startSupplierAddNew,
+} from "../../../actions/proveedores.actions";
+import { fetchWithToken } from "../../../helpers/fetch.helper";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -34,6 +39,20 @@ export const ProveedoresModal = () => {
     }
   }, [activeSupplier, setFormValues]);
 
+  const [restaurantes, setRestaurantes] = useState([]);
+
+  useEffect(() => {
+    obtenerDatosSelect();
+  }, []);
+
+  const obtenerDatosSelect = () => {
+    fetchWithToken("restaurant").then((resp) => {
+      resp.json().then((data) => {
+        setRestaurantes(data.restaurants);
+      });
+    });
+  };
+
   const handleInputChange = ({ target }) => {
     setFormValues({
       ...formValues,
@@ -58,7 +77,7 @@ export const ProveedoresModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeSupplier.codigo));
+    dispatch(startDeletingSupplier(activeSupplier.codigo));
     handleCloseModal();
   };
 
@@ -68,7 +87,18 @@ export const ProveedoresModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    const select = document.getElementById("restaurante");
+    const restaurante = select.value;
+    dispatch(
+      startSupplierAddNew({
+        nombre,
+        apellido1,
+        apellido2,
+        telefono,
+        fax,
+        restaurante,
+      })
+    );
     handleCloseModal();
   };
 
@@ -182,6 +212,22 @@ export const ProveedoresModal = () => {
               placeholder="Fax"
             />
           </div>
+        </div>
+        <div className="field">
+          <p className="control has-icons-left">
+            <span className="select">
+              <select id="restaurante">
+                {restaurantes.map((r) => (
+                  <option value={r._id} key={r._id}>
+                    {r.nombre}
+                  </option>
+                ))}
+              </select>
+            </span>
+            <span className="icon is-small is-left">
+              <i className="fas fa-globe"></i>
+            </span>
+          </p>
         </div>
         {activeSupplier ? (
           <div className="field is-grouped">

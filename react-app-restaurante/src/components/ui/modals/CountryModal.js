@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { removeActiveCountry } from "../../../actions/country.actions";
+import {
+  removeActiveCountry,
+  startCountryAddNew,
+  startDeletingCountry,
+} from "../../../actions/country.actions";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
@@ -53,7 +57,7 @@ export const CountryModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeCountry.codigo));
+    dispatch(startDeletingCountry(activeCountry.codigo));
     handleCloseModal();
   };
 
@@ -63,7 +67,7 @@ export const CountryModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    dispatch(startCountryAddNew({ pais }));
     handleCloseModal();
   };
 

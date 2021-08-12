@@ -26,6 +26,20 @@ export const tecnologiaReducer = (state = initialState, action) => {
         tecnologia: action.payload,
       };
 
+    case types.addTecnologia:
+      return {
+        ...state,
+        tecnologia: [...state.tecnologia, action.payload],
+      };
+
+    case types.deleteTecnologia:
+      return {
+        ...state,
+        tecnologia: state.tecnologia.filter(
+          (tecno) => tecno.codigo !== action.payload.codigo
+        ),
+        activeTecnologia: null,
+      };
     default:
       return state;
   }

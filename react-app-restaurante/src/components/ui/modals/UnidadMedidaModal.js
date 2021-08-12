@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../actions/ui.actions";
-import { removeActiveUnidadMedida } from "../../../actions/unidad-medida.action";
+import {
+  removeActiveUnidadMedida,
+  startDeletingUnidadMedida,
+  startUnidadMedidaAddNew,
+} from "../../../actions/unidad-medida.action";
 import { customStyles } from "../../../helpers/modal.customStyles";
 
 // Agregar el modal al documento
@@ -58,7 +62,7 @@ export const UnidadMedidaModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeUnidadMedida.codigo));
+    dispatch(startDeletingUnidadMedida(activeUnidadMedida.codigo));
     handleCloseModal();
   };
 
@@ -68,7 +72,9 @@ export const UnidadMedidaModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+    dispatch(
+      startUnidadMedidaAddNew({ unidad, detalle, escala, simbolo, simbologia })
+    );
     handleCloseModal();
   };
 

@@ -26,6 +26,21 @@ export const comestiblesReducer = (state = initialState, action) => {
         comestibles: action.payload,
       };
 
+    case types.addComestibles:
+      return {
+        ...state,
+        comestibles: [...state.comestibles, action.payload],
+      };
+
+    case types.deleteComestibles:
+      return {
+        ...state,
+        comestibles: state.comestibles.filter(
+          (comestible) => comestible.codigo !== action.payload.codigo
+        ),
+        activeComestible: null,
+      };
+
     default:
       return state;
   }

@@ -25,6 +25,19 @@ export const rolReducer = (state = initialState, action) => {
         rols: action.payload,
       };
 
+    case types.addRol:
+      return {
+        ...state,
+        rols: [...state.rols, action.payload],
+      };
+
+    case types.deleteRol:
+      return {
+        ...state,
+        rols: state.rols.filter((rol) => rol.codigo !== action.payload.codigo),
+        activeRol: null,
+      };
+
     default:
       return state;
   }

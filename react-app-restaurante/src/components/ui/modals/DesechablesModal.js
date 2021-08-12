@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import { closeModal } from "../../../actions/ui.actions";
 import { customStyles } from "../../../helpers/modal.customStyles";
-import { removeActiveDesechable } from "../../../actions/desechables.actions";
+import {
+  removeActiveDesechable,
+  startDeletingDesechable,
+  startDesechablesAddNew,
+} from "../../../actions/desechables.actions";
+import { fetchWithToken } from "../../../helpers/fetch.helper";
 
 // Agregar el modal al documento
 Modal.setAppElement("#root");
@@ -22,7 +27,7 @@ export const DesechablesModal = () => {
 
   const [formValues, setFormValues] = useState(initialValues);
 
-  const { codigo, nombre, cantidad, descripcion, marca } = formValues;
+  const { codigo, nombre, cantidad, descripcion } = formValues;
 
   useEffect(() => {
     if (activeDesechable) {
@@ -31,6 +36,20 @@ export const DesechablesModal = () => {
       setFormValues(initialValues);
     }
   }, [activeDesechable, setFormValues]);
+
+  const [marcas, setMarcas] = useState([]);
+
+  useEffect(() => {
+    obtenerDatosSelect();
+  }, []);
+
+  const obtenerDatosSelect = () => {
+    fetchWithToken("brands").then((resp) => {
+      resp.json().then((data) => {
+        setMarcas(data.brands);
+      });
+    });
+  };
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -56,7 +75,7 @@ export const DesechablesModal = () => {
   };
 
   const handleDelete = () => {
-    //dispatch(startDeletingJob(activeDesechable.codigo));
+    dispatch(startDeletingDesechable(activeDesechable.codigo));
     handleCloseModal();
   };
 
@@ -66,7 +85,10 @@ export const DesechablesModal = () => {
 
   const saveInformation = (e) => {
     e.preventDefault();
-    //dispatch(startJobsAddNew(nombre, rol));
+
+    const select = document.getElementById("marca");
+    const marca = select.value;
+    dispatch(startDesechablesAddNew({ nombre, cantidad, descripcion, marca }));
     handleCloseModal();
   };
 
@@ -141,6 +163,24 @@ export const DesechablesModal = () => {
               value={cantidad}
               placeholder="cantidad"
             />
+          </div>
+        </div>
+        <div className="column">
+          <div className="field">
+            <p className="control has-icons-left">
+              <span className="select">
+                <select id="marca">
+                  {marcas.map((m) => (
+                    <option value={m._id} key={m._id}>
+                      {m.nombre}
+                    </option>
+                  ))}
+                </select>
+              </span>
+              <span className="icon is-small is-left">
+                <i className="fas fa-globe"></i>
+              </span>
+            </p>
           </div>
         </div>
         {activeDesechable ? (

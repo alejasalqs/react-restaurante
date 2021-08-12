@@ -67,14 +67,14 @@ export const types = {
   removeActiveTable: "[TABLE] Remove Active Table",
   addTable: "[TABLE] Add new Table",
   editTable: "[TABLE] Edit Table",
-  deleteTable: "[TABLE] Delete Job",
+  deleteTable: "[TABLE] Delete Table",
   tableLoaded: "[TABLE] Loading Tables",
   /////////////////
   setActiveBrand: "[BRAND] Set Active brand",
   removeActiveBrand: "[BRAND] Remove Active brand",
   addBrand: "[BRAND] Add new brand",
   editBrand: "[BRAND] Edit brand",
-  deleteBrand: "[BRAND] Delete Job",
+  deleteBrand: "[BRAND] Delete Brand",
   brandLoaded: "[BRAND] Loading brands",
   /////////////////
   setActiveSupplier: "[SUPPLIERS] Set Active supplier",

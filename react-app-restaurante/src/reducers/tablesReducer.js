@@ -36,7 +36,7 @@ export const tableReducer = (state = initialState, action) => {
       return {
         ...state,
         tables: state.tables.filter(
-          (table) => table.codigo !== state.activeTable.codigo
+          (table) => table.codigo !== action.payload.codigo
         ),
         activeTable: null,
       };

@@ -26,6 +26,21 @@ export const consecutivosReducer = (state = initialState, action) => {
         consecutivos: action.payload,
       };
 
+    case types.addConsecutivos:
+      return {
+        ...state,
+        consecutivos: [...state.consecutivos, action.payload],
+      };
+
+    case types.deleteConsecutivos:
+      return {
+        ...state,
+        consecutivos: state.consecutivos.filter(
+          (consecutivo) => consecutivo.codigo !== action.payload.codigo
+        ),
+        activeConsecutivo: null,
+      };
+
     default:
       return state;
   }
