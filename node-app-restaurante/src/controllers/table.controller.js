@@ -21,6 +21,16 @@ const getAllTablesFromRestaurant = async (req, res, next) => {
   });
 };
 
+const getTableByIDRestaurant = async (req, res, next) => {
+  const { id } = req.params;
+  const tables = await TableModel.find({ restaurante: id });
+
+  return res.json({
+    ok: true,
+    tables,
+  });
+};
+
 const createTable = async (req, res, next) => {
   try {
     const { restaurant } = req.user;
@@ -114,6 +124,7 @@ const deleteTable = async (req, res, next) => {
 
 module.exports = {
   getAllTablesFromRestaurant,
+  getTableByIDRestaurant,
   createTable,
   updateTable,
   deleteTable,

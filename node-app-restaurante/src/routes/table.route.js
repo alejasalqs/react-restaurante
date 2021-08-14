@@ -5,6 +5,7 @@
 const express = require("express");
 const {
   getAllTablesFromRestaurant,
+  getTableByIDRestaurant,
   createTable,
   updateTable,
   deleteTable,
@@ -16,6 +17,8 @@ const router = express.Router();
 router.use(checkJWT);
 
 router.get("/", getAllTablesFromRestaurant);
+
+router.get("/:id", getTableByIDRestaurant);
 
 router.post("/", createTable);
 

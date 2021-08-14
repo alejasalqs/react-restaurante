@@ -1,42 +1,37 @@
 const { Schema, model } = require("mongoose");
 const encrypt = require("mongoose-encryption");
 
-const TableSchema = Schema({
-  codigo: {
-    type: String,
-    unique: true,
-  },
-  nombre: {
-    required: true,
+const PedidoSchema = Schema({
+  numero_mesa: {
     type: String,
   },
-  numero: {
-    required: true,
-    type: Number,
-  },
+  pedido: [
+    {
+      nombre: {
+        required: true,
+        type: String,
+      },
+      precio: {
+        required: true,
+        type: Number,
+      },
+    },
+  ],
   restaurante: {
     type: Schema.Types.ObjectId,
     ref: "Restaurant",
-  },
-  cantidad_sillas: {
-    required: true,
-    type: Number,
-  },
-  estado_mesa: {
-    required: true,
-    type: Number,
   },
 });
 
 const encKey = process.env.STRING_32BYTE_BASE64_STRING;
 const sigKey = process.env.STRING_64BYTE_BASE64_STRING;
 
-TableSchema.plugin(encrypt, {
+PedidoSchema.plugin(encrypt, {
   encryptionKey: encKey,
   signingKey: sigKey,
-  encryptedFields: ["nombre", "numero", "cantidad_sillas"],
+  encryptedFields: ["nombre", "rol"],
 });
 // This adds _ct and _ac fields to the schema, as well as pre 'init' and pre 'save' middleware,
 // and encrypt, decrypt, sign, and authenticate instance methods
 
-module.exports = model("Table", TableSchema);
+module.exports = model("Pedido", PedidoSchema);
