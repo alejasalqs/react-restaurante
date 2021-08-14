@@ -48,6 +48,10 @@ export const types = {
 
   uiOpenVinosModal: "[UI] Open Vinos Modal",
   uiCloseVinosModal: "[UI] Close Vinos Modal",
+
+  uiOpenOrdenesModal: "[UI] Open Ordenes Modal",
+  uiCloseOrdenesModal: "[UI] Close Ordenes Modal",
+
   //////////////////
   setActiveEmployee: "[Employees] Set Active Employee",
   removeActiveEmployee: "[Employees] Remove Active Employee",
@@ -204,4 +208,11 @@ export const types = {
   editVinos: "[Vinos] Edit Vinos",
   deleteVinos: "[Vinos] Delete Vinos",
   vinosLoaded: "[Vinos] Loading Vinos",
+  /////////////////
+  setActiveClientes: "[Clientes] Set Active Clientes",
+  removeActiveClientes: "[Clientes] Remove Active Clientes",
+  addClientes: "[Clientes] Add new Clientes",
+  editClientes: "[Clientes] Edit Clientes",
+  deleteClientes: "[Clientes] Delete Clientes",
+  clientesLoaded: "[Clientes] Loading Clientes",
 };

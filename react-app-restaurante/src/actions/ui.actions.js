@@ -68,6 +68,9 @@ export const openModal = (modalType) => {
     case "vinos":
       return { type: types.uiOpenVinosModal };
 
+    case "ordenes":
+      return { type: types.uiOpenOrdenesModal };
+
     default:
       return {};
   }
@@ -140,6 +143,9 @@ export const closeModal = (modalType) => {
 
     case "vinos":
       return { type: types.uiCloseVinosModal };
+
+    case "ordenes":
+      return { type: types.uiCloseOrdenesModal };
 
     default:
       return {};

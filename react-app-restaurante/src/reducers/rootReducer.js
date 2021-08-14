@@ -24,6 +24,7 @@ import { bebidaHeladaReducer } from "./bebidaHeladaReducer";
 import { bebidaGaseosaReducer } from "./bebidaGaseosaReducer";
 import { licoresReducer } from "./licoresReducer";
 import { vinosReducer } from "./vinosReducer";
+import { clientsReducer } from "./clients.reducer";
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -51,4 +52,5 @@ export const rootReducer = combineReducers({
   bebidas_gaseosa: bebidaGaseosaReducer,
   licores: licoresReducer,
   vinos: vinosReducer,
+  clientes: clientsReducer,
 });

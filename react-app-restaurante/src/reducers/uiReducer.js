@@ -22,6 +22,7 @@ const initialState = {
   bebidasGaseosasModalOpen: false,
   licoresModalOpen: false,
   vinosModalOpen: false,
+  ordenesModalOpen: false,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -288,6 +289,18 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         vinosModalOpen: false,
+      };
+
+    case types.uiOpenOrdenesModal:
+      return {
+        ...state,
+        ordenesModalOpen: true,
+      };
+
+    case types.uiCloseOrdenesModal:
+      return {
+        ...state,
+        ordenesModalOpen: false,
       };
     default:
       return state;
